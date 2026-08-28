@@ -52,13 +52,13 @@ const features = [
 
 export const EnterpriseGenAI = () => {
   return (
-    <section className="py-20 lg:py-32 bg-white relative overflow-hidden">
+    <section className="py-20 lg:py-32 bg-[#0D0C1A] relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-purple/5 rounded-full blur-3xl"></div>
-        <div className="absolute inset-0 opacity-[0.02]" 
-             style={{ backgroundImage: 'radial-gradient(#2563EB 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#7C3AED]/12 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#8B5CF6]/8 rounded-full blur-3xl" />
+        <div className="absolute inset-0 opacity-[0.04]"
+             style={{ backgroundImage: 'radial-gradient(rgba(139,92,246,0.8) 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
         </div>
       </div>
 
@@ -69,9 +69,9 @@ export const EnterpriseGenAI = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-sm font-semibold tracking-wide uppercase mb-6"
+            className="inline-flex items-center gap-2 bg-[#15151D]/90 border border-[#29263A] shadow-[0_0_18px_rgba(124,58,237,0.2)] text-[#A78BFA] text-xs font-semibold px-5 py-2 rounded-full mb-6 backdrop-blur-md uppercase tracking-wide"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse"></span>
             Our Approach
           </motion.div>
 
@@ -80,17 +80,21 @@ export const EnterpriseGenAI = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-dark-grey mb-6 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight"
           >
-            Enterprise GenAI, <span className="text-brand-blue">Built Our Way</span>
+            Enterprise GenAI,{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#C084FC] drop-shadow-[0_0_25px_rgba(139,92,246,0.5)]">
+              Built Our Way
+            </span>
           </motion.h2>
+          <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent shadow-[0_0_10px_#8B5CF6] mx-auto mb-6" />
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-[#B8B6C4] max-w-3xl mx-auto leading-relaxed"
           >
             A comprehensive AI platform designed for enterprise needs, combining cutting-edge technology with practical business solutions.
           </motion.p>
@@ -111,25 +115,28 @@ export const EnterpriseGenAI = () => {
                   ease: [0.21, 0.47, 0.32, 0.98]
                 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="group relative bg-white rounded-2xl p-8 border border-gray-100 shadow-soft hover:shadow-strong transition-all duration-500 ease-out hover:-translate-y-2"
+                className="group relative bg-[#15151D]/95 rounded-2xl p-8 border border-[#29263A] hover:border-[#8B5CF6]/60 shadow-[0_10px_35px_rgba(0,0,0,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] transition-all duration-500 overflow-hidden hover:-translate-y-2"
               >
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
+                <div className="absolute top-0 right-0 w-28 h-28 bg-[#7C3AED]/10 rounded-full blur-2xl transform translate-x-8 -translate-y-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                 {/* Icon */}
                 <div className="mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-brand-blue/10 flex items-center justify-center group-hover:bg-brand-blue/20 group-hover:scale-110 transition-all duration-300">
-                    <IconComponent className="w-7 h-7 text-brand-blue" />
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 flex items-center justify-center group-hover:border-[#A78BFA] group-hover:shadow-[0_0_15px_rgba(124,58,237,0.4)] group-hover:scale-110 transition-all duration-300">
+                    <IconComponent className="w-7 h-7 text-[#A78BFA]" />
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-brand-dark-grey mb-3 group-hover:text-brand-blue transition-colors duration-300">
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#A78BFA] transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-[#B8B6C4] leading-relaxed text-sm">
                   {feature.description}
                 </p>
 
-                {/* Decorative Element */}
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {/* Bottom neon line */}
+                <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-500 ease-out w-0 group-hover:w-full" />
               </motion.div>
             );
           })}

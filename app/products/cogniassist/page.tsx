@@ -64,38 +64,17 @@ const productData = {
 
 export default function CogniAssistPage() {
   return (
-    <PageLayout>
-      <ProductHero product={productData} />
-      <InteractiveDemo productName="CogniAssist" />
-      <EnterpriseGenAI/>
-      {/* <BeforeAfterComparison 
-        productName="CogniAssist"
-        before={{
-          title: 'Traditional Business Processes',
-          points: [
-            'Manual coordination between departments',
-            'Time-consuming approval workflows',
-            'Inconsistent process execution',
-            'Limited visibility into process status',
-            'High operational overhead and costs'
-          ]
-        }}
-        after={{
-          title: 'With CogniAssist',
-          points: [
-            'Intelligent agent coordination and automation',
-            'Instant approvals with smart routing',
-            'Consistent, optimized process execution',
-            'Real-time monitoring and transparency',
-            'Dramatically reduced operational costs'
-          ]
-        }}
-      /> */}
-      <ArchitectureDiagram productName="CogniAssist" />
-      <AIAgentsShowcase />
-      <IntegrationsSection />
-      <CogniAgentDiagram />
-      <CTASection />
+    <PageLayout className="bg-[#0B0A14]">
+      <div className="bg-[#0B0A14] text-white min-h-screen">
+        <ProductHero product={productData} />
+        <InteractiveDemo productName="CogniAssist" />
+        <EnterpriseGenAI/>
+        <ArchitectureDiagram productName="CogniAssist" />
+        <AIAgentsShowcase />
+        <IntegrationsSection />
+        <CogniAgentDiagram />
+        <CTASection theme="dark" />
+      </div>
     </PageLayout>
   );
 }

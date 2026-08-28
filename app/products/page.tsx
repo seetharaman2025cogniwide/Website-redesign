@@ -19,17 +19,19 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <PageLayout>
-      <ProductHero
-        title="Enterprise AI Products"
-        subtitle="Transform your business with our comprehensive suite of AI-powered products designed for intelligent automation and advanced analytics"
-        primaryCTA="Explore Products"
-        secondaryCTA="Schedule Demo"
-      />
-      <ProductCategories />
-      <ProductIntegration />
-      <ProductTechnologyStack />
-      <CTASection />
+    <PageLayout className="bg-[#0B0A14]">
+      <div className="bg-[#0B0A14] text-white min-h-screen">
+        <ProductHero
+          title="Enterprise AI Products"
+          subtitle="Transform your business with our comprehensive suite of AI-powered products designed for intelligent automation and advanced analytics"
+          primaryCTA="Explore Products"
+          secondaryCTA="Schedule Demo"
+        />
+        <ProductCategories />
+        <ProductIntegration />
+        <ProductTechnologyStack />
+        <CTASection theme="dark" />
+      </div>
     </PageLayout>
   )
 }

@@ -52,33 +52,38 @@ const INTEGRATION_LOGOS = [
 ];
 
 export const IntegrationsSection = () => {
-  // Split integrations into 3 roughly equal chunks
   const chunkSize = Math.ceil(INTEGRATION_LOGOS.length / 3);
   const row1 = INTEGRATION_LOGOS.slice(0, chunkSize);
   const row2 = INTEGRATION_LOGOS.slice(chunkSize, chunkSize * 2);
   const row3 = INTEGRATION_LOGOS.slice(chunkSize * 2);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    <section className="py-20 bg-[#0B0A14] relative overflow-hidden">
+      {/* Background glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#7C3AED]/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#8B5CF6]/8 rounded-full blur-[120px]" />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-12">
         <div className="text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-tight"
           >
-            <span className="block text-xl md:text-2xl font-semibold text-blue-600 mb-3 uppercase tracking-wide">
+            <span className="block text-xl md:text-2xl font-semibold text-[#A78BFA] mb-3 uppercase tracking-wide">
               Seamless Ecosystem
             </span>
             Integrate AI Agents with 1000+ Business Platforms
           </motion.h2>
+          <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent shadow-[0_0_10px_#8B5CF6] mx-auto mb-6" />
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-gray-600 max-w-3xl mx-auto"
+            className="text-lg text-[#B8B6C4] max-w-3xl mx-auto"
           >
             Connect your existing tools and workflows with our powerful AI agents. From CRM to communication channels, we support the platforms you use every day.
           </motion.p>
@@ -88,36 +93,24 @@ export const IntegrationsSection = () => {
       {/* Marquee Container */}
       <div className="relative w-full overflow-hidden py-8 space-y-6">
         {/* Gradient Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0B0A14] to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0B0A14] to-transparent z-10" />
 
         {/* Row 1: Left to Right */}
         <div className="flex w-full">
           <motion.div
             className="flex gap-6 px-4"
             animate={{ x: ['0%', '-50%'] }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 40,
-                ease: "linear",
-              },
-            }}
+            transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 40, ease: "linear" } }}
             style={{ width: "fit-content" }}
           >
             {[...row1, ...row1].map((item, index) => (
               <div
                 key={`row1-${item.name}-${index}`}
-                className="relative w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm border border-gray-100 flex-shrink-0 hover:shadow-md transition-shadow duration-300"
+                className="relative w-16 h-16 md:w-20 md:h-20 bg-[#15151D] rounded-2xl flex items-center justify-center p-4 border border-[#29263A] flex-shrink-0 hover:border-[#8B5CF6]/40 transition-colors duration-300"
                 title={item.name}
               >
-                <Image
-                  src={item.src}
-                  alt={item.name}
-                  fill unoptimized
-                  className="object-contain p-2"
-                />
+                <Image src={item.src} alt={item.name} fill unoptimized className="object-contain p-2" />
               </div>
             ))}
           </motion.div>
@@ -128,28 +121,16 @@ export const IntegrationsSection = () => {
           <motion.div
             className="flex gap-6 px-4"
             animate={{ x: ['-50%', '0%'] }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 45,
-                ease: "linear",
-              },
-            }}
+            transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 45, ease: "linear" } }}
             style={{ width: "fit-content" }}
           >
             {[...row2, ...row2].map((item, index) => (
               <div
                 key={`row2-${item.name}-${index}`}
-                className="relative w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm border border-gray-100 flex-shrink-0 hover:shadow-md transition-shadow duration-300"
+                className="relative w-16 h-16 md:w-20 md:h-20 bg-[#15151D] rounded-2xl flex items-center justify-center p-4 border border-[#29263A] flex-shrink-0 hover:border-[#8B5CF6]/40 transition-colors duration-300"
                 title={item.name}
               >
-                <Image
-                  src={item.src}
-                  alt={item.name}
-                  fill unoptimized
-                  className="object-contain p-2"
-                />
+                <Image src={item.src} alt={item.name} fill unoptimized className="object-contain p-2" />
               </div>
             ))}
           </motion.div>
@@ -160,28 +141,16 @@ export const IntegrationsSection = () => {
           <motion.div
             className="flex gap-6 px-4"
             animate={{ x: ['0%', '-50%'] }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 35,
-                ease: "linear",
-              },
-            }}
+            transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 35, ease: "linear" } }}
             style={{ width: "fit-content" }}
           >
             {[...row3, ...row3].map((item, index) => (
               <div
                 key={`row3-${item.name}-${index}`}
-                className="relative w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm border border-gray-100 flex-shrink-0 hover:shadow-md transition-shadow duration-300"
+                className="relative w-16 h-16 md:w-20 md:h-20 bg-[#15151D] rounded-2xl flex items-center justify-center p-4 border border-[#29263A] flex-shrink-0 hover:border-[#8B5CF6]/40 transition-colors duration-300"
                 title={item.name}
               >
-                <Image
-                  src={item.src}
-                  alt={item.name}
-                  fill unoptimized
-                  className="object-contain p-2"
-                />
+                <Image src={item.src} alt={item.name} fill unoptimized className="object-contain p-2" />
               </div>
             ))}
           </motion.div>
@@ -198,7 +167,7 @@ export const IntegrationsSection = () => {
       >
         <Link
           href="/contact"
-          className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-blue-600 rounded-full hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/30 transform hover:-translate-y-1"
+          className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-300 bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] rounded-full hover:shadow-[0_0_25px_rgba(124,58,237,0.5)] transform hover:-translate-y-1"
         >
           Explore All Integrations
         </Link>

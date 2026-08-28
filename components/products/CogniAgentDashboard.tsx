@@ -11,12 +11,13 @@ const CogniAssistDashboard = () => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, delay: 0.5 }}
     >
-      <div className="relative bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+      <div className="relative bg-[#15151D]/95 rounded-2xl shadow-[0_10px_35px_rgba(0,0,0,0.6)] p-8 border border-[#29263A]">
+        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent rounded-t-2xl" />
         {/* CogniAssist Dashboard */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 rounded-lg bg-brand-blue flex items-center justify-center text-white">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#8B5CF6] flex items-center justify-center text-white shadow-[0_0_12px_rgba(124,58,237,0.5)]">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -25,58 +26,58 @@ const CogniAssistDashboard = () => {
                 </svg>
               </div>
               <div>
-                <div className="font-semibold text-gray-900">Agent Orchestrator</div>
-                <div className="text-sm text-gray-600">Multi-agent coordination</div>
+                <div className="font-semibold text-white">Agent Orchestrator</div>
+                <div className="text-sm text-[#B8B6C4]">Multi-agent coordination</div>
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-brand-green rounded-full animate-pulse"></div>
-              <span className="text-sm text-brand-green font-medium">Active</span>
+              <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+              <span className="text-sm text-emerald-400 font-medium">Active</span>
             </div>
           </div>
 
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-blue-50 rounded-lg p-4 text-center border border-blue-200">
-              <div className="text-2xl font-bold text-brand-blue">24</div>
-              <div className="text-xs text-gray-600">Active Agents</div>
+            <div className="bg-[#1E1B38] rounded-lg p-4 text-center border border-[#8B5CF6]/30">
+              <div className="text-2xl font-bold text-[#A78BFA]">24</div>
+              <div className="text-xs text-[#B8B6C4]">Active Agents</div>
             </div>
-            <div className="bg-green-50 rounded-lg p-4 text-center border border-green-200">
-              <div className="text-2xl font-bold text-brand-green">95%</div>
-              <div className="text-xs text-gray-600">Automation Rate</div>
+            <div className="bg-[#1E1B38] rounded-lg p-4 text-center border border-emerald-500/30">
+              <div className="text-2xl font-bold text-emerald-400">95%</div>
+              <div className="text-xs text-[#B8B6C4]">Automation Rate</div>
             </div>
-            <div className="bg-yellow-50 rounded-lg p-4 text-center border border-yellow-200">
-              <div className="text-2xl font-bold text-brand-yellow-dark">1.2k</div>
-              <div className="text-xs text-gray-600">Tasks/Hour</div>
+            <div className="bg-[#1E1B38] rounded-lg p-4 text-center border border-amber-500/30">
+              <div className="text-2xl font-bold text-amber-400">1.2k</div>
+              <div className="text-xs text-[#B8B6C4]">Tasks/Hour</div>
             </div>
           </div>
 
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="flex items-center justify-between p-3 bg-[#1E1B38] rounded-lg border border-[#29263A]">
               <div className="flex items-center space-x-3">
-                <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="w-6 h-6 bg-[#8B5CF6]/30 rounded-full flex items-center justify-center border border-[#8B5CF6]/40">
+                  <div className="w-2 h-2 bg-[#A78BFA] rounded-full"></div>
                 </div>
-                <span className="text-sm font-medium text-gray-900">Customer Service Agent</span>
+                <span className="text-sm font-medium text-white">Customer Service Agent</span>
               </div>
-              <span className="text-xs text-brand-green font-medium">Processing</span>
+              <span className="text-xs text-emerald-400 font-medium">Processing</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="flex items-center justify-between p-3 bg-[#1E1B38] rounded-lg border border-[#29263A]">
               <div className="flex items-center space-x-3">
-                <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="w-6 h-6 bg-[#8B5CF6]/30 rounded-full flex items-center justify-center border border-[#8B5CF6]/40">
+                  <div className="w-2 h-2 bg-[#A78BFA] rounded-full"></div>
                 </div>
-                <span className="text-sm font-medium text-gray-900">Data Analysis Agent</span>
+                <span className="text-sm font-medium text-white">Data Analysis Agent</span>
               </div>
-              <span className="text-xs text-brand-blue font-medium">Analyzing</span>
+              <span className="text-xs text-[#A78BFA] font-medium">Analyzing</span>
             </div>
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="flex items-center justify-between p-3 bg-[#1E1B38] rounded-lg border border-[#29263A]">
               <div className="flex items-center space-x-3">
-                <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="w-6 h-6 bg-[#8B5CF6]/30 rounded-full flex items-center justify-center border border-[#8B5CF6]/40">
+                  <div className="w-2 h-2 bg-[#A78BFA] rounded-full"></div>
                 </div>
-                <span className="text-sm font-medium text-gray-900">Workflow Orchestrator</span>
+                <span className="text-sm font-medium text-white">Workflow Orchestrator</span>
               </div>
-              <span className="text-xs text-brand-yellow-dark font-medium">Coordinating</span>
+              <span className="text-xs text-amber-400 font-medium">Coordinating</span>
             </div>
           </div>
         </div>

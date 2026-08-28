@@ -48,208 +48,106 @@ const ProductHero: React.FC<ProductHeroProps> = ({
   // If product data is provided, use the new enhanced layout
   if (product) {
     return (
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden bg-[#0B0A14]">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50">
-          {/* Animated Grid Background */}
-          <div className="absolute inset-0 opacity-20">
-            <div
-              className="absolute inset-0 bg-brand-blue/5"
-              style={{
-                backgroundImage: `
-                  linear-gradient(to right, rgba(37, 99, 235, 0.1) 1px, transparent 1px),
-                  linear-gradient(to bottom, rgba(37, 99, 235, 0.1) 1px, transparent 1px)
-                `,
-                backgroundSize: '60px 60px',
-                animation: 'gridMove 20s linear infinite'
-              }}
-            />
+        <section className="relative min-h-screen flex items-center justify-center bg-[#08090B]">
+          {/* Background ambient glows */}
+          <div className="absolute inset-0 pointer-events-none">
+            {/* Top central purple flare */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-[#7C3AED]/20 via-[#8B5CF6]/10 to-transparent blur-[120px]" />
+            {/* Left violet glow */}
+            <div className="absolute top-1/3 -left-32 w-96 h-96 bg-[#8B5CF6]/10 rounded-full blur-[140px]" />
+            {/* Right violet glow */}
+            <div className="absolute top-1/2 -right-32 w-96 h-96 bg-[#7C3AED]/12 rounded-full blur-[140px]" />
+
+            {/* Star sparkles */}
+            <div className="absolute top-16 left-[15%] w-1 h-1 bg-[#A78BFA] rounded-full opacity-60 animate-pulse" />
+            <div className="absolute top-28 right-[20%] w-1.5 h-1.5 bg-white rounded-full opacity-70 animate-pulse" />
+            <div className="absolute top-44 left-[30%] w-1 h-1 bg-[#8B5CF6] rounded-full opacity-40" />
+            <div className="absolute top-60 right-[10%] w-1 h-1 bg-[#A78BFA] rounded-full opacity-50" />
+            <div className="absolute bottom-20 left-[8%] w-1.5 h-1.5 bg-[#8B5CF6] rounded-full opacity-60 animate-pulse" />
+            <div className="absolute bottom-40 right-[15%] w-1 h-1 bg-white rounded-full opacity-50" />
           </div>
 
-          {/* Floating Geometric Shapes */}
+          {/* Animated floating orbs */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Large floating circles */}
             <motion.div
-              className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"
-              animate={{
-                y: [0, -30, 0],
-                x: [0, 20, 0],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 15,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-[#7C3AED]/15 to-[#8B5CF6]/10 rounded-full blur-3xl"
+              animate={{ y: [0, -30, 0], x: [0, 20, 0], scale: [1, 1.1, 1] }}
+              transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div
-              className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-indigo-400/15 to-cyan-400/15 rounded-full blur-3xl"
-              animate={{
-                y: [0, 40, 0],
-                x: [0, -30, 0],
-                scale: [1, 1.15, 1],
-              }}
-              transition={{
-                duration: 18,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-
-            {/* Smaller animated orbs */}
-            <motion.div
-              className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-br from-blue-500/25 to-transparent rounded-full blur-2xl"
-              animate={{
-                y: [0, -50, 0],
-                x: [0, 30, 0],
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-[#6D28D9]/10 to-[#A78BFA]/10 rounded-full blur-3xl"
+              animate={{ y: [0, 40, 0], x: [0, -30, 0], scale: [1, 1.15, 1] }}
+              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
             />
             <motion.div
-              className="absolute bottom-1/3 left-1/2 w-72 h-72 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-2xl"
-              animate={{
-                y: [0, 60, 0],
-                x: [0, -40, 0],
-              }}
-              transition={{
-                duration: 14,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
+              className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-br from-[#8B5CF6]/20 to-transparent rounded-full blur-2xl"
+              animate={{ y: [0, -50, 0], x: [0, 30, 0] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
             />
-
-            {/* Floating geometric shapes */}
-            <motion.div
-              className="absolute top-20 right-1/4 w-32 h-32 border-2 border-blue-400/30 rounded-2xl"
-              animate={{
-                rotate: [0, 360],
-                y: [0, -20, 0],
-              }}
-              transition={{
-                rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                y: { duration: 8, repeat: Infinity, ease: "easeInOut" }
-              }}
-              style={{ transformStyle: 'preserve-3d' }}
-            />
-            <motion.div
-              className="absolute bottom-32 left-1/4 w-24 h-24 border-2 border-purple-400/30 rounded-xl"
-              animate={{
-                rotate: [0, -360],
-                y: [0, 30, 0],
-              }}
-              transition={{
-                rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-                y: { duration: 10, repeat: Infinity, ease: "easeInOut" }
-              }}
-            />
-            <motion.div
-              className="absolute top-1/2 right-20 w-16 h-16 bg-gradient-to-br from-cyan-400/40 to-blue-500/40 rounded-lg"
-              animate={{
-                rotate: [0, 180, 360],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 16,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-
             {/* Particle dots */}
-            {[...Array(15)].map((_, i) => (
+            {[...Array(12)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-2 h-2 bg-blue-500/40 rounded-full"
+                className="absolute w-1.5 h-1.5 bg-[#A78BFA]/50 rounded-full"
                 style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
+                  top: `${10 + (i * 7) % 80}%`,
+                  left: `${5 + (i * 13) % 90}%`,
                 }}
-                animate={{
-                  y: [0, -100, 0],
-                  opacity: [0.2, 0.8, 0.2],
-                }}
+                animate={{ y: [0, -80, 0], opacity: [0.2, 0.7, 0.2] }}
                 transition={{
-                  duration: 8 + Math.random() * 4,
+                  duration: 8 + (i % 4),
                   repeat: Infinity,
-                  delay: Math.random() * 5,
+                  delay: i * 0.4,
                   ease: "easeInOut"
                 }}
               />
             ))}
           </div>
 
-          {/* Glassmorphism overlay elements */}
-          <div className="absolute inset-0 pointer-events-none">
-            <motion.div
-              className="absolute top-40 left-10 w-48 h-48 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20"
-              animate={{
-                y: [0, -20, 0],
-                rotate: [0, 5, 0],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            <motion.div
-              className="absolute bottom-40 right-10 w-56 h-56 bg-white/10 backdrop-blur-sm rounded-3xl border border-white/20"
-              animate={{
-                y: [0, 20, 0],
-                rotate: [0, -5, 0],
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </div>
-
-          {/* Add keyframe animation for grid */}
-          <style jsx>{`
-            @keyframes gridMove {
-              0% {
-                transform: translate(0, 0);
-              }
-              100% {
-                transform: translate(60px, 60px);
-              }
-            }
-          `}</style>
-
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left Content */}
               <div className="text-center lg:text-left">
+                {/* Product badge */}
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
                   className="flex justify-center lg:justify-start mb-6"
                 >
-                  <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-brand-blue shadow-lg">
-                    <div className="text-white">
+                  <div className="inline-flex items-center gap-2 bg-[#15151D]/90 border border-[#29263A] shadow-[0_0_18px_rgba(124,58,237,0.2)] text-[#A78BFA] text-xs md:text-sm font-semibold px-5 py-2 rounded-full backdrop-blur-md">
+                    <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-ping" />
+                    <span>{product.name}</span>
+                  </div>
+                </motion.div>
+
+                {/* Icon */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="flex justify-center lg:justify-start mb-6"
+                >
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(124,58,237,0.35)]">
+                    <div className="text-[#A78BFA]">
                       {product.icon}
                     </div>
                   </div>
                 </motion.div>
 
                 <motion.h1
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4"
+                  className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 tracking-tight leading-tight"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
+                  transition={{ duration: 0.8, delay: 0.15 }}
                 >
                   {product.name}
                 </motion.h1>
 
                 <motion.h2
-                  className="text-xl sm:text-2xl lg:text-3xl text-brand-blue mb-6 font-semibold"
+                  className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#C084FC] drop-shadow-[0_0_25px_rgba(139,92,246,0.5)]"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
@@ -258,7 +156,7 @@ const ProductHero: React.FC<ProductHeroProps> = ({
                 </motion.h2>
 
                 <motion.p
-                  className="text-lg sm:text-xl text-gray-700 mb-8 leading-relaxed max-w-2xl"
+                  className="text-lg sm:text-xl text-[#B8B6C4] mb-8 leading-relaxed max-w-2xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
@@ -273,12 +171,12 @@ const ProductHero: React.FC<ProductHeroProps> = ({
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
                   <Link href="/contact">
-                    <button className="bg-brand-blue text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-brand-blue-dark transition-all shadow-lg hover:shadow-xl">
+                    <button className="bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-[0_0_25px_rgba(124,58,237,0.5)] transition-all duration-300 shadow-lg">
                       Schedule Demo
                     </button>
                   </Link>
                   <Link href="/">
-                    <button className="border-2 border-brand-blue text-brand-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-brand-blue hover:text-white transition-all">
+                    <button className="border border-[#8B5CF6]/50 text-[#A78BFA] px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[#8B5CF6]/10 hover:border-[#A78BFA] transition-all duration-300 backdrop-blur-sm">
                       Learn More
                     </button>
                   </Link>
@@ -298,58 +196,58 @@ const ProductHero: React.FC<ProductHeroProps> = ({
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
                 >
-                  <div className="relative bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
-                    {/* Generic Dashboard for other products */}
+                  <div className="relative bg-[#15151D]/95 rounded-2xl shadow-[0_10px_35px_rgba(0,0,0,0.6)] p-8 border border-[#29263A] hover:border-[#8B5CF6]/60 transition-all duration-300">
+                    <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent rounded-t-2xl" />
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                          <div className="w-8 h-8 rounded-lg bg-brand-blue flex items-center justify-center text-white">
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 flex items-center justify-center text-[#A78BFA]">
                             {product.icon}
                           </div>
                           <div>
-                            <div className="font-semibold text-gray-900">{product.name} Dashboard</div>
-                            <div className="text-sm text-gray-600">Real-time monitoring</div>
+                            <div className="font-semibold text-white">{product.name} Dashboard</div>
+                            <div className="text-sm text-[#B8B6C4]">Real-time monitoring</div>
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-brand-green rounded-full animate-pulse"></div>
-                          <span className="text-sm text-brand-green font-medium">Active</span>
+                          <div className="w-2 h-2 bg-[#8B5CF6] rounded-full animate-pulse"></div>
+                          <span className="text-sm text-[#A78BFA] font-medium">Active</span>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-3 gap-4">
-                        <div className="bg-blue-50 rounded-lg p-4 text-center border border-blue-200">
-                          <div className="text-2xl font-bold text-brand-blue">24</div>
-                          <div className="text-xs text-gray-600">Active</div>
+                        <div className="bg-[#1E1B38] rounded-lg p-4 text-center border border-[#29263A]">
+                          <div className="text-2xl font-bold text-[#A78BFA]">24</div>
+                          <div className="text-xs text-[#B8B6C4]">Active</div>
                         </div>
-                        <div className="bg-green-50 rounded-lg p-4 text-center border border-green-200">
-                          <div className="text-2xl font-bold text-brand-green">95%</div>
-                          <div className="text-xs text-gray-600">Efficiency</div>
+                        <div className="bg-[#1E1B38] rounded-lg p-4 text-center border border-[#29263A]">
+                          <div className="text-2xl font-bold text-[#A78BFA]">95%</div>
+                          <div className="text-xs text-[#B8B6C4]">Efficiency</div>
                         </div>
-                        <div className="bg-purple-50 rounded-lg p-4 text-center border border-purple-200">
-                          <div className="text-2xl font-bold text-brand-purple">1.2k</div>
-                          <div className="text-xs text-gray-600">Tasks/Hour</div>
+                        <div className="bg-[#1E1B38] rounded-lg p-4 text-center border border-[#29263A]">
+                          <div className="text-2xl font-bold text-[#A78BFA]">1.2k</div>
+                          <div className="text-xs text-[#B8B6C4]">Tasks/Hour</div>
                         </div>
                       </div>
 
                       <div className="space-y-3">
-                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <div className="flex items-center justify-between p-3 bg-[#1E1B38] rounded-lg border border-[#29263A]">
                           <div className="flex items-center space-x-3">
-                            <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center">
-                              <div className="w-2 h-2 bg-white rounded-full"></div>
+                            <div className="w-6 h-6 bg-[#8B5CF6]/30 rounded-full flex items-center justify-center border border-[#8B5CF6]/40">
+                              <div className="w-2 h-2 bg-[#A78BFA] rounded-full"></div>
                             </div>
-                            <span className="text-sm font-medium text-gray-900">Primary Process</span>
+                            <span className="text-sm font-medium text-white">Primary Process</span>
                           </div>
-                          <span className="text-xs text-brand-green font-medium">Running</span>
+                          <span className="text-xs text-[#A78BFA] font-medium">Running</span>
                         </div>
-                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <div className="flex items-center justify-between p-3 bg-[#1E1B38] rounded-lg border border-[#29263A]">
                           <div className="flex items-center space-x-3">
-                            <div className="w-6 h-6 bg-brand-blue rounded-full flex items-center justify-center">
-                              <div className="w-2 h-2 bg-white rounded-full"></div>
+                            <div className="w-6 h-6 bg-[#8B5CF6]/30 rounded-full flex items-center justify-center border border-[#8B5CF6]/40">
+                              <div className="w-2 h-2 bg-[#A78BFA] rounded-full"></div>
                             </div>
-                            <span className="text-sm font-medium text-gray-900">Secondary Process</span>
+                            <span className="text-sm font-medium text-white">Secondary Process</span>
                           </div>
-                          <span className="text-xs text-brand-blue font-medium">Processing</span>
+                          <span className="text-xs text-[#A78BFA] font-medium">Processing</span>
                         </div>
                       </div>
                     </div>
@@ -361,7 +259,7 @@ const ProductHero: React.FC<ProductHeroProps> = ({
         </section>
 
         {/* Features Section */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-[#0B0A14]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -370,10 +268,17 @@ const ProductHero: React.FC<ProductHeroProps> = ({
               transition={{ duration: 0.8 }}
               className="text-center mb-16"
             >
-              <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              {/* Section pill */}
+              <div className="inline-flex items-center gap-2 bg-[#15151D]/90 border border-[#29263A] shadow-[0_0_18px_rgba(124,58,237,0.2)] text-[#A78BFA] text-xs font-semibold px-5 py-2 rounded-full mb-6 backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse" />
+                <span>Capabilities</span>
+              </div>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 tracking-tight">
                 Key Features
               </h3>
-              <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+              {/* Neon accent bar */}
+              <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent shadow-[0_0_10px_#8B5CF6] mx-auto mb-4" />
+              <p className="text-lg text-[#B8B6C4] max-w-3xl mx-auto">
                 Powerful capabilities designed to transform your operations
               </p>
             </motion.div>
@@ -386,21 +291,24 @@ const ProductHero: React.FC<ProductHeroProps> = ({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-brand-blue"
+                  className="group relative bg-[#15151D]/95 rounded-2xl p-6 border border-[#29263A] hover:border-[#8B5CF6]/60 shadow-[0_10px_35px_rgba(0,0,0,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] transition-all duration-500 overflow-hidden"
                 >
-                  <div className="w-12 h-12 bg-brand-blue rounded-xl flex items-center justify-center mb-4">
-                    <div className="w-6 h-6 text-white">
+                  <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#7C3AED]/10 rounded-full blur-2xl transform translate-x-8 -translate-y-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 rounded-xl flex items-center justify-center mb-4 group-hover:border-[#A78BFA] group-hover:shadow-[0_0_15px_rgba(124,58,237,0.4)] transition-all duration-300">
+                    <div className="w-6 h-6 text-[#A78BFA]">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">
+                  <h4 className="text-lg font-semibold text-white mb-2 group-hover:text-[#A78BFA] transition-colors duration-300">
                     {feature}
                   </h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-[#B8B6C4] text-sm leading-relaxed">
                     Advanced capabilities to enhance your workflow and productivity.
                   </p>
+                  <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-500 ease-out w-0 group-hover:w-full" />
                 </motion.div>
               ))}
             </div>
@@ -414,18 +322,22 @@ const ProductHero: React.FC<ProductHeroProps> = ({
               className="mt-24"
             >
               <div className="text-center mb-16">
-                <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                {/* Section pill */}
+                <div className="inline-flex items-center gap-2 bg-[#15151D]/90 border border-[#29263A] shadow-[0_0_18px_rgba(124,58,237,0.2)] text-[#A78BFA] text-xs font-semibold px-5 py-2 rounded-full mb-6 backdrop-blur-md">
+                  <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse" />
+                  <span>Results</span>
+                </div>
+                <h3 className="text-3xl font-extrabold text-white mb-4 tracking-tight">
                   Measurable Business Impact
                 </h3>
-                <div className="w-20 h-1 bg-brand-blue mx-auto rounded-full mb-6"></div>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent shadow-[0_0_10px_#8B5CF6] mx-auto mb-6" />
+                <p className="text-xl text-[#B8B6C4] max-w-2xl mx-auto">
                   See how our solutions drive tangible results and transform organizations across industries
                 </p>
               </div>
               
               <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-${product.benefits.length <= 4 ? product.benefits.length : 5} gap-8`}>
                 {product.benefits.map((benefit, index) => {
-                  // Helper to parse benefit text for number highlighting
                   const match = benefit.match(/(\d+%?)(.*)/);
                   const number = match ? match[1] : '';
                   const text = match ? match[2] : benefit;
@@ -437,29 +349,29 @@ const ProductHero: React.FC<ProductHeroProps> = ({
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                      className="relative group"
+                      className="group relative"
                     >
-                      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white rounded-2xl transform transition-transform duration-300 group-hover:-translate-y-2"></div>
-                      <div className="relative bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-brand-blue/30 transition-all duration-300 h-full flex flex-col items-center text-center group-hover:shadow-xl">
+                      <div className="relative bg-[#15151D]/95 rounded-2xl p-8 border border-[#29263A] hover:border-[#8B5CF6]/60 shadow-[0_10px_35px_rgba(0,0,0,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] transition-all duration-500 h-full flex flex-col items-center text-center overflow-hidden">
+                        <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
                         {/* Icon Container */}
-                        <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-blue transition-colors duration-300">
+                        <div className="w-16 h-16 bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 rounded-full flex items-center justify-center mb-6 group-hover:border-[#A78BFA] group-hover:shadow-[0_0_20px_rgba(124,58,237,0.4)] transition-all duration-300">
                           {index === 0 && (
-                            <svg className="w-8 h-8 text-brand-blue group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-8 h-8 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                           )}
                           {index === 1 && (
-                            <svg className="w-8 h-8 text-brand-blue group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-8 h-8 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           )}
                           {index === 2 && (
-                            <svg className="w-8 h-8 text-brand-blue group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-8 h-8 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           )}
                           {index === 3 && (
-                            <svg className="w-8 h-8 text-brand-blue group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-8 h-8 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                             </svg>
                           )}
@@ -469,29 +381,30 @@ const ProductHero: React.FC<ProductHeroProps> = ({
                         <div className="flex-1 flex flex-col justify-center">
                           {number ? (
                             <>
-                              <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2 tracking-tight group-hover:text-brand-blue transition-colors duration-300">
+                              <div className="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight bg-gradient-to-r from-white via-[#A78BFA] to-[#8B5CF6] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(139,92,246,0.35)]">
                                 {number}
                               </div>
-                              <p className="text-gray-600 font-medium leading-snug">
+                              <p className="text-[#B8B6C4] font-medium leading-snug">
                                 {text}
                               </p>
                             </>
                           ) : (
-                            <h4 className="text-xl font-bold text-gray-900 group-hover:text-brand-blue transition-colors duration-300">
+                            <h4 className="text-xl font-bold text-white group-hover:text-[#A78BFA] transition-colors duration-300">
                               {benefit}
                             </h4>
                           )}
                         </div>
 
                         {/* Label */}
-                        <div className="mt-6 pt-4 border-t border-gray-100 w-full">
-                          <span className="text-xs font-bold text-brand-blue uppercase tracking-widest">
+                        <div className="mt-6 pt-4 border-t border-[#29263A] w-full">
+                          <span className="text-xs font-bold text-[#8B5CF6] uppercase tracking-widest">
                             {index === 0 && 'Efficiency'}
                             {index === 1 && 'Accuracy'}
                             {index === 2 && 'Speed'}
                             {index === 3 && 'Cost Savings'}
                           </span>
                         </div>
+                        <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-500 ease-out w-0 group-hover:w-full" />
                       </div>
                     </motion.div>
                   );

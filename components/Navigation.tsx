@@ -62,7 +62,7 @@ interface NavigationSection {
 
 const Navigation = () => {
   const pathname = usePathname()
-  const isDark = pathname?.startsWith('/about') || pathname?.startsWith('/careers') || pathname?.startsWith('/blog') || pathname?.startsWith('/solutions')
+  const isDark = pathname?.startsWith('/about') || pathname?.startsWith('/careers') || pathname?.startsWith('/blog') || pathname?.startsWith('/solutions') || pathname?.startsWith('/products')
   const [isOpen, setIsOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null)
@@ -91,6 +91,7 @@ const Navigation = () => {
           description: 'Agentic AI Platform',
           icon: RocketLaunchIcon,
           badge: 'POPULAR',
+          color: 'linear-gradient(135deg, #7c3aed, #9333ea)',
           features: [
             'Multi-Agent Orchestration',
             'AI Engineering No-code & Pro-code tools',
@@ -104,6 +105,7 @@ const Navigation = () => {
           description: 'AI-Powered Kubernetes Orchestration',
           icon: CloudIcon,
           badge: 'POPULAR',
+          color: 'linear-gradient(135deg, #0284c7, #2563eb)',
           features: [
             'Multicloud Finops',
             'Multicloud Governance and Compliance',
@@ -116,6 +118,7 @@ const Navigation = () => {
           href: '/products/cogniaura',
           description: 'Analytics & BI Platform',
           icon: PresentationChartBarIcon,
+          color: 'linear-gradient(135deg, #0d9488, #059669)',
           features: [
             'Automated Data Visualizations',
             'Predictive Trend Analysis',
@@ -128,6 +131,7 @@ const Navigation = () => {
           href: '/products/cogninova',
           description: 'AI-Powered School ERP and LMS',
           icon: AcademicCapIcon,
+          color: 'linear-gradient(135deg, #4f46e5, #2563eb)',
           features: [
             'Student Information System (SIS)',
             'AI-Assisted Grading & Feedback',
@@ -140,6 +144,7 @@ const Navigation = () => {
           href: '/products/cogniforge',
           description: 'ERP for Manufacturing Companies',
           icon: WrenchIcon,
+          color: 'linear-gradient(135deg, #ea580c, #dc2626)',
           features: [
             'Production Planning',
             'Inventory Management',
@@ -389,7 +394,11 @@ const Navigation = () => {
                                         onClick={closeDropdown}
                                       >
                                         <div className="flex items-center space-x-2 mb-3">
-                                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm ${isDark ? 'bg-[#1A1829] border border-[#8B5CF6]/40 text-[#A78BFA]' : 'bg-brand-blue'}`}>
+                                          <div
+                                            suppressHydrationWarning
+                                            className="w-9 h-9 rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm transition-all duration-200 group-hover:brightness-110"
+                                            style={{ background: product.color || (isDark ? '#1A1829' : '#2563eb') }}
+                                          >
                                             {React.createElement(product.icon, { className: "w-5 h-5" })}
                                           </div>
                                           {product.badge && (
@@ -478,7 +487,7 @@ const Navigation = () => {
                                         }`}
                                       onClick={closeDropdown}
                                     >
-                                      <div className={`w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 ${isDark ? 'bg-[#8B5CF6]' : 'bg-brand-blue'}`}>
+                                      <div className={`w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 group-hover:brightness-110 ${subItem.color ? `bg-gradient-to-br ${subItem.color}` : (isDark ? 'bg-[#8B5CF6]' : 'bg-brand-blue')}`}>
                                         {React.createElement(subItem.icon, { className: "w-4 h-4 text-white" })}
                                       </div>
                                       <div className="flex-1 min-w-0">
@@ -514,7 +523,7 @@ const Navigation = () => {
                                       }`}
                                     onClick={closeDropdown}
                                   >
-                                    <div className={`w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 ${isDark ? 'bg-[#8B5CF6]' : 'bg-brand-blue'}`}>
+                                    <div className={`w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 group-hover:brightness-110 ${subItem.color ? `bg-gradient-to-br ${subItem.color}` : (isDark ? 'bg-[#8B5CF6]' : 'bg-brand-blue')}`}>
                                       {React.createElement(subItem.icon, { className: "w-4 h-4 text-white" })}
                                     </div>
                                     <div className="flex-1 min-w-0">

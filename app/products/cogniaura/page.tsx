@@ -57,12 +57,14 @@ const productData = {
 
 export default function CogniAuraPage() {
   return (
-    <PageLayout>
-      <ProductHero product={productData} />
-      <CogniAuraKeyModules />
-      <CogniAuraServicesList />
-      <CogniAuraAgentsShowcase />
-      <CTASection />
+    <PageLayout className="bg-[#0B0A14]">
+      <div className="bg-[#0B0A14] text-white min-h-screen">
+        <ProductHero product={productData} />
+        <CogniAuraKeyModules />
+        <CogniAuraServicesList />
+        <CogniAuraAgentsShowcase />
+        <CTASection theme="dark" />
+      </div>
     </PageLayout>
   );
 }

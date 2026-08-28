@@ -3,9 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import Section from '@/components/layout/Section'
 
 interface InteractiveDemoProps {
   productName: string
@@ -184,20 +182,20 @@ const InteractiveDemo = ({
   }, [])
 
   return (
-    <Section background="white" padding="lg">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-16 bg-[#0B0A14]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-3"
+            className="text-3xl md:text-4xl font-extrabold text-white mb-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            {title}<span className='text-brand-blue'> Architecture & Performance</span>
+            {title}<span className='text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] to-[#8B5CF6]'> Architecture & Performance</span>
           </motion.h2>
           <motion.p
-            className="text-base text-gray-600 max-w-2xl mx-auto"
+            className="text-base text-[#B8B6C4] max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -216,18 +214,19 @@ const InteractiveDemo = ({
             viewport={{ once: true }}
             className="h-full"
           >
-            <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-xl border border-gray-100 h-full flex flex-col">
+            <div className="relative bg-[#15151D]/95 rounded-2xl p-8 border border-[#29263A] shadow-[0_10px_35px_rgba(0,0,0,0.4)] h-full flex flex-col">
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent rounded-t-2xl" />
               <div className="flex items-center mb-8">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 rounded-xl flex items-center justify-center mr-4">
+                  <svg className="w-6 h-6 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.01M15 10h1.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900">
+                  <h3 className="text-xl font-bold text-white">
                     Interactive Demo
                   </h3>
-                  <p className="text-sm text-gray-600">Click any step to explore</p>
+                  <p className="text-sm text-[#B8B6C4]">Click any step to explore</p>
                 </div>
               </div>
 
@@ -236,8 +235,8 @@ const InteractiveDemo = ({
                   <motion.div
                     key={step.title}
                     className={`group p-4 rounded-xl cursor-pointer transition-all duration-300 ${activeStep === index
-                      ? 'bg-blue-50 border-2 border-blue-200 shadow-md'
-                      : 'bg-white border-2 border-gray-100 hover:border-blue-200 hover:shadow-sm'
+                      ? 'bg-[#1E1B38] border-2 border-[#8B5CF6]/60 shadow-[0_0_20px_rgba(124,58,237,0.2)]'
+                      : 'bg-[#15151D] border-2 border-[#29263A] hover:border-[#8B5CF6]/40'
                       }`}
                     onClick={() => setActiveStep(index)}
                     whileHover={{ y: -2 }}
@@ -245,18 +244,18 @@ const InteractiveDemo = ({
                   >
                     <div className="flex items-center space-x-4">
                       <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${activeStep === index
-                        ? 'bg-blue-500 text-white shadow-lg'
-                        : 'bg-gray-100 text-gray-500 group-hover:bg-blue-100 group-hover:text-blue-600'
+                        ? 'bg-[#8B5CF6] text-white shadow-[0_0_15px_rgba(124,58,237,0.4)]'
+                        : 'bg-[#1E1B38] text-[#B8B6C4] group-hover:bg-[#8B5CF6]/20 group-hover:text-[#A78BFA]'
                         }`}>
                         {step.icon}
                       </div>
                       <div className="flex-1">
-                        <div className={`font-semibold transition-colors duration-300 ${activeStep === index ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
+                        <div className={`font-semibold transition-colors duration-300 ${activeStep === index ? 'text-white' : 'text-[#B8B6C4] group-hover:text-white'
                           }`}>{step.title}</div>
-                        <div className="text-sm text-gray-500 mt-1">{step.description}</div>
+                        <div className="text-sm text-[#B8B6C4]/70 mt-1">{step.description}</div>
                       </div>
                       {activeStep === index && (
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-[#8B5CF6] rounded-full"></div>
                       )}
                     </div>
                   </motion.div>
@@ -267,7 +266,7 @@ const InteractiveDemo = ({
                 variant="primary"
                 onClick={playDemo}
                 disabled={isPlaying}
-                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="w-full bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] hover:shadow-[0_0_25px_rgba(124,58,237,0.5)] text-white font-semibold py-3 px-6 rounded-xl shadow-lg transition-all duration-300"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.01M15 10h1.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -285,10 +284,11 @@ const InteractiveDemo = ({
             viewport={{ once: true }}
             className="h-full"
           >
-            <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-xl border border-gray-100 h-full flex flex-col justify-center">
-              <h1 className="text-2xl font-bold mb-12 text-center">Interactive Demo {productName}</h1>
-              <div className="aspect-video bg-gradient-to-br from-white to-white-50 rounded-xl flex items-center justify-center mb-8 border border-blue-100 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-white to-transparent"></div>
+            <div className="relative bg-[#15151D]/95 rounded-2xl p-8 border border-[#29263A] shadow-[0_10px_35px_rgba(0,0,0,0.4)] h-full flex flex-col justify-center">
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent rounded-t-2xl" />
+              <h1 className="text-2xl font-bold mb-12 text-center text-white">Interactive Demo {productName}</h1>
+              <div className="aspect-video bg-[#0B0A14] rounded-xl flex items-center justify-center mb-8 border border-[#29263A] relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0B0A14] to-transparent"></div>
                 {/* Product-Specific Demo Visualization */}
                 <motion.div
                   className="w-full h-full flex items-center justify-center relative z-10"
@@ -325,7 +325,7 @@ const InteractiveDemo = ({
                   {productName === 'CogniLoom' && (
                     <div className="w-full">
                       <motion.div
-                        className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-white shadow-lg"
+                        className="w-20 h-20 bg-gradient-to-br from-[#7C3AED] to-[#8B5CF6] rounded-2xl flex items-center justify-center mb-6 mx-auto text-white shadow-[0_0_20px_rgba(124,58,237,0.4)]"
                         animate={{
                           scale: [1, 1.05, 1],
                           y: [0, -5, 0]
@@ -342,11 +342,11 @@ const InteractiveDemo = ({
                         {[1, 2, 3, 4].map((i) => (
                           <motion.div
                             key={i}
-                            className={`w-14 h-14 rounded-xl border-2 ${activeStep >= i - 1 ? 'border-green-400 bg-green-100' : 'border-gray-300 bg-gray-100'} flex items-center justify-center shadow-sm`}
+                            className={`w-14 h-14 rounded-xl border-2 ${activeStep >= i - 1 ? 'border-[#8B5CF6] bg-[#1E1B38]' : 'border-[#29263A] bg-[#15151D]'} flex items-center justify-center shadow-sm`}
                             animate={activeStep >= i - 1 ? { scale: [1, 1.1, 1] } : {}}
                             transition={{ duration: 0.5, delay: i * 0.1 }}
                           >
-                            <div className={`w-7 h-7 rounded-lg ${activeStep >= i - 1 ? 'bg-green-400' : 'bg-gray-300'}`}></div>
+                            <div className={`w-7 h-7 rounded-lg ${activeStep >= i - 1 ? 'bg-[#8B5CF6]' : 'bg-[#29263A]'}`}></div>
                           </motion.div>
                         ))}
                       </div>
@@ -356,7 +356,7 @@ const InteractiveDemo = ({
                   {productName === 'CogniInsights' && (
                     <div className="w-full">
                       <motion.div
-                        className="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-white shadow-lg"
+                        className="w-20 h-20 bg-gradient-to-br from-[#7C3AED] to-[#8B5CF6] rounded-2xl flex items-center justify-center mb-6 mx-auto text-white shadow-[0_0_20px_rgba(124,58,237,0.4)]"
                         animate={{
                           scale: [1, 1.05, 1],
                           rotate: [0, 5, -5, 0]
@@ -370,18 +370,18 @@ const InteractiveDemo = ({
                         {demoSteps[activeStep]?.icon}
                       </motion.div>
                       <div className="flex justify-between items-center mb-6">
-                        <div className="w-20 h-14 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center text-xs font-semibold text-white shadow-md">Source</div>
+                        <div className="w-20 h-14 bg-gradient-to-br from-[#7C3AED] to-[#8B5CF6] rounded-xl flex items-center justify-center text-xs font-semibold text-white shadow-md">Source</div>
                         <div className="flex-1 mx-6">
-                          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+                          <div className="h-3 bg-[#1E1B38] rounded-full overflow-hidden border border-[#29263A]">
                             <motion.div
-                              className="h-full bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
+                              className="h-full bg-gradient-to-r from-[#7C3AED] to-[#A78BFA] rounded-full"
                               initial={{ width: 0 }}
                               animate={{ width: `${((activeStep + 1) / demoSteps.length) * 100}%` }}
                               transition={{ duration: 1, ease: "easeInOut" }}
                             />
                           </div>
                         </div>
-                        <div className="w-20 h-14 bg-gradient-to-br from-purple-400 to-purple-500 rounded-xl flex items-center justify-center text-xs font-semibold text-white shadow-md">Target</div>
+                        <div className="w-20 h-14 bg-gradient-to-br from-[#8B5CF6] to-[#A78BFA] rounded-xl flex items-center justify-center text-xs font-semibold text-white shadow-md">Target</div>
                       </div>
                     </div>
                   )}
@@ -389,7 +389,7 @@ const InteractiveDemo = ({
                   {productName === 'CogniForge' && (
                     <div className="w-full">
                       <motion.div
-                        className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl flex items-center justify-center mb-6 mx-auto text-white shadow-lg"
+                        className="w-20 h-20 bg-gradient-to-br from-[#7C3AED] to-[#8B5CF6] rounded-2xl flex items-center justify-center mb-6 mx-auto text-white shadow-[0_0_20px_rgba(124,58,237,0.4)]"
                         animate={{
                           scale: [1, 1.05, 1],
                           rotate: [0, 3, -3, 0]
@@ -406,23 +406,11 @@ const InteractiveDemo = ({
                         {['Order', 'Plan', 'Execute', 'Deliver'].map((label, i) => (
                           <motion.div
                             key={i}
-                            className={`h-12 rounded-xl ${activeStep >= i ? 'bg-gradient-to-br from-orange-400 to-red-500 text-white' : 'bg-gray-200 text-gray-600'} flex items-center justify-center text-xs font-semibold shadow-sm`}
+                            className={`h-12 rounded-xl ${activeStep >= i ? 'bg-gradient-to-br from-[#7C3AED] to-[#8B5CF6] text-white' : 'bg-[#1E1B38] text-[#B8B6C4] border border-[#29263A]'} flex items-center justify-center text-xs font-semibold`}
                             animate={activeStep >= i ? { scale: [1, 1.05, 1] } : {}}
                             transition={{ duration: 0.5, delay: i * 0.1 }}
                           >
                             {label}
-                          </motion.div>
-                        ))}
-                      </div>
-                      <div className="flex justify-center space-x-2 mb-4">
-                        {[1, 2, 3].map((i) => (
-                          <motion.div
-                            key={i}
-                            className={`w-8 h-8 rounded-lg ${activeStep >= i - 1 ? 'bg-orange-400' : 'bg-gray-300'} flex items-center justify-center shadow-sm`}
-                            // animate={activeStep >= i - 1 ? { rotate: [0, 360] } : {}}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                          >
-                            <div className="w-3 h-3 bg-white rounded-full"></div>
                           </motion.div>
                         ))}
                       </div>
@@ -433,7 +421,7 @@ const InteractiveDemo = ({
                 {/* Animated Elements */}
                 {isPlaying && (
                   <motion.div
-                    className="absolute inset-0 border-4 border-blue-400 rounded-xl"
+                    className="absolute inset-0 border-4 border-[#8B5CF6]/60 rounded-xl"
                     initial={{ scale: 1, opacity: 1 }}
                     animate={{ scale: 1.05, opacity: 0 }}
                     transition={{ duration: 0.8, repeat: Infinity }}
@@ -443,17 +431,17 @@ const InteractiveDemo = ({
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-gray-700">Step {activeStep + 1} of {demoSteps.length}</span>
-                  <div className="w-px h-4 bg-gray-300"></div>
-                  <span className="text-xs text-gray-500">Interactive Preview</span>
+                  <span className="text-sm font-medium text-[#B8B6C4]">Step {activeStep + 1} of {demoSteps.length}</span>
+                  <div className="w-px h-4 bg-[#29263A]"></div>
+                  <span className="text-xs text-[#B8B6C4]/60">Interactive Preview</span>
                 </div>
                 <div className="flex space-x-2">
                   {demoSteps.map((_, index) => (
                     <motion.div
                       key={index}
                       className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${index === activeStep
-                        ? 'bg-blue-500 shadow-lg scale-110'
-                        : 'bg-gray-200 hover:bg-gray-300'
+                        ? 'bg-[#8B5CF6] shadow-[0_0_8px_rgba(139,92,246,0.6)] scale-110'
+                        : 'bg-[#29263A] hover:bg-[#8B5CF6]/40'
                         }`}
                       onClick={() => setActiveStep(index)}
                       whileHover={{ scale: 1.2 }}
@@ -466,7 +454,7 @@ const InteractiveDemo = ({
           </motion.div>
         </div>
       </div>
-    </Section>
+    </section>
   )
 }
 
