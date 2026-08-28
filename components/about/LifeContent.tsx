@@ -68,40 +68,47 @@ export default function LifeContent({
 
   return (
     <div className="bg-[#0B0A14] text-white">
-      {/* 1. Hero Banner */}
-      <section className="relative overflow-hidden bg-[#08090B] min-h-[420px] md:min-h-[540px] flex items-center justify-center pt-20">
-        {/* Background hero image with dark purple gradient overlays */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/life-at-cogniwide/hero.JPG"
-            alt="Life at Cogniwide hero"
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover object-center filter brightness-90"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#08090B]/90 via-[#08090B]/70 to-[#0B0A14]" />
-          <div className="absolute inset-0 bg-radial-gradient from-transparent via-[#7C3AED]/10 to-transparent pointer-events-none" />
-        </div>
+      {/* 1. Hero Header & Unobstructed Team Photo */}
+      <section className="relative bg-[#08090B] pt-28 pb-16 overflow-hidden">
+        {/* Ambient lighting flare */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-[#7C3AED]/15 rounded-full blur-[140px] pointer-events-none" />
 
-        {/* Top ambient lighting flare */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-[#7C3AED]/20 rounded-full blur-[140px] pointer-events-none" />
-
-        {/* Heading overlay */}
-        <div className="relative z-10 w-full max-w-5xl px-4 sm:px-6 lg:px-8 text-center py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Content ABOVE the image */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="text-center mb-10"
           >
-            <div className="inline-flex items-center px-5 py-2 bg-[#15151D]/90 backdrop-blur-md rounded-full text-xs sm:text-sm font-semibold text-[#A78BFA] mb-6 border border-[#29263A] shadow-[0_0_20px_rgba(124,58,237,0.25)] max-w-2xl mx-auto">
+            <div className="inline-flex items-center px-5 py-2.5 bg-[#15151D]/90 backdrop-blur-md rounded-full text-xs sm:text-sm font-semibold text-[#A78BFA] mb-6 border border-[#29263A] shadow-[0_0_20px_rgba(124,58,237,0.2)] max-w-2xl mx-auto">
               Energetic, collaborative, and innovation-first. From cricket showdowns to hackathons, we keep work fun and outcomes impactful.
             </div>
-            
+
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-4">
               Life at Cogniwide
             </h1>
-            <div className="mx-auto w-24 h-1 bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent rounded-full shadow-[0_0_15px_#8B5CF6]"></div>
+            <div className="mx-auto w-24 h-1.5 bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent rounded-full shadow-[0_0_20px_#8B5CF6]"></div>
+          </motion.div>
+
+          {/* Full Unobstructed Team Photo Container */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative rounded-3xl overflow-hidden border border-[#29263A] shadow-[0_20px_50px_rgba(0,0,0,0.8)] hover:border-[#8B5CF6]/50 hover:shadow-[0_0_40px_rgba(124,58,237,0.25)] transition-all duration-500"
+          >
+            <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] md:aspect-[2.4/1] max-h-[580px]">
+              <Image
+                src="/images/life-at-cogniwide/hero.JPG"
+                alt="Cogniwide Team"
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1200px"
+                className="object-cover object-center brightness-105 contrast-[1.05]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0A14]/30 via-transparent to-transparent pointer-events-none" />
+            </div>
           </motion.div>
         </div>
       </section>

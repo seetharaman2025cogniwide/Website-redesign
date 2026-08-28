@@ -302,18 +302,18 @@ const Navigation = () => {
       : 'bg-white/80 border-b border-white/40 shadow-sm opacity-95'
       }`}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center group">
-              <div className="relative">
-                <div className={`absolute inset-0 rounded-lg blur-md -z-10 group-hover:blur-lg transition-all duration-300 ${isDark ? 'bg-[#8B5CF6]/20' : 'bg-white/40'}`} suppressHydrationWarning></div>
+              <div className="relative py-1">
+                <div className={`absolute inset-0 rounded-xl blur-md -z-10 group-hover:blur-xl transition-all duration-300 ${isDark ? 'bg-[#8B5CF6]/30' : 'bg-white/40'}`} suppressHydrationWarning></div>
                 <Image
-                  src="/logo-light.png"
+                  src="/logo-dark-2.png"
                   alt="Cogniwide"
-                  width={150}
-                  height={36}
-                  className="h-9 w-auto group-hover:scale-[1.02] transition-all duration-300 relative z-10 drop-shadow-sm"
+                  width={200}
+                  height={50}
+                  className="h-11 md:h-12 w-auto group-hover:scale-105 transition-all duration-300 relative z-10 filter brightness-115 contrast-105 drop-shadow-[0_0_18px_rgba(139,92,246,0.35)]"
                   priority
                 />
               </div>
@@ -330,7 +330,7 @@ const Navigation = () => {
                 return (
                   <div
                     key={item.name}
-                    className="relative h-16 flex items-center"
+                    className="relative h-20 flex items-center"
                     onMouseEnter={() => handleMouseEnter(item.name)}
                     onMouseLeave={handleMouseLeave}
                   >
@@ -346,7 +346,7 @@ const Navigation = () => {
                     </button>
 
                     {activeDropdown === item.name && content.layout === 'mega-menu' && (
-                      <div className="fixed left-0 right-0 top-16 pt-2 z-50 flex justify-center">
+                      <div className="fixed left-0 right-0 top-20 pt-2 z-50 flex justify-center">
                         <div className="w-[1280px]">
                           <div className={`backdrop-blur-xl rounded-2xl overflow-hidden ${isDark
                             ? 'bg-[#15151D]/95 border border-[#29263A] shadow-[0_20px_50px_rgba(0,0,0,0.8)] text-white'
@@ -436,7 +436,7 @@ const Navigation = () => {
                       </div>
                     )}
                     {activeDropdown === item.name && content.layout !== 'mega-menu' && (
-                      <div className={`absolute top-14 pt-2 z-50 ${isTwoColumn ? 'left-1/2 -translate-x-1/2 w-[560px]' : 'left-1/2 -translate-x-1/2 w-80'}`}>
+                      <div className={`absolute top-18 pt-2 z-50 ${isTwoColumn ? 'left-1/2 -translate-x-1/2 w-[560px]' : 'left-1/2 -translate-x-1/2 w-80'}`}>
                         <div className={`backdrop-blur-xl rounded-2xl overflow-hidden ${isDark
                           ? 'bg-[#15151D]/95 border border-[#29263A] shadow-[0_20px_50px_rgba(0,0,0,0.8)]'
                           : 'bg-white/95 border border-gray-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)]'
