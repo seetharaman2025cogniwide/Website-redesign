@@ -62,7 +62,7 @@ interface NavigationSection {
 
 const Navigation = () => {
   const pathname = usePathname()
-  const isDark = pathname?.startsWith('/about') || pathname?.startsWith('/careers') || pathname?.startsWith('/blog') || pathname?.startsWith('/solutions') || pathname?.startsWith('/products')
+  const isDark = pathname?.startsWith('/about') || pathname?.startsWith('/careers') || pathname?.startsWith('/blog') || pathname?.startsWith('/solutions') || pathname?.startsWith('/products') || pathname?.startsWith('/contact')
   const [isOpen, setIsOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null)
