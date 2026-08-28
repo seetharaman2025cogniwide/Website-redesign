@@ -131,7 +131,7 @@ const MarqueeRow = ({ items, direction = 'left', speed = 50 }: { items: typeof r
         {[...items, ...items].map((item, idx) => (
           <div
             key={`${item.name}-${idx}`}
-            className="relative group/logo w-20 h-20 bg-white rounded-2xl border border-gray-100 flex items-center justify-center p-4 shadow-sm hover:shadow-md hover:border-brand-blue/30 transition-all duration-300 flex-shrink-0"
+            className="relative group/logo w-20 h-20 bg-white rounded-2xl border border-[#29263A] flex items-center justify-center p-4 shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_25px_rgba(124,58,237,0.35)] hover:border-[#8B5CF6]/60 transition-all duration-300 flex-shrink-0"
             title={item.name}
           >
             <div className="relative w-full h-full flex items-center justify-center">
@@ -144,11 +144,11 @@ const MarqueeRow = ({ items, direction = 'left', speed = 50 }: { items: typeof r
                   className="object-contain p-1"
                 />
               ) : (
-                <span className="text-xs font-bold text-gray-700 text-center">{item.name}</span>
+                <span className="text-xs font-bold text-[#0B0A14] text-center">{item.name}</span>
               )}
             </div>
             {/* Tooltip */}
-            <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover/logo:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20 shadow-lg">
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-[#1A1829] border border-[#29263A] text-white text-xs rounded-lg opacity-0 group-hover/logo:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20 shadow-[0_0_18px_rgba(124,58,237,0.35)]">
               {item.name}
             </div>
           </div>
@@ -156,19 +156,19 @@ const MarqueeRow = ({ items, direction = 'left', speed = 50 }: { items: typeof r
       </motion.div>
       
       {/* Gradient masks for smooth fade edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
-      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+      <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0B0A14] to-transparent z-10" />
+      <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0B0A14] to-transparent z-10" />
     </div>
   );
 };
 
 export const TechStack = () => {
   return (
-    <section className="py-12 bg-white relative overflow-hidden">
+    <section className="py-12 bg-[#0B0A14] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 -left-24 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#7C3AED]/10 rounded-full blur-[140px]"></div>
+        <div className="absolute top-1/2 -left-24 w-72 h-72 bg-[#8B5CF6]/10 rounded-full blur-[140px]"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -177,16 +177,19 @@ export const TechStack = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
           >
-            Built on a <span className="text-brand-blue">Modern Tech Stack</span>
+            Built on a{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#C084FC] drop-shadow-[0_0_20px_rgba(139,92,246,0.45)]">
+              Modern Tech Stack
+            </span>
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-lg text-[#B8B6C4] max-w-2xl mx-auto"
           >
             We leverage best-in-class technologies to build scalable, secure, and future-proof AI solutions for the enterprise.
           </motion.p>

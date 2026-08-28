@@ -122,7 +122,7 @@ const caseStudies = [
       { label: 'Accuracy', value: '99.9%', sub: 'False Positive Rate' }
     ],
     icon: BankIcon,
-    imageColor: 'bg-blue-100',
+    imageColor: 'bg-neon-100',
     image: '/images/Industry/banking.jpg'
   },
   {
@@ -136,7 +136,7 @@ const caseStudies = [
       { label: 'Accuracy', value: '95%', sub: 'Clinical Validation' }
     ],
     icon: HeartIcon,
-    imageColor: 'bg-green-100',
+    imageColor: 'bg-neon-100',
     image: '/images/Industry/healthcare.webp'
   },
   {
@@ -150,7 +150,7 @@ const caseStudies = [
       { label: 'Cost Savings', value: '20%', sub: 'Inventory Opt.' }
     ],
     icon: ShoppingBagIcon,
-    imageColor: 'bg-purple-100',
+    imageColor: 'bg-neon-100',
     image: '/images/Industry/retail.jpg'
   },
   {
@@ -164,7 +164,7 @@ const caseStudies = [
       { label: 'Student Engagement', value: '85%', sub: 'Satisfaction Rate' }
     ],
     icon: AcademicCapIcon,
-    imageColor: 'bg-indigo-100',
+    imageColor: 'bg-mint-100',
     image: '/images/Industry/education.jpg'
   },
   {
@@ -178,7 +178,7 @@ const caseStudies = [
       { label: 'Cost Savings', value: '$35M+', sub: 'Annual Savings' }
     ],
     icon: ShieldCheckIcon,
-    imageColor: 'bg-teal-100',
+    imageColor: 'bg-mint-100',
     image: '/images/Industry/insurance.png'
   },
   {
@@ -192,7 +192,7 @@ const caseStudies = [
       { label: 'Cost Savings', value: '28%', sub: 'Operational Cost' }
     ],
     icon: TruckIcon,
-    imageColor: 'bg-cyan-100',
+    imageColor: 'bg-mint-100',
     image: '/images/Industry/manufacturing.jpg'
   },
   {
@@ -206,7 +206,7 @@ const caseStudies = [
       { label: 'Service Quality', value: '55%', sub: 'Improvement' }
     ],
     icon: SignalIcon,
-    imageColor: 'bg-violet-100',
+    imageColor: 'bg-neon-100',
     image: '/images/Industry/telecom.png'
   }
 ];
@@ -228,14 +228,14 @@ export const SuccessStories = () => {
   const activeStudy = caseStudies.find(s => s.id === activeTab) || caseStudies[0];
 
   return (
-    <section className="font-poppins bg-white overflow-hidden">
+    <section className="font-poppins bg-transparent overflow-hidden">
 
       {/* 1. Header Section with Stats Ticker */}
-      <div className="bg-brand-blue-dark text-white pt-20 pb-24 relative">
+      <div className="bg-transparent text-white pt-20 pb-24 relative">
         {/* Abstract Tech Background */}
         <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-blue rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-purple rounded-full blur-[100px]" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-neon-400 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-500 rounded-full blur-[100px]" />
           <svg className="absolute w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M0 100 L100 0" stroke="white" strokeWidth="0.5" strokeDasharray="2 2" />
             <path d="M20 100 L100 20" stroke="white" strokeWidth="0.5" strokeDasharray="2 2" />
@@ -247,9 +247,9 @@ export const SuccessStories = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-6"
+            className="cw-eyebrow inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-yellow animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-neon-400 animate-pulse"></span>
             <span className="text-sm font-medium tracking-wide">Proven Enterprise Results</span>
           </motion.div>
 
@@ -260,7 +260,7 @@ export const SuccessStories = () => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight"
           >
-            Driving Impact at <span className="text-brand-blue-light">Scale</span>
+            Driving Impact at <span className="cw-glow-text">Scale</span>
           </motion.h2>
 
           <motion.p
@@ -268,7 +268,7 @@ export const SuccessStories = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-brand-blue-light/80 max-w-3xl mx-auto"
+            className="text-lg md:text-xl text-night-400 max-w-3xl mx-auto"
           >
             We don't just implement AI. We engineer measurable outcomes for the world's most ambitious organizations.
           </motion.p>
@@ -277,11 +277,11 @@ export const SuccessStories = () => {
 
       {/* 2. Overlapping Interactive Case Study Panel */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
-        <div className="bg-white rounded-3xl shadow-strong border border-gray-100 overflow-hidden flex flex-col lg:flex-row min-h-[600px]">
+        <div className="cw-glass cw-topline rounded-3xl overflow-hidden flex flex-col lg:flex-row min-h-[600px]">
 
           {/* Left: Tab Navigation (Vertical on Desktop) */}
-          <div className="lg:w-1/3 bg-gray-50 border-r border-gray-100 p-6 flex flex-col gap-4">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2 pl-4">Industries</h3>
+          <div className="lg:w-1/3 bg-night-950/40 border-r border-mint-300/12 p-6 flex flex-col gap-4">
+            <h3 className="text-sm font-semibold text-night-500 uppercase tracking-wider mb-2 pl-4">Industries</h3>
             {caseStudies.map((study) => {
               const Icon = study.icon;
               return (
@@ -290,21 +290,21 @@ export const SuccessStories = () => {
                   onClick={() => setActiveTab(study.id)}
                   className={`group relative flex items-center p-4 rounded-xl text-left transition-all duration-300 ease-in-out
                   ${activeTab === study.id
-                      ? 'bg-white shadow-medium border-l-4 border-brand-blue'
-                      : 'hover:bg-gray-100 border-l-4 border-transparent'
+                      ? 'bg-mint-300/8 border-l-4 border-neon-400'
+                      : 'hover:bg-mint-300/5 border-l-4 border-transparent'
                     }`}
                 >
-                  <div className={`p-3 rounded-lg mr-4 transition-colors duration-300 ${activeTab === study.id ? 'bg-brand-blue text-white' : 'bg-gray-200 text-gray-500 group-hover:text-brand-blue'}`}>
-                    <Icon className="w-6 h-6" />
+                  <div className={`p-3 rounded-lg mr-4 transition-colors duration-300 ${activeTab === study.id ? 'bg-neon-400 text-night-950' : 'bg-mint-300/10 border border-mint-300/20 text-night-400 group-hover:text-neon-400'}`}>
+                    <Icon className="cw-icon-float w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className={`font-bold text-lg ${activeTab === study.id ? 'text-brand-dark-grey' : 'text-gray-500 group-hover:text-gray-700'}`}>
+                    <h4 className={`font-bold text-lg ${activeTab === study.id ? 'text-white' : 'text-night-400 group-hover:text-night-200'}`}>
                       {study.industry}
                     </h4>
-                    <p className="text-xs text-gray-400 truncate w-40">View Impact Analysis</p>
+                    <p className="text-xs text-night-500 truncate w-40">View Impact Analysis</p>
                   </div>
                   {activeTab === study.id && (
-                    <motion.div layoutId="activeTabIndicator" className="absolute right-4 text-brand-blue">
+                    <motion.div layoutId="activeTabIndicator" className="absolute right-4 text-neon-400">
                       <ArrowRightIcon className="w-5 h-5" />
                     </motion.div>
                   )}
@@ -314,7 +314,7 @@ export const SuccessStories = () => {
           </div>
 
           {/* Right: Content Display */}
-          <div className="lg:w-2/3 p-8 lg:p-12 relative bg-white">
+          <div className="lg:w-2/3 p-8 lg:p-12 relative bg-transparent">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStudy.id}
@@ -327,21 +327,21 @@ export const SuccessStories = () => {
                 {/* Header of Content */}
                 <div>
                   <div className="flex items-center space-x-3 mb-6">
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-brand-blue/10 text-brand-blue uppercase tracking-wide">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-neon-400/10 text-neon-400 uppercase tracking-wide">
                       Case Study
                     </span>
-                    <span className="h-px flex-1 bg-gray-100"></span>
+                    <span className="h-px flex-1 bg-gradient-to-r from-mint-300/30 to-transparent"></span>
                   </div>
 
-                  <h3 className="text-3xl font-bold text-brand-dark-grey mb-4">
+                  <h3 className="text-3xl font-bold text-white mb-4">
                     {activeStudy.title}
                   </h3>
-                  <p className="text-gray-600 text-lg leading-relaxed mb-6 max-w-2xl">
+                  <p className="text-night-400 text-lg leading-relaxed mb-6 max-w-2xl">
                     {activeStudy.description}
                   </p>
 
                   {/* Case Study Image */}
-                  <div className="relative w-full h-48 rounded-xl overflow-hidden mb-8 border border-gray-200">
+                  <div className="cw-media relative w-full h-48 rounded-xl overflow-hidden mb-8 border border-mint-300/15">
                     <Image
                       src={activeStudy.image}
                       alt={activeStudy.title}
@@ -360,15 +360,15 @@ export const SuccessStories = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * idx }}
-                      className="bg-brand-blue-light1/50 rounded-2xl p-6 border border-brand-blue-light/20 hover:border-brand-blue/40 transition-colors"
+                      className="cw-glass cw-gradient-border cw-tilt rounded-2xl p-6"
                     >
-                      <div className="text-4xl font-bold text-brand-blue mb-1">
+                      <div className="cw-glow-text text-4xl font-bold mb-1" data-cw-count>
                         {metric.value}
                       </div>
-                      <div className="text-sm font-bold text-brand-dark-grey">
+                      <div className="text-sm font-bold text-white">
                         {metric.label}
                       </div>
-                      <div className="text-xs text-gray-500 mt-1">
+                      <div className="text-xs text-night-400 mt-1">
                         {metric.sub}
                       </div>
                     </motion.div>
@@ -378,9 +378,9 @@ export const SuccessStories = () => {
                 {/* Call to Action within Card */}
                 <div className="mt-10 flex items-center gap-4">
                   <Link href="/casestudy">
-                  <button className="flex items-center gap-2 text-brand-blue font-semibold hover:gap-4 transition-all group">
+                  <button className="cw-link-underline flex items-center gap-2 text-neon-400 font-semibold hover:gap-4 transition-all group">
                     Read full case study
-                    <ArrowRightIcon className="w-4 h-4 group-hover:text-brand-yellow" />
+                    <ArrowRightIcon className="w-4 h-4 group-hover:text-mint-300" />
                   </button>
                   </Link>
                 </div>
@@ -389,32 +389,32 @@ export const SuccessStories = () => {
             </AnimatePresence>
 
             {/* Background Decoration */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-brand-blue-light1 to-transparent opacity-50 rounded-bl-full pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-neon-400/10 to-transparent opacity-50 rounded-bl-full pointer-events-none" />
           </div>
         </div>
       </div>
 
       {/* 3. Social Proof / Testimonials (MNC Style: Clean, Dark Text on Light, or Dark Strip) */}
-      <div className="py-24 bg-brand-light-grey relative overflow-hidden">
+      <div className="py-24 bg-transparent relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
 
             {/* Left: Text Context */}
             <div className="lg:w-1/3">
-              <QuoteIcon className="w-16 h-16 text-brand-blue/20 mb-6" />
-              <h2 className="text-3xl font-bold text-brand-dark-grey mb-4">Trusted by Industry Leaders</h2>
-              <p className="text-gray-600 mb-8">
+              <QuoteIcon className="w-16 h-16 text-neon-400/30 mb-6" />
+              <h2 className="text-3xl font-bold text-white mb-4">Trusted by Industry Leaders</h2>
+              <p className="text-night-400 mb-8">
                 Our partners don't just use our software; they transform their business models with it.
               </p>
               <div className="flex items-center gap-4">
                 <div className="flex -space-x-4">
                   {[1, 2, 3].map(i => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-300 flex items-center justify-center text-xs font-bold text-white shadow-sm" style={{ backgroundColor: i === 1 ? '#1a4f8c' : i === 2 ? '#2563eb' : '#93C5FD' }}>
+                    <div key={i} className="w-10 h-10 rounded-full border-2 border-night-950 bg-night-800 flex items-center justify-center text-xs font-bold text-night-950 shadow-sm" style={{ backgroundColor: i === 1 ? '#7C3AED' : i === 2 ? '#8B5CF6' : '#A78BFA' }}>
                       {i === 3 ? '30+' : ''}
                     </div>
                   ))}
                 </div>
-                <span className="text-sm font-medium text-gray-500">Enterprise Partners</span>
+                <span className="text-sm font-medium text-night-400">Enterprise Partners</span>
               </div>
             </div>
 
@@ -428,25 +428,25 @@ export const SuccessStories = () => {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -50 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    className="absolute inset-0 bg-white rounded-2xl p-8 md:p-12 shadow-medium border-l-8 border-brand-blue flex flex-col justify-center"
+                    className="cw-glass cw-topline absolute inset-0 rounded-2xl p-8 md:p-12 border-l-8 border-l-neon-400 flex flex-col justify-center"
                   >
                     <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => (
-                        <StarIcon key={i} className="w-5 h-5 text-brand-yellow" />
+                        <StarIcon key={i} className="w-5 h-5 text-neon-400 drop-shadow-[0_0_8px_rgba(139,92,246,0.7)]" />
                       ))}
                     </div>
-                    <h3 className="text-sm md:text-base font-normal text-brand-dark-grey leading-relaxed mb-6 italic">
+                    <h3 className="text-sm md:text-base font-normal text-night-200 leading-relaxed mb-6 italic">
                       "{testimonials[activeTestimonial].content}"
                     </h3>
 
-                    <div className="flex items-center justify-between border-t border-gray-100 pt-6">
+                    <div className="flex items-center justify-between border-t border-mint-300/15 pt-6">
                       <div>
-                        <div className="font-bold text-brand-dark-grey">{testimonials[activeTestimonial].name}</div>
-                        <div className="text-sm text-brand-blue">{testimonials[activeTestimonial].title}</div>
+                        <div className="font-bold text-white">{testimonials[activeTestimonial].name}</div>
+                        <div className="text-sm text-neon-400">{testimonials[activeTestimonial].title}</div>
                       </div>
-                      <div className="hidden sm:flex items-center gap-2 bg-green-50 px-4 py-2 rounded-lg border border-green-100">
-                        <CheckCircleIcon className="w-5 h-5 text-brand-green" />
-                        <span className="text-sm font-bold text-brand-green-dark">{testimonials[activeTestimonial].results}</span>
+                      <div className="hidden sm:flex items-center gap-2 bg-neon-400/10 px-4 py-2 rounded-lg border border-neon-400/30">
+                        <CheckCircleIcon className="w-5 h-5 text-neon-400" />
+                        <span className="text-sm font-bold text-neon-400">{testimonials[activeTestimonial].results}</span>
                       </div>
                     </div>
                   </motion.div>
@@ -458,7 +458,7 @@ export const SuccessStories = () => {
                     <button
                       key={index}
                       onClick={() => setActiveTestimonial(index)}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${activeTestimonial === index ? 'w-8 bg-brand-blue' : 'bg-gray-300 hover:bg-brand-blue-light'}`}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${activeTestimonial === index ? 'w-8 cw-dot--on' : 'bg-mint-300/25 hover:bg-mint-300/60'}`}
                     />
                   ))}
                 </div>

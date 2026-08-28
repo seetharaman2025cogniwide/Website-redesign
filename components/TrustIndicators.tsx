@@ -83,11 +83,11 @@ const TrustIndicators = () => {
   }, [hasAnimated])
 
   return (
-    <section className="py-20 lg:py-28 bg-white relative overflow-hidden">
+    <section className="py-20 lg:py-28 bg-[#0B0A14] relative overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-gray-100 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-100 rounded-full blur-3xl"></div>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-[#7C3AED]/10 rounded-full blur-[140px]"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#8B5CF6]/10 rounded-full blur-[140px]"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,8 +100,11 @@ const TrustIndicators = () => {
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h3 className="text-center text-gray-900 text-3xl lg:text-4xl mb-12  font-bold">
-            Trusted by leading <span className='text-brand-blue'>Enterprises Worldwide</span>
+          <h3 className="text-center text-white text-3xl lg:text-4xl mb-12  font-bold">
+            Trusted by leading{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#C084FC] drop-shadow-[0_0_20px_rgba(139,92,246,0.45)]">
+              Enterprises Worldwide
+            </span>
           </h3>
 
           <div className="space-y-8">
@@ -120,7 +123,7 @@ const TrustIndicators = () => {
                 {clientLogos.slice(0, 8).concat(clientLogos.slice(0, 8)).map((client, index) => (
                   <motion.div
                     key={`row1-${client.name}-${index}`}
-                    className="flex-shrink-0 w-32 h-20 flex items-center justify-center p-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300 ease-out group"
+                    className="flex-shrink-0 w-32 h-20 flex items-center justify-center p-3 bg-white/95 backdrop-blur-sm rounded-xl border border-[#29263A] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:border-[#8B5CF6]/60 hover:shadow-[0_0_25px_rgba(124,58,237,0.3)] transition-all duration-300 ease-out group"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{
@@ -158,7 +161,7 @@ const TrustIndicators = () => {
                 {clientLogos.slice(0, 8).concat(clientLogos.slice(0, 8)).map((client, index) => (
                   <motion.div
                     key={`row2-${client.name}-${index}`}
-                    className="flex-shrink-0 w-32 h-20 flex items-center justify-center p-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200/50 shadow-sm hover:shadow-md transition-all duration-300 ease-out group"
+                    className="flex-shrink-0 w-32 h-20 flex items-center justify-center p-3 bg-white/95 backdrop-blur-sm rounded-xl border border-[#29263A] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:border-[#8B5CF6]/60 hover:shadow-[0_0_25px_rgba(124,58,237,0.3)] transition-all duration-300 ease-out group"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{

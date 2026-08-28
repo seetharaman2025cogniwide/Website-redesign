@@ -70,41 +70,41 @@ export const ProductShowcase = () => {
 
   const colorMap: Record<string, { bg: string; text: string; lightBg: string; gradient: string; ring: string; hoverBg: string }> = {
     agent: {
-      bg: 'bg-brand-blue',
-      text: 'text-brand-blue',
-      lightBg: 'bg-blue-100',
-      gradient: 'from-brand-blue to-blue-400',
-      ring: 'focus:ring-brand-blue',
-      hoverBg: 'group-hover:bg-brand-blue'
+      bg: 'bg-neon-400',
+      text: 'text-neon-400',
+      lightBg: 'bg-neon-400/15',
+      gradient: 'from-neon-400 to-neon-400',
+      ring: 'focus:ring-neon-400',
+      hoverBg: 'group-hover:bg-neon-400'
     },
     loom: {
-      bg: 'bg-purple-600',
-      text: 'text-purple-600',
-      lightBg: 'bg-purple-100',
-      gradient: 'from-purple-600 to-purple-400',
-      ring: 'focus:ring-purple-600',
-      hoverBg: 'group-hover:bg-purple-600'
+      bg: 'bg-neon-400',
+      text: 'text-neon-300',
+      lightBg: 'bg-neon-400/15',
+      gradient: 'from-neon-400 to-neon-400',
+      ring: 'focus:ring-neon-400',
+      hoverBg: 'group-hover:bg-neon-400'
     },
     aura: {
-      bg: 'bg-orange-500',
-      text: 'text-orange-500',
-      lightBg: 'bg-orange-100',
-      gradient: 'from-orange-500 to-orange-400',
-      ring: 'focus:ring-orange-500',
-      hoverBg: 'group-hover:bg-orange-500'
+      bg: 'bg-mint-400',
+      text: 'text-mint-300',
+      lightBg: 'bg-mint-400/15',
+      gradient: 'from-mint-300 to-neon-400',
+      ring: 'focus:ring-mint-400',
+      hoverBg: 'group-hover:bg-mint-400'
     }
   };
 
   const activeColors = colorMap[activeTab] || colorMap.agent;
 
   return (
-    <section className="bg-brand-blue-light1 relative py-24 lg:py-32 overflow-hidden font-poppins selection:bg-brand-blue selection:text-white">
+    <section className="bg-transparent relative py-24 lg:py-32 overflow-hidden font-poppins selection:bg-neon-400 selection:text-white">
 
       {/* 1. Sophisticated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-brand-blue-light1/50 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-[120px]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-gray-200 to-transparent opacity-50"></div>
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-neon-400/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-neon-400/5 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-mint-300/20 to-transparent"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,9 +115,9 @@ export const ProductShowcase = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue-light1 border border-brand-blue/20 text-brand-blue text-sm font-semibold tracking-wide uppercase mb-6"
+            className="cw-eyebrow inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold tracking-wide uppercase mb-6"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-neon-400 animate-pulse"></span>
             Our Products
           </motion.div>
 
@@ -126,11 +126,11 @@ export const ProductShowcase = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-dark-grey mb-6 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
           >
-            Intelligence at <span className="text-brand-blue relative inline-block">
+            Intelligence at <span className="cw-glow-text relative inline-block">
               Scale
-              <svg className="absolute w-full h-3 -bottom-1 left-0 text-brand-yellow opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+              <svg className="absolute w-full h-3 -bottom-1 left-0 text-mint-300 opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
                 <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="none" />
               </svg>
             </span>
@@ -141,7 +141,7 @@ export const ProductShowcase = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-night-400 max-w-2xl mx-auto leading-relaxed"
           >
             Orchestrate agents, manage containers, and unlock insights with our integrated AI ecosystem.
           </motion.p>
@@ -149,7 +149,7 @@ export const ProductShowcase = () => {
 
         {/* 3. Tabs Navigation */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex p-1.5 bg-white rounded-2xl shadow-sm border border-gray-100 gap-2">
+          <div className="cw-glass inline-flex p-1.5 rounded-2xl gap-2">
             {products.map((product) => {
                const pColors = colorMap[product.id] || colorMap.agent;
                return (
@@ -158,8 +158,8 @@ export const ProductShowcase = () => {
                   onClick={() => setActiveTab(product.id)}
                   className={`relative px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                     activeTab === product.id 
-                      ? 'text-white shadow-md' 
-                      : 'text-gray-500 hover:text-brand-dark-grey hover:bg-gray-50'
+                      ? 'text-night-950 font-bold' 
+                      : 'text-night-400 hover:text-white hover:bg-mint-300/10'
                   }`}
                 >
                   {activeTab === product.id && (
@@ -198,11 +198,11 @@ export const ProductShowcase = () => {
                   </span>
                 </div>
 
-                <h3 className="text-3xl md:text-4xl font-bold text-brand-dark-grey mb-6">
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
                   {activeProduct.name}
                 </h3>
 
-                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                <p className="text-lg text-night-300 mb-8 leading-relaxed">
                   {activeProduct.description}
                 </p>
 
@@ -212,14 +212,14 @@ export const ProductShowcase = () => {
                       <div className={`mt-1 p-0.5 rounded-full ${activeColors.lightBg} ${activeColors.text}`}>
                         <CheckCircle className="w-3.5 h-3.5" />
                       </div>
-                      <span className="text-gray-700 font-medium">{feature}</span>
+                      <span className="text-night-200 font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <a href={activeProduct.href} className="relative inline-flex group self-start">
                   <div className={`absolute transition-all duration-300 opacity-70 -inset-px bg-gradient-to-r rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt ${activeColors.gradient}`}></div>
-                  <button className={`relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 font-sans rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 ${activeColors.bg} ${activeColors.ring}`}>
+                  <button className="cw-btn cw-btn-primary cw-btn-pulse relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold font-sans rounded-xl focus:outline-none">
                     <span>Explore {activeProduct.name}</span>
                     <ArrowRight className="w-5 h-5 ml-2 -mr-1 transition-transform duration-200 group-hover:translate-x-1" />
                   </button>
@@ -228,17 +228,17 @@ export const ProductShowcase = () => {
 
               {/* Right Column: Agent Ecosystem (The "List of Agents") */}
               <div className="lg:col-span-7">
-                <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 relative overflow-hidden h-full">
+                <div className="cw-glass cw-gradient-border cw-topline rounded-3xl p-8 relative overflow-hidden h-full">
                   {/* Decorative Background */}
                   <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] opacity-20 -mr-16 -mt-16 ${activeColors.bg}`}></div>
 
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-8">
-                      <h4 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                        <Bot className="w-5 h-5 text-gray-400" />
+                      <h4 className="text-xl font-bold text-night-100 flex items-center gap-2">
+                        <Bot className="w-5 h-5 text-night-500" />
                         Specialized Agents
                       </h4>
-                      <span className={`text-xs font-bold px-3 py-1 rounded-full bg-gray-50 border border-gray-100 text-gray-500`}>
+                      <span className={`text-xs font-bold px-3 py-1 rounded-full bg-mint-300/10 border border-mint-300/20 text-mint-300`}>
                         {activeProduct.agents.length} Active
                       </span>
                     </div>
@@ -250,15 +250,15 @@ export const ProductShowcase = () => {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: i * 0.1 }}
-                          className="group p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-lg hover:border-gray-200 transition-all duration-300 cursor-default"
+                          className="cw-glass cw-tilt group relative p-4 rounded-xl transition-all duration-300 cursor-default"
                         >
                           <div className="flex items-start gap-4">
-                            <div className={`p-3 rounded-lg shadow-sm transition-colors duration-300 bg-white ${activeColors.text} ${activeColors.hoverBg} group-hover:text-white`}>
+                            <div className={`cw-icon-float p-3 rounded-lg bg-mint-300/10 border border-mint-300/20 transition-colors duration-300 ${activeColors.text} ${activeColors.hoverBg} group-hover:text-night-950`}>
                               <agent.icon className="w-6 h-6" />
                             </div>
                             <div>
-                              <h5 className="font-bold text-gray-800 text-sm mb-1 group-hover:text-brand-dark-grey">{agent.name}</h5>
-                              <p className="text-xs text-gray-500 leading-relaxed">{agent.desc}</p>
+                              <h5 className="font-bold text-night-100 text-sm mb-1 group-hover:text-white">{agent.name}</h5>
+                              <p className="text-xs text-night-400 leading-relaxed">{agent.desc}</p>
                             </div>
                           </div>
                         </motion.div>
@@ -266,7 +266,7 @@ export const ProductShowcase = () => {
                     </div>
 
                     {/* Bottom "More" indicator */}
-                    <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-center text-sm text-gray-400">
+                    <div className="mt-8 pt-6 border-t border-night-800 flex items-center justify-center text-sm text-night-500">
                       <span className="flex items-center gap-2">
                         <Zap className="w-4 h-4" />
                         30+ more pre-built agents available
