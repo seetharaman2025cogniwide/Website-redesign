@@ -1,0 +1,12 @@
+<!-- This is a placeholder file. In production, this would be a WebP image -->
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f3f4f6"/>
+  <rect x="100" y="100" width="600" height="400" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <circle cx="400" cy="300" r="80" fill="#ffd700" opacity="0.2"/>
+  <text x="400" y="310" text-anchor="middle" fill="#374151" font-family="Arial, sans-serif" font-size="24" font-weight="bold">
+    CogniAssist
+  </text>
+  <text x="400" y="340" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif" font-size="16">
+    AI Assistant Platform
+  </text>
+</svg>

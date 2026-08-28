@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-poppins text-brand-dark-grey bg-brand-white;
+  }
+  
+  * {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Responsive text sizing */
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm;
+  }
+
+  .text-responsive-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-responsive-base {
+    @apply text-base sm:text-lg;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  .text-responsive-3xl {
+    @apply text-3xl sm:text-4xl;
+  }
+
+  .text-responsive-4xl {
+    @apply text-4xl sm:text-5xl;
+  }
+}
+
+@layer components {
+
+  /* Compact button styles */
+  .btn-primary {
+    @apply bg-brand-yellow text-brand-dark-grey px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-brand-dark-grey text-brand-dark-grey px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition-all duration-300 hover:bg-brand-dark-grey hover:text-brand-white;
+  }
+
+  .btn-compact {
+    @apply px-3 py-1.5 text-sm rounded-md font-medium transition-all duration-200;
+  }
+
+  /* Responsive spacing utilities */
+  .section-padding {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .content-spacing {
+    @apply space-y-6 sm:space-y-8 lg:space-y-12;
+  }
+
+  /* Compact card styles */
+  .card-compact {
+    @apply bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-4 sm:p-6;
+  }
+
+  .card-feature {
+    @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 p-6 sm:p-8;
+  }
+
+  /* Grid responsive utilities */
+  .grid-responsive-2 {
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6;
+  }
+
+  .grid-responsive-3 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+  }
+
+  .grid-responsive-4 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8;
+  }
+
+  .gradient-bg {
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+  }
+
+  .ai-pattern {
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+  }
+
+  /* Compact hero section */
+  .hero-compact {
+    @apply min-h-[80vh] sm:min-h-screen flex items-center justify-center;
+  }
+
+  /* Icon sizing utilities */
+  .icon-xs {
+    @apply w-4 h-4;
+  }
+
+  .icon-sm {
+    @apply w-5 h-5;
+  }
+
+  .icon-md {
+    @apply w-6 h-6;
+  }
+
+  .icon-lg {
+    @apply w-8 h-8;
+  }
+
+  .icon-xl {
+    @apply w-10 h-10;
+  }
+}
+
+/* Animated background keyframes */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%, 0% 0%, 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%, 100% 100%, 100% 100%;
+  }
+  100% {
+    background-position: 0% 50%, 0% 0%, 0% 0%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+/* Slide-in animation for effect switcher */
+@keyframes slide-in-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.slide-in-from-top-2 {
+  animation: slide-in-from-top 0.2s ease-out;
+}
+
+.duration-200 {
+  animation-duration: 0.2s;
+}
