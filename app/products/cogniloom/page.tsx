@@ -63,75 +63,77 @@ const productData = {
 
 export default function CogniLoomPage() {
   return (
-    <PageLayout>
-      <ProductHero product={productData} />
-      <InteractiveDemo productName="CogniLoom" />
-      {/* AI Agents Section */}
-      <CogniLoomAgentsShowcase />
-      <ArchitectureDiagram productName="CogniLoom" />
-      <CogniLoomDiagram />
+    <PageLayout className="bg-[#0B0A14]">
+      <div className="bg-[#0B0A14] text-white min-h-screen">
+        <ProductHero product={productData} />
+        <InteractiveDemo productName="CogniLoom" />
+        {/* AI Agents Section */}
+        <CogniLoomAgentsShowcase />
+        <ArchitectureDiagram productName="CogniLoom" />
+        <CogniLoomDiagram />
 
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">Intelligent Orchestration</h3>
-              <p className="text-gray-600">AI-driven automation that optimizes DevSecOps performance across clusters and environments</p>
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[#0D0C1A]">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-1">Intelligent Orchestration</h3>
+                <p className="text-[#B8B6C4] mb-6">AI-driven automation that optimizes DevSecOps performance across clusters and environments</p>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-[#1E1B38] border border-[#8B5CF6]/40 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-[#A78BFA]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white">Predictive Scaling</h4>
+                      <p className="text-[#B8B6C4]">AI agents forecast workload demand and automatically scale resources to maintain performance and uptime across Kubernetes clusters.</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Predictive Scaling</h4>
-                    <p className="text-gray-600">AI agents forecast workload demand and automatically scale resources to maintain performance and uptime across Kubernetes clusters.</p>
-                  </div>
-                </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-[#1E1B38] border border-[#8B5CF6]/40 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-[#A78BFA]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white">Intelligent Resource Optimization</h4>
+                      <p className="text-[#B8B6C4]">Continuously analyze cluster utilization, identify underused or overcommitted nodes, and rebalance workloads for cost and performance efficiency.</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Intelligent Resource Optimization</h4>
-                    <p className="text-gray-600">Continuously analyze cluster utilization, identify underused or overcommitted nodes, and rebalance workloads for cost and performance efficiency.</p>
-                  </div>
-                </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Automated Healing & Drift Prevention</h4>
-                    <p className="text-gray-600">Detect anomalies, configuration drifts, and pod failures in real time — triggering automated remediation and restoring system stability before impact.</p>
+                  <div className="flex items-start space-x-4">
+                    <div className="w-8 h-8 bg-[#1E1B38] border border-[#8B5CF6]/40 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <svg className="w-4 h-4 text-[#A78BFA]" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white">Automated Healing & Drift Prevention</h4>
+                      <p className="text-[#B8B6C4]">Detect anomalies, configuration drifts, and pod failures in real time — triggering automated remediation and restoring system stability before impact.</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
+              <div className="bg-gradient-to-br from-[#15151D] to-[#1E1B38] p-8 rounded-2xl border border-[#29263A] shadow-[0_10px_35px_rgba(0,0,0,0.4)]">
+                <div className="text-center">
+                  <div className="w-24 h-24 bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(124,58,237,0.3)]">
+                    <svg className="w-12 h-12 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                  </div>
+                  <h4 className="text-xl font-bold text-white mb-4">Multi-Cloud Ready</h4>
+                  <p className="text-[#B8B6C4]">Deploy and manage Kubernetes clusters across AWS, Azure, GCP, and on-premises environments with unified control.</p>
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-4">Multi-Cloud Ready</h4>
-                <p className="text-gray-600">Deploy and manage Kubernetes clusters across AWS, Azure, GCP, and on-premises environments with unified control.</p>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <CTASection />
+        <CTASection theme="dark" />
+      </div>
     </PageLayout>
   );
 }

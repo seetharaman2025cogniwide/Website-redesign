@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  CpuChipIcon, 
-  GlobeAltIcon, 
-  AcademicCapIcon, 
-  HeartIcon 
+import {
+  CpuChipIcon,
+  GlobeAltIcon,
+  AcademicCapIcon,
+  HeartIcon
 } from '@heroicons/react/24/outline';
 
 const benefits = [

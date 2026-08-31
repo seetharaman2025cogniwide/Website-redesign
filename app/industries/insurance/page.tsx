@@ -137,7 +137,7 @@ const heroStats = [
 
 export default function InsurancePage() {
   return (
-    <PageLayout>
+    <PageLayout className="bg-[#0B0A14]">
       <IndustryHero
         industry="insurance"
         title="AI-Powered Insurance Solutions"
@@ -158,7 +158,7 @@ export default function InsurancePage() {
         internalAreas={industryAgentData.insurance.internalAreas}
       />
       
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 }

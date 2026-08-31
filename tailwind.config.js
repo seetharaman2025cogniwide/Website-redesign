@@ -38,7 +38,54 @@ module.exports = {
           'medium-grey': '#6C757D',
           'dark-grey': '#212529',
           black: '#000000',
-        }
+        },
+
+        /* --------------------------------------------------------------
+         * Home-page dark theme — same purple/black language as /about.
+         * `night` = black/violet neutrals, `neon` = primary violet accent,
+         * `mint`  = secondary purple accent. These three scales are only
+         * referenced by the home-page components, so they stay scoped
+         * to the home page.
+         * ------------------------------------------------------------ */
+        night: {
+          50: '#F5F4F8',
+          100: '#E7E5EE',
+          200: '#D3D0DC',
+          300: '#B8B6C4', // about-page body copy
+          400: '#8F8CA0',
+          500: '#777583', // about-page muted copy
+          600: '#4B4860',
+          700: '#35314A',
+          800: '#29263A', // about-page border
+          900: '#1A1829', // about-page raised surface
+          950: '#0B0A14', // about-page canvas
+        },
+        neon: {
+          50: '#F5F3FF',
+          100: '#EDE9FE',
+          200: '#DDD6FE',
+          300: '#C4B5FD',
+          400: '#A78BFA', // about-page accent light
+          500: '#8B5CF6', // about-page accent
+          600: '#7C3AED', // about-page accent dark
+          700: '#6D28D9',
+          800: '#5B21B6',
+          900: '#4C1D95',
+          950: '#2E1065',
+        },
+        mint: {
+          50: '#FAF5FF',
+          100: '#F3E8FF',
+          200: '#E9D5FF',
+          300: '#D8B4FE',
+          400: '#C084FC', // about-page gradient tail
+          500: '#A855F7',
+          600: '#9333EA',
+          700: '#7E22CE',
+          800: '#6B21A8',
+          900: '#581C87',
+          950: '#3B0764',
+        },
       },
       spacing: {
         '18': '4.5rem',
@@ -78,6 +125,9 @@ module.exports = {
         'fade-in-delay': 'fadeIn 1s ease-out 0.3s both',
         'float': 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 3s ease-in-out infinite',
+        'pulse-slower': 'pulse 6s ease-in-out infinite',
+        'spin-slow-reverse': 'spin 18s linear infinite reverse',
+        'tilt': 'tilt 8s ease-in-out infinite',
         'slide-in': 'slideIn 0.5s ease-out',
         'slide-in-left': 'slideInLeft 0.6s ease-out',
         'slide-in-right': 'slideInRight 0.6s ease-out',
@@ -124,6 +174,11 @@ module.exports = {
         bounceSubtle: {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-5px)' },
+        },
+        tilt: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '25%': { transform: 'rotate(0.6deg)' },
+          '75%': { transform: 'rotate(-0.6deg)' },
         },
       },
       maxWidth: {

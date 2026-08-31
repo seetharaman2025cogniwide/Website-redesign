@@ -62,7 +62,9 @@ interface NavigationSection {
 
 const Navigation = () => {
   const pathname = usePathname()
-  const isDark = pathname?.startsWith('/about') || pathname?.startsWith('/careers')
+  // Pages that sit on the near-black violet canvas get the dark navbar.
+  const darkRoutes = ['/about', '/careers', '/blog', '/solutions', '/products', '/contact']
+  const isDark = pathname === '/' || darkRoutes.some((route) => pathname?.startsWith(route))
   const [isOpen, setIsOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null)
@@ -91,6 +93,7 @@ const Navigation = () => {
           description: 'Agentic AI Platform',
           icon: RocketLaunchIcon,
           badge: 'POPULAR',
+          color: 'linear-gradient(135deg, #7c3aed, #9333ea)',
           features: [
             'Multi-Agent Orchestration',
             'AI Engineering No-code & Pro-code tools',
@@ -104,6 +107,7 @@ const Navigation = () => {
           description: 'AI-Powered Kubernetes Orchestration',
           icon: CloudIcon,
           badge: 'POPULAR',
+          color: 'linear-gradient(135deg, #0284c7, #2563eb)',
           features: [
             'Multicloud Finops',
             'Multicloud Governance and Compliance',
@@ -116,6 +120,7 @@ const Navigation = () => {
           href: '/products/cogniaura',
           description: 'Analytics & BI Platform',
           icon: PresentationChartBarIcon,
+          color: 'linear-gradient(135deg, #0d9488, #059669)',
           features: [
             'Automated Data Visualizations',
             'Predictive Trend Analysis',
@@ -128,6 +133,7 @@ const Navigation = () => {
           href: '/products/cogninova',
           description: 'AI-Powered School ERP and LMS',
           icon: AcademicCapIcon,
+          color: 'linear-gradient(135deg, #4f46e5, #2563eb)',
           features: [
             'Student Information System (SIS)',
             'AI-Assisted Grading & Feedback',
@@ -140,6 +146,7 @@ const Navigation = () => {
           href: '/products/cogniforge',
           description: 'ERP for Manufacturing Companies',
           icon: WrenchIcon,
+          color: 'linear-gradient(135deg, #ea580c, #dc2626)',
           features: [
             'Production Planning',
             'Inventory Management',
@@ -297,18 +304,18 @@ const Navigation = () => {
       : 'bg-white/80 border-b border-white/40 shadow-sm opacity-95'
       }`}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center group">
-              <div className="relative">
-                <div className={`absolute inset-0 rounded-lg blur-md -z-10 group-hover:blur-lg transition-all duration-300 ${isDark ? 'bg-[#8B5CF6]/20' : 'bg-white/40'}`} suppressHydrationWarning></div>
+              <div className="relative py-1">
+                <div className={`absolute inset-0 rounded-xl blur-md -z-10 group-hover:blur-xl transition-all duration-300 ${isDark ? 'bg-[#8B5CF6]/30' : 'bg-white/40'}`} suppressHydrationWarning></div>
                 <Image
-                  src="/logo-light.png"
+                  src="/logo-dark-2.png"
                   alt="Cogniwide"
-                  width={150}
-                  height={36}
-                  className="h-9 w-auto group-hover:scale-[1.02] transition-all duration-300 relative z-10 drop-shadow-sm"
+                  width={200}
+                  height={50}
+                  className="h-11 md:h-12 w-auto group-hover:scale-105 transition-all duration-300 relative z-10 filter brightness-115 contrast-105 drop-shadow-[0_0_18px_rgba(139,92,246,0.35)]"
                   priority
                 />
               </div>
@@ -327,7 +334,7 @@ const Navigation = () => {
                 return (
                   <div
                     key={item.name}
-                    className="relative h-16 flex items-center"
+                    className="relative h-20 flex items-center"
                     onMouseEnter={() => handleMouseEnter(item.name)}
                     onMouseLeave={handleMouseLeave}
                   >
@@ -343,7 +350,7 @@ const Navigation = () => {
                     </button>
 
                     {activeDropdown === item.name && content.layout === 'mega-menu' && (
-                      <div className="fixed left-0 right-0 top-16 pt-2 z-50 flex justify-center">
+                      <div className="fixed left-0 right-0 top-20 pt-2 z-50 flex justify-center">
                         <div className="w-[1280px]">
                           <div className={`backdrop-blur-xl rounded-2xl overflow-hidden ${isDark
                             ? 'bg-[#15151D]/95 border border-[#29263A] shadow-[0_20px_50px_rgba(0,0,0,0.8)] text-white'
@@ -391,7 +398,11 @@ const Navigation = () => {
                                         onClick={closeDropdown}
                                       >
                                         <div className="flex items-center space-x-2 mb-3">
-                                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm ${isDark ? 'bg-[#1A1829] border border-[#8B5CF6]/40 text-[#A78BFA]' : 'bg-brand-blue'}`}>
+                                          <div
+                                            suppressHydrationWarning
+                                            className="w-9 h-9 rounded-lg flex items-center justify-center text-white flex-shrink-0 shadow-sm transition-all duration-200 group-hover:brightness-110"
+                                            style={{ background: product.color || (isDark ? '#1A1829' : '#2563eb') }}
+                                          >
                                             {React.createElement(product.icon, { className: "w-5 h-5" })}
                                           </div>
                                           {product.badge && (
@@ -516,7 +527,7 @@ const Navigation = () => {
                                       }`}
                                     onClick={closeDropdown}
                                   >
-                                    <div className={`w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 ${isDark ? 'bg-[#8B5CF6]' : 'bg-brand-blue'}`}>
+                                    <div className={`w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 group-hover:brightness-110 ${subItem.color ? `bg-gradient-to-br ${subItem.color}` : (isDark ? 'bg-[#8B5CF6]' : 'bg-brand-blue')}`}>
                                       {React.createElement(subItem.icon, { className: "w-4 h-4 text-white" })}
                                     </div>
                                     <div className="flex-1 min-w-0">

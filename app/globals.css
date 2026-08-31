@@ -138,6 +138,273 @@
   }
 }
 
+/* ==========================================================================
+ * Home-page theme (`cw-*`) — purple / black, matching the /about page.
+ *
+ * Palette anchors (identical to components/about/*):
+ *   canvas   #0B0A14 · deep hero #08090B · surface #15151D · raised #1A1829
+ *   border   #29263A
+ *   accent   #8B5CF6 · light #A78BFA · dark #7C3AED · tail #C084FC
+ *   copy     #FFFFFF headings · #B8B6C4 body · #777583 muted
+ * ========================================================================== */
+:root {
+  --cw-canvas: #0b0a14;
+  --cw-canvas-deep: #08090b;
+  --cw-surface: #15151d;
+  --cw-raised: #1a1829;
+  --cw-border: #29263a;
+  --cw-accent: #8b5cf6;
+  --cw-accent-light: #a78bfa;
+  --cw-accent-dark: #7c3aed;
+  --cw-accent-tail: #c084fc;
+  --cw-body: #b8b6c4;
+  --cw-muted: #777583;
+}
+
+/* --- Hero shell -------------------------------------------------------- */
+.cw-hero {
+  background:
+    radial-gradient(ellipse 700px 350px at 50% 0%, rgba(124, 58, 237, 0.22), transparent 70%),
+    radial-gradient(ellipse 600px 400px at 10% 40%, rgba(139, 92, 246, 0.12), transparent 70%),
+    radial-gradient(ellipse 600px 400px at 95% 55%, rgba(124, 58, 237, 0.14), transparent 70%),
+    var(--cw-canvas-deep);
+}
+
+/* Soft violet horizon that ties the hero into the section beneath it. */
+.cw-hero-horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 220px;
+  background: linear-gradient(to top, var(--cw-canvas) 12%, rgba(124, 58, 237, 0.14) 55%, transparent 100%);
+}
+
+/* --- Surfaces ---------------------------------------------------------- */
+.cw-glass {
+  position: relative;
+  background: rgba(21, 21, 29, 0.9);
+  border: 1px solid var(--cw-border);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.cw-glass:hover {
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.25);
+}
+
+/* Violet edge that reads as a lit border on the darker surfaces. */
+.cw-gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.55), rgba(124, 58, 237, 0.1) 45%, rgba(192, 132, 252, 0.45));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.cw-gradient-border:hover::after {
+  opacity: 1;
+}
+
+/* Single hairline highlight across the top edge of a card. */
+.cw-topline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.5), transparent);
+  pointer-events: none;
+}
+
+.cw-tilt:hover {
+  transform: translateY(-4px);
+}
+
+.cw-media {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(139, 92, 246, 0.18) inset;
+}
+
+.cw-float-pill {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Faint violet graph paper for inset "monitor" panels. */
+.cw-inner-grid {
+  background-image:
+    linear-gradient(to right, rgba(139, 92, 246, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(139, 92, 246, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* --- Type & accents ---------------------------------------------------- */
+.cw-eyebrow {
+  background: rgba(21, 21, 29, 0.9);
+  border: 1px solid var(--cw-border);
+  color: var(--cw-accent-light);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cw-glow-text {
+  background-image: linear-gradient(to right, var(--cw-accent-light), var(--cw-accent), var(--cw-accent-tail));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 22px rgba(139, 92, 246, 0.45));
+}
+
+/* Applied alongside a Tailwind `bg-gradient-to-r`, so it only adds the glow. */
+.cw-glow-gradient {
+  filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.5));
+}
+
+.cw-link-underline {
+  position: relative;
+}
+
+.cw-link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1.5px;
+  background: linear-gradient(to right, var(--cw-accent-light), var(--cw-accent-tail));
+  transition: width 0.3s ease;
+}
+
+.cw-link-underline:hover::after {
+  width: 100%;
+}
+
+.cw-icon-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* --- Buttons ----------------------------------------------------------- */
+.cw-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.cw-btn:hover {
+  transform: translateY(-2px);
+}
+
+.cw-btn-primary {
+  background-image: linear-gradient(to right, var(--cw-accent), var(--cw-accent-dark));
+  color: #fff;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.cw-btn-primary:hover {
+  background-image: linear-gradient(to right, var(--cw-accent-dark), #6d28d9);
+  box-shadow: 0 0 34px rgba(139, 92, 246, 0.6);
+}
+
+.cw-btn-ghost {
+  background: rgba(21, 21, 29, 0.8);
+  border: 1px solid var(--cw-border);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cw-btn-ghost:hover {
+  border-color: rgba(139, 92, 246, 0.6);
+  color: var(--cw-accent-light);
+}
+
+.cw-btn-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5);
+  animation: cwBtnPulse 2.8s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cwBtnPulse {
+  0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.5); }
+  70% { box-shadow: 0 0 0 14px rgba(139, 92, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+}
+
+/* --- Carousel dots ----------------------------------------------------- */
+.cw-dot {
+  border: none;
+  cursor: pointer;
+}
+
+.cw-dot--on {
+  background-image: linear-gradient(to right, var(--cw-accent-light), var(--cw-accent-tail));
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.7);
+}
+
+.cw-tab-active {
+  background-image: linear-gradient(to right, var(--cw-accent), var(--cw-accent-dark));
+  color: #fff;
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.45);
+}
+
+/* --- Hero diamond composition ------------------------------------------ */
+.cw-perspective {
+  perspective: 1400px;
+}
+
+.cw-diamond {
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 0 28px rgba(124, 58, 237, 0.28);
+}
+
+.cw-hub {
+  background-image: linear-gradient(135deg, var(--cw-accent-light), var(--cw-accent-tail));
+  box-shadow: 0 0 34px rgba(139, 92, 246, 0.65), 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Staggered entrances ----------------------------------------------- */
+.cw-enter {
+  animation: cwEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cw-enter-1 { animation-delay: 0.05s; }
+.cw-enter-2 { animation-delay: 0.15s; }
+.cw-enter-3 { animation-delay: 0.25s; }
+.cw-enter-4 { animation-delay: 0.35s; }
+.cw-enter-5 { animation-delay: 0.45s; }
+
+@keyframes cwEnter {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cw-enter,
+  .cw-icon-float,
+  .cw-float-pill,
+  .cw-btn-pulse::before {
+    animation: none;
+  }
+}
+
 /* Animated background keyframes */
 @keyframes gradientShift {
   0% {
@@ -291,3 +558,130 @@
 }
 
  
+/* --- Expanding product panels (home ProductShowcase) -------------------- *
+ * Three panels share one row on desktop: the open one takes the space and
+ * the others collapse to vertical spines. Stacks to a vertical accordion
+ * below lg, where the closed panels become slim horizontal bars.
+ * ----------------------------------------------------------------------- */
+.cw-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cw-panel {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  border-radius: 22px;
+  border: 1px solid var(--cw-border);
+  background: rgba(21, 21, 29, 0.9);
+  height: 92px;
+  transition: height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              flex 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s ease;
+}
+
+.cw-panel[data-open='true'] {
+  height: auto;
+  border-color: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 0 45px rgba(124, 58, 237, 0.22);
+}
+
+.cw-panel__wash {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+  transition: opacity 0.5s ease;
+  background: radial-gradient(120% 80% at 18% 112%, var(--cw-panel-acc, rgba(139, 92, 246, 0.28)), transparent 62%);
+}
+
+.cw-panel[data-open='true'] .cw-panel__wash {
+  opacity: 1;
+}
+
+.cw-panel__closed {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 20px;
+  transition: opacity 0.3s ease;
+}
+
+.cw-panel[data-open='true'] .cw-panel__closed {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cw-panel__open {
+  position: relative;
+  padding: 24px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease 0.15s, transform 0.5s ease 0.15s;
+  pointer-events: none;
+}
+
+.cw-panel[data-open='true'] .cw-panel__open {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+@media (min-width: 1024px) {
+  .cw-panels {
+    flex-direction: row;
+    height: 560px;
+    gap: 16px;
+  }
+
+  .cw-panel {
+    height: 100%;
+    flex: 0.62 1 0;
+    min-width: 0;
+  }
+
+  .cw-panel[data-open='true'] {
+    flex: 3.4 1 0;
+  }
+
+  .cw-panel__closed {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 26px 14px;
+  }
+
+  .cw-panel__vert {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  .cw-panel__open {
+    position: absolute;
+    inset: 0;
+    padding: 30px;
+    transform: translateX(-14px);
+    overflow: hidden;
+  }
+
+  .cw-panel[data-open='true'] .cw-panel__open {
+    transform: none;
+  }
+
+  /* Keeps the copy from re-wrapping while the panel is growing. */
+  .cw-panel__inner {
+    min-width: 470px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cw-panel,
+  .cw-panel__wash,
+  .cw-panel__closed,
+  .cw-panel__open {
+    transition-duration: 0.001ms;
+  }
+}

@@ -219,15 +219,21 @@ export const AIAgentsShowcase = () => {
   const [activeTab, setActiveTab] = useState('finance');
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+    <section className="py-20 bg-[#0D0C1A] relative overflow-hidden">
+      {/* Background glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#7C3AED]/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#8B5CF6]/8 rounded-full blur-[120px]" />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-4 py-2 rounded-full mb-4"
+            className="inline-flex items-center gap-2 bg-[#15151D]/90 border border-[#29263A] shadow-[0_0_18px_rgba(124,58,237,0.2)] text-[#A78BFA] text-xs font-semibold px-5 py-2 rounded-full mb-6 backdrop-blur-md"
           >
+            <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse" />
             Enterprise AI Agents
           </motion.div>
           <motion.h2
@@ -235,16 +241,17 @@ export const AIAgentsShowcase = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight"
           >
             Intelligent Agents for Every Function
           </motion.h2>
+          <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent shadow-[0_0_10px_#8B5CF6] mx-auto mb-6" />
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-xl text-[#B8B6C4] max-w-3xl mx-auto"
           >
             Deploy specialized AI agents that understand your business context and automate complex workflows across departments.
           </motion.p>
@@ -258,8 +265,8 @@ export const AIAgentsShowcase = () => {
               onClick={() => setActiveTab(category.id)}
               className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeTab === category.id
-                  ? 'bg-blue-600 text-white shadow-lg scale-105'
-                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                  ? 'bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] text-white shadow-[0_0_20px_rgba(124,58,237,0.4)] scale-105'
+                  : 'bg-[#15151D] text-[#B8B6C4] hover:bg-[#1E1B38] hover:text-[#A78BFA] border border-[#29263A] hover:border-[#8B5CF6]/40'
               }`}
             >
               <category.icon className="w-5 h-5" />
@@ -285,17 +292,20 @@ export const AIAgentsShowcase = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-blue-300 hover:shadow-xl transition-all duration-300 group"
+                  className="group relative bg-[#15151D]/95 rounded-2xl p-8 border border-[#29263A] hover:border-[#8B5CF6]/60 shadow-[0_10px_35px_rgba(0,0,0,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] transition-all duration-500 overflow-hidden"
                 >
-                  <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                    <agent.icon className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                  <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-[#7C3AED]/10 rounded-full blur-2xl transform translate-x-8 -translate-y-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 rounded-xl flex items-center justify-center mb-6 group-hover:border-[#A78BFA] group-hover:shadow-[0_0_15px_rgba(124,58,237,0.4)] transition-all duration-300">
+                    <agent.icon className="w-7 h-7 text-[#A78BFA]" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#A78BFA] transition-colors duration-300">
                     {agent.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-[#B8B6C4] leading-relaxed text-sm">
                     {agent.description}
                   </p>
+                  <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-500 ease-out w-0 group-hover:w-full" />
                 </motion.div>
               ))}
             </motion.div>

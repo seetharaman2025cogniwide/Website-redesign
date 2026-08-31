@@ -72,28 +72,26 @@ const ArchitectureDiagram = ({ productName }: ArchitectureDiagramProps) => {
   ]
 
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden bg-slate-50">
+    <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0D0C1A]">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-[50vw] h-[50vh] bg-blue-100/40 rounded-full blur-[120px] mix-blend-multiply" />
-        <div className="absolute bottom-0 right-0 w-[40vw] h-[60vh] bg-slate-200/50 rounded-full blur-[100px] mix-blend-multiply" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20"></div>
+        <div className="absolute top-0 left-0 w-[50vw] h-[50vh] bg-[#7C3AED]/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-0 w-[40vw] h-[60vh] bg-[#8B5CF6]/8 rounded-full blur-[100px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(139,92,246,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(139,92,246,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-30"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6">
-            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-            <span className="text-xs font-semibold tracking-wider text-blue-700 uppercase">
-              Core Components
-            </span>
+          <div className="inline-flex items-center gap-2 bg-[#15151D]/90 border border-[#29263A] shadow-[0_0_18px_rgba(124,58,237,0.2)] text-[#A78BFA] text-xs font-semibold px-5 py-2 rounded-full mb-6 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse"></span>
+            <span className="uppercase tracking-wider">Core Components</span>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
             {productName} Core Components & Capabilities
           </h2>
-
-          <p className="text-lg text-slate-600 leading-relaxed">
+          <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent shadow-[0_0_10px_#8B5CF6] mx-auto mb-6" />
+          <p className="text-lg text-[#B8B6C4] leading-relaxed">
             Explore the essential components that power {productName} and drive intelligent automation
           </p>
         </div>
@@ -102,40 +100,41 @@ const ArchitectureDiagram = ({ productName }: ArchitectureDiagramProps) => {
           {architectureComponents.map((component, index) => (
             <motion.div
               key={component.name}
-              className="group relative h-full bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-300 ease-out overflow-hidden"
+              className="group relative h-full bg-[#15151D]/95 rounded-2xl p-8 border border-[#29263A] hover:border-[#8B5CF6]/60 shadow-[0_10px_35px_rgba(0,0,0,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] transition-all duration-500 overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl transform translate-x-10 -translate-y-10 transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#7C3AED]/10 rounded-full blur-3xl transform translate-x-10 -translate-y-10 transition-opacity duration-500 opacity-0 group-hover:opacity-100" />
               
               <div className="relative z-10 flex flex-col h-full">
                 <div className="flex justify-between items-start mb-6">
-                  <div className="p-3 rounded-xl transition-colors duration-300 bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white">
+                  <div className="p-3 rounded-xl bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 text-[#A78BFA] group-hover:border-[#A78BFA] group-hover:shadow-[0_0_15px_rgba(124,58,237,0.4)] transition-all duration-300">
                     {component.icon}
                   </div>
                   <div className="transform transition-all duration-300 translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
-                    <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </div>
                 </div>
 
                 <div className="mb-8">
-                  <h3 className="text-xl font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#A78BFA] transition-colors duration-300">
                     {component.name}
                   </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">
+                  <p className="text-[#B8B6C4] text-sm leading-relaxed">
                     {component.description}
                   </p>
                 </div>
 
-                <div className="mt-auto pt-6 border-t border-slate-100">
-                  <ul className="space-y-2 text-sm text-slate-600">
+                <div className="mt-auto pt-6 border-t border-[#29263A]">
+                  <ul className="space-y-2 text-sm text-[#B8B6C4]">
                     {component.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
-                        <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                        <span className="w-2 h-2 bg-[#8B5CF6] rounded-full mr-2"></span>
                         {feature}
                       </li>
                     ))}
@@ -143,11 +142,10 @@ const ArchitectureDiagram = ({ productName }: ArchitectureDiagramProps) => {
                 </div>
               </div>
 
-              <div className="absolute bottom-0 left-0 h-1 bg-blue-600 transition-all duration-500 ease-out w-0 group-hover:w-full" />
+              <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-500 ease-out w-0 group-hover:w-full" />
             </motion.div>
           ))}
         </div>
-     
       </div>
     </section>
   )

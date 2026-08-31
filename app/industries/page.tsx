@@ -13,17 +13,19 @@ export const metadata: Metadata = {
 
 export default function IndustriesPage() {
   return (
-    <PageLayout>
-      <IndustriesHero 
-        title="AI Solutions for Every Industry"
-        subtitle="From banking to healthcare, retail to manufacturing - our AI solutions are tailored to meet the unique challenges and opportunities of your industry."
-        primaryCTA="Explore Solutions"
-        secondaryCTA="Schedule Industry Consultation"
-      />
-      <IndustryCategories />
-      <IndustryIntegration />
-      <IndustryTechnologyStack />
-      <IndustriesCTA />
+    <PageLayout className="bg-[#0B0A14]">
+      <div className="bg-[#0B0A14] text-white min-h-screen">
+        <IndustriesHero
+          title="AI Solutions for Every Industry"
+          subtitle="From banking to healthcare, retail to manufacturing - our AI solutions are tailored to meet the unique challenges and opportunities of your industry."
+          primaryCTA="Explore Solutions"
+          secondaryCTA="Schedule Industry Consultation"
+        />
+        <IndustryCategories />
+        <IndustryIntegration />
+        <IndustryTechnologyStack />
+        <IndustriesCTA />
+      </div>
     </PageLayout>
   )
 }

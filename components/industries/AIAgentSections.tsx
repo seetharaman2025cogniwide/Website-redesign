@@ -144,8 +144,14 @@ const AIAgentSections: React.FC<AIAgentSectionsProps> = ({
     }), [internalAreas]);
 
   return (
-    <div className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative py-24 bg-[#0B0A14] border-t border-[#29263A] overflow-hidden">
+      {/* Ambient Lighting */}
+      <div className="absolute inset-0 pointer-events-none -z-10">
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[#7C3AED]/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#8B5CF6]/10 rounded-full blur-[140px]" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div 
           className="text-center mb-16"
@@ -154,30 +160,31 @@ const AIAgentSections: React.FC<AIAgentSectionsProps> = ({
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            AI Agents Transforming <span className="text-blue-600">{industryName}</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 tracking-tight">
+            AI Agents Transforming <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#C084FC]">{industryName}</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-[#B8B6C4] max-w-3xl mx-auto leading-relaxed">
             Revolutionizing operations and customer experience through intelligent automation
           </p>
         </motion.div>
 
         {/* Customer Experience Journey */}
         <motion.div 
-          className="mb-20 bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          className="relative mb-20 bg-[#15151D]/90 rounded-3xl p-8 border border-[#29263A] shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
         >
           <div className="text-center mb-10">
-            <div className="inline-block px-4 py-2 bg-blue-100 rounded-full mb-4">
-              <span className="text-blue-600 font-semibold text-sm">Customer Experience</span>
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
+            <div className="inline-block px-4 py-2 bg-[#1A1829]/80 border border-[#29263A] rounded-full mb-4">
+              <span className="text-[#A78BFA] font-semibold text-sm">Customer Experience</span>
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-3">
+            <h3 className="text-3xl font-extrabold text-white mb-3 tracking-tight">
               {customerExperienceTitle}
             </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-[#B8B6C4] max-w-2xl mx-auto leading-relaxed">
               {customerExperienceDescription}
             </p>
           </div>
@@ -188,20 +195,20 @@ const AIAgentSections: React.FC<AIAgentSectionsProps> = ({
               return (
                 <motion.div
                   key={stage.stage}
-                  className="group bg-gradient-to-br from-blue-50 to-white rounded-xl p-5 hover:shadow-lg transition-all duration-300 border border-blue-100 hover:border-blue-300 hover:-translate-y-1"
+                  className="group bg-[#1A1829]/80 rounded-xl p-5 transition-all duration-300 border border-[#29263A] hover:border-[#8B5CF6]/60 hover:shadow-[0_0_30px_rgba(124,58,237,0.2)] hover:-translate-y-1"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(139,92,246,0.35)]">
                     <IconComponent className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-base font-bold text-gray-900 mb-3">{stage.stage}</h4>
+                  <h4 className="text-base font-bold text-white mb-3 group-hover:text-[#A78BFA] transition-colors">{stage.stage}</h4>
                   <ul className="space-y-2">
                     {stage.applications.map((app, appIndex) => (
-                      <li key={appIndex} className="text-xs text-gray-700 leading-relaxed flex items-start">
-                        <span className="text-blue-500 mr-2 mt-0.5">•</span>
+                      <li key={appIndex} className="text-xs text-[#B8B6C4] leading-relaxed flex items-start">
+                        <span className="text-[#8B5CF6] mr-2 mt-0.5">•</span>
                         <span>{app}</span>
                       </li>
                     ))}
@@ -214,20 +221,21 @@ const AIAgentSections: React.FC<AIAgentSectionsProps> = ({
 
         {/* Internal Operations */}
         <motion.div 
-          className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          className="relative bg-[#15151D]/90 rounded-3xl p-8 border border-[#29263A] shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
           <div className="text-center mb-10">
-            <div className="inline-block px-4 py-2 bg-green-100 rounded-full mb-4">
-              <span className="text-green-600 font-semibold text-sm">Internal Operations</span>
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
+            <div className="inline-block px-4 py-2 bg-[#1A1829]/80 border border-[#29263A] rounded-full mb-4">
+              <span className="text-[#A78BFA] font-semibold text-sm">Internal Operations</span>
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-3">
+            <h3 className="text-3xl font-extrabold text-white mb-3 tracking-tight">
               {internalOperationsTitle}
             </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-[#B8B6C4] max-w-2xl mx-auto leading-relaxed">
               {internalOperationsDescription}
             </p>
           </div>
@@ -238,20 +246,20 @@ const AIAgentSections: React.FC<AIAgentSectionsProps> = ({
               return (
                 <motion.div
                   key={area.area}
-                  className="group bg-gradient-to-br from-green-50 to-white rounded-xl p-5 hover:shadow-lg transition-all duration-300 border border-green-100 hover:border-green-300 hover:-translate-y-1"
+                  className="group bg-[#1A1829]/80 rounded-xl p-5 transition-all duration-300 border border-[#29263A] hover:border-[#8B5CF6]/60 hover:shadow-[0_0_30px_rgba(124,58,237,0.2)] hover:-translate-y-1"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-600 to-green-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(139,92,246,0.35)]">
                     <IconComponent className="w-6 h-6 text-white" />
                   </div>
-                  <h4 className="text-base font-bold text-gray-900 mb-3">{area.area}</h4>
+                  <h4 className="text-base font-bold text-white mb-3 group-hover:text-[#A78BFA] transition-colors">{area.area}</h4>
                   <ul className="space-y-2">
                     {area.applications.map((app, appIndex) => (
-                      <li key={appIndex} className="text-xs text-gray-700 leading-relaxed flex items-start">
-                        <span className="text-green-500 mr-2 mt-0.5">•</span>
+                      <li key={appIndex} className="text-xs text-[#B8B6C4] leading-relaxed flex items-start">
+                        <span className="text-[#8B5CF6] mr-2 mt-0.5">•</span>
                         <span>{app}</span>
                       </li>
                     ))}
@@ -264,17 +272,18 @@ const AIAgentSections: React.FC<AIAgentSectionsProps> = ({
 
         {/* Business Value Metrics */}
         <motion.div 
-          className="mt-20 bg-gradient-to-br from-brand-blue-light1 to-white rounded-2xl p-8 border border-gray-200 shadow-lg"
+          className="relative mt-20 bg-[#15151D]/90 rounded-3xl p-8 border border-[#29263A] shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
+            <h3 className="text-2xl font-extrabold text-white mb-2">
               Measurable Business Impact
             </h3>
-            <p className="text-gray-600 text-sm">
+            <p className="text-[#B8B6C4] text-sm">
               Real results from organizations using our solutions
             </p>
           </div>
@@ -287,12 +296,12 @@ const AIAgentSections: React.FC<AIAgentSectionsProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-                className="flex flex-col items-center justify-center text-center p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300 h-32"
+                className="flex flex-col items-center justify-center text-center p-6 bg-[#1A1829]/80 rounded-xl border border-[#29263A] hover:border-[#8B5CF6]/60 transition-all duration-300 h-32"
               >
-                <div className="text-3xl font-bold text-brand-blue mb-2">
+                <div className="text-3xl font-extrabold bg-gradient-to-r from-white via-[#A78BFA] to-[#8B5CF6] bg-clip-text text-transparent mb-2">
                   {metric.value}
                 </div>
-                <div className="text-xs text-gray-600 font-medium line-clamp-2 leading-tight">
+                <div className="text-xs text-[#B8B6C4] font-medium line-clamp-2 leading-tight">
                   {metric.label}
                 </div>
               </motion.div>
@@ -308,10 +317,10 @@ const AIAgentSections: React.FC<AIAgentSectionsProps> = ({
             viewport={{ once: true }}
           >
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/products/cogniassist" className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl">
+              <Link href="/products/cogniassist" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] hover:from-[#7C3AED] hover:to-[#6D28D9] text-white rounded-xl font-bold shadow-[0_0_25px_rgba(139,92,246,0.4)] hover:shadow-[0_0_35px_rgba(139,92,246,0.6)] hover:-translate-y-0.5 transition-all duration-300">
                 Get Started with AI Agents
               </Link>
-              <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+              <Link href="/contact" className="inline-flex items-center justify-center px-8 py-4 bg-[#1A1829]/80 text-[#A78BFA] border border-[#29263A] hover:border-[#8B5CF6] hover:text-white rounded-xl font-bold transition-all duration-300">
                 Schedule a Consultation
               </Link>
             </div>

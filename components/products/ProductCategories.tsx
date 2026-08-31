@@ -12,11 +12,11 @@ import {
   CheckIcon
 } from '@heroicons/react/24/outline'
 
-// Unified Color Scheme based on request: Blue/Gray/White/Black
-const ACCENT_COLOR = 'text-blue-600'
-const ACCENT_BG = 'bg-blue-600'
-const ACCENT_HOVER = 'hover:bg-blue-700'
-const ACCENT_LIGHT_BG = 'bg-blue-50'
+// Dark theme tokens
+const ACCENT_COLOR = 'text-[#A78BFA]'
+const ACCENT_BG = 'bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6]'
+const ACCENT_HOVER = 'hover:shadow-[0_0_20px_rgba(124,58,237,0.4)]'
+const ACCENT_LIGHT_BG = 'bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40'
 
 const ProductCategories = () => {
   // Products data structure is simplified for cleaner presentation
@@ -73,23 +73,38 @@ const ProductCategories = () => {
   ]
 
   return (
-    // Replaced 'Section' with div and direct class styling for portability
-    <section className="py-20 lg:py-28 bg-gray-50">
+    <section className="py-20 lg:py-28 bg-[#0D0C1A] relative overflow-hidden">
+      {/* Background glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#7C3AED]/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#8B5CF6]/8 rounded-full blur-3xl" />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Header - Minimalist Style */}
+        {/* Header */}
         <div className="text-center mb-16">
-          <motion.h2
-            className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4"
+          <motion.div
+            className="inline-flex items-center gap-2 bg-[#15151D]/90 border border-[#29263A] shadow-[0_0_18px_rgba(124,58,237,0.2)] text-[#A78BFA] text-xs font-semibold px-5 py-2 rounded-full mb-6 backdrop-blur-md"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            AI-Powered <span className={ACCENT_COLOR}>Enterprise Products</span>
+            <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse" />
+            <span className="uppercase tracking-wider">Our Products</span>
+          </motion.div>
+          <motion.h2
+            className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            AI-Powered <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#C084FC]">Enterprise Products</span>
           </motion.h2>
+          <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#8B5CF6] via-[#A78BFA] to-transparent shadow-[0_0_10px_#8B5CF6] mx-auto mb-4" />
           <motion.p
-            className="text-lg text-gray-600 max-w-3xl mx-auto"
+            className="text-lg text-[#B8B6C4] max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -99,7 +114,7 @@ const ProductCategories = () => {
           </motion.p>
         </div>
 
-        {/* --- Unified and Symmetrical Grid --- */}
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (
             <motion.div
@@ -111,64 +126,62 @@ const ProductCategories = () => {
               className="h-full"
             >
               <motion.div
-                // Card container with motion effects
-                whileHover={{
-                  scale: 1.01,
-                  boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
-                }}
-                className="bg-white border border-gray-200 rounded-3xl p-8 h-full flex flex-col transition-shadow duration-300 shadow-md hover:border-blue-300"
+                whileHover={{ scale: 1.01 }}
+                className="group relative bg-[#15151D]/95 border border-[#29263A] hover:border-[#8B5CF6]/60 rounded-3xl p-8 h-full flex flex-col shadow-[0_10px_35px_rgba(0,0,0,0.4)] hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] transition-all duration-500 overflow-hidden"
               >
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent" />
+                <div className="absolute top-0 right-0 w-28 h-28 bg-[#7C3AED]/10 rounded-full blur-2xl transform translate-x-8 -translate-y-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* ICON & TITLE ROW */}
+                {/* ICON & TITLE */}
                 <div className="flex items-start space-x-4 mb-6">
-                  <div className={`w-12 h-12 ${ACCENT_LIGHT_BG} rounded-xl flex items-center justify-center shrink-0`}>
-                    <product.icon className={`w-6 h-6 ${ACCENT_COLOR}`} />
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#1E1B38] to-[#15151D] border border-[#8B5CF6]/40 rounded-xl flex items-center justify-center shrink-0 group-hover:border-[#A78BFA] group-hover:shadow-[0_0_15px_rgba(124,58,237,0.4)] transition-all duration-300">
+                    <product.icon className="w-6 h-6 text-[#A78BFA]" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mt-1">
+                  <h3 className="text-xl font-bold text-white mt-1 group-hover:text-[#A78BFA] transition-colors duration-300">
                     {product.title}
                   </h3>
                 </div>
 
                 {/* DESCRIPTION */}
-                <p className="text-gray-700 mb-6 leading-relaxed flex-grow text-sm">
+                <p className="text-[#B8B6C4] mb-6 leading-relaxed flex-grow text-sm">
                   {product.description}
                 </p>
 
-                {/* KEY CAPABILITIES (Compressed) */}
+                {/* KEY CAPABILITIES */}
                 <div className="mb-6">
-                  <h4 className="text-xs font-bold text-gray-500 mb-3 uppercase tracking-widest">
+                  <h4 className="text-xs font-bold text-[#A78BFA]/70 mb-3 uppercase tracking-widest">
                     Key Features
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {/* Show only top 2 capabilities for brevity */}
                     {product.capabilities.slice(0, 2).map((capability) => (
                       <span
                         key={capability}
-                        className="flex items-center px-3 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full border border-gray-200"
+                        className="flex items-center px-3 py-1 text-xs font-medium bg-[#1E1B38] text-[#B8B6C4] rounded-full border border-[#29263A]"
                       >
-                        <CheckIcon className={`w-3 h-3 ${ACCENT_COLOR} mr-1 shrink-0`} />
+                        <CheckIcon className="w-3 h-3 text-[#8B5CF6] mr-1 shrink-0" />
                         {capability}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                {/* INDUSTRIES (Compressed) */}
+                {/* INDUSTRIES */}
                 <div className="mb-6">
-                  <h4 className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">
+                  <h4 className="text-xs font-bold text-[#A78BFA]/70 mb-2 uppercase tracking-widest">
                     Industries
                   </h4>
-                  <p className="text-sm text-gray-600">
-                    {product.industries.slice(0, 2).join(', ')} {product.industries.length > 2 ? ` (+${product.industries.length - 2} more)` : ''}
+                  <p className="text-sm text-[#B8B6C4]">
+                    {product.industries.slice(0, 2).join(', ')}{product.industries.length > 2 ? ` (+${product.industries.length - 2} more)` : ''}
                   </p>
                 </div>
 
                 {/* BUTTON */}
                 <a href={product.href} className="mt-auto block">
-                  <button className={`w-full ${ACCENT_BG} text-white px-4 py-3 rounded-xl font-semibold ${ACCENT_HOVER} transition-all duration-300`}>
+                  <button className="w-full bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] text-white px-4 py-3 rounded-xl font-semibold hover:shadow-[0_0_20px_rgba(124,58,237,0.5)] transition-all duration-300">
                     Learn More →
                   </button>
                 </a>
+                <div className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-500 ease-out w-0 group-hover:w-full" />
               </motion.div>
             </motion.div>
           ))}

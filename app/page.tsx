@@ -59,10 +59,10 @@ export default function Home() {
   // const schemas = generateHomepageSchemas();
 
   return (
-    <PageLayout>
+    <PageLayout className="bg-[#0B0A14]">
       {/* <StructuredData data={schemas} /> */}
       <CleanHero />
-      <div id="main-content">
+      <div id="main-content" className="bg-[#0B0A14] text-white">
         <TrustIndicators />
         <ProductShowcase />
         <SolutionShowcase />
@@ -71,7 +71,7 @@ export default function Home() {
         <TechStack />
         <SuccessStories />
         {/* <PersonalizedContent limit={6} className="bg-gray-50" /> */}
-        <CTASection />
+        <CTASection theme="dark" />
       </div>
     </PageLayout>
   )
