@@ -68,11 +68,11 @@ const Footer = () => {
           <div>
             <Link href="/" className="inline-block group">
               <Image
-                src="/logo-light.png"
+                src="/logo-dark-2.png"
                 alt="Cogniwide"
                 width={170}
                 height={42}
-                className="h-10 w-auto group-hover:scale-[1.02] transition-transform duration-300 drop-shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                className="h-10 md:h-11 w-auto group-hover:scale-[1.02] transition-transform duration-300 drop-shadow-[0_0_18px_rgba(139,92,246,0.35)] filter brightness-115 contrast-105"
                 priority
               />
             </Link>
