@@ -9,6 +9,18 @@ import {
   CaseStudyEntry,
 } from '@/types/contentful';
 
+// Every CMS read hits this path while Contentful is unconfigured, so warn once
+// per process instead of once per request.
+let warnedNotConfigured = false;
+
+function warnNotConfigured() {
+  if (warnedNotConfigured) return;
+  warnedNotConfigured = true;
+  console.warn(
+    'Contentful is not configured (set CONTENTFUL_SPACE_ID and CONTENTFUL_ACCESS_TOKEN). CMS-backed content will be empty.'
+  );
+}
+
 // Generic function to get entries with preview support
 async function getEntries<T>(
   contentType: string,
@@ -16,17 +28,17 @@ async function getEntries<T>(
   query: any = {}
 ) {
   if (!isContentfulConfigured) {
-    console.warn('Contentful is not configured. Returning empty array.');
+    warnNotConfigured();
     return [];
   }
 
   const contentfulClient = preview ? previewClient : client;
-  
+
   if (!contentfulClient) {
     console.warn('Contentful client is not available. Returning empty array.');
     return [];
   }
-  
+
   try {
     const response = await contentfulClient.getEntries({
       content_type: contentType,
@@ -47,7 +59,7 @@ async function getEntryBySlug<T>(
   preview: boolean = false
 ) {
   if (!isContentfulConfigured) {
-    console.warn('Contentful is not configured. Returning null.');
+    warnNotConfigured();
     return null;
   }
 
@@ -228,17 +240,17 @@ export async function searchContent(
   preview: boolean = false
 ): Promise<any[]> {
   if (!isContentfulConfigured) {
-    console.warn('Contentful is not configured. Returning empty array.');
+    warnNotConfigured();
     return [];
   }
 
   const contentfulClient = preview ? previewClient : client;
-  
+
   if (!contentfulClient) {
     console.warn('Contentful client is not available. Returning empty array.');
     return [];
   }
-  
+
   try {
     const searchPromises = contentTypes.map(contentType =>
       contentfulClient.getEntries({

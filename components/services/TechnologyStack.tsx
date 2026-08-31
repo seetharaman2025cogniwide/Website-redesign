@@ -33,10 +33,10 @@ const TechnologyStack = () => {
   ]
 
   return (
-    <Section background="light-grey" padding="lg">
+    <Section background="light-grey" padding="lg" className="bg-[#0B0A14]">
       <div className="text-center mb-16">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-brand-dark-grey mb-6"
+          className="text-3xl md:text-4xl font-bold text-white mb-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -45,7 +45,7 @@ const TechnologyStack = () => {
           AI-Powered Technology Stack
         </motion.h2>
         <motion.p
-          className="text-xl text-brand-medium-grey max-w-3xl mx-auto"
+          className="text-xl text-[#B8B6C4] max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -64,8 +64,8 @@ const TechnologyStack = () => {
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card padding="lg" className="h-full">
-              <h3 className="text-lg font-semibold text-brand-dark-grey mb-6 text-center">
+            <Card padding="lg" className="h-full bg-[#15151D]/95 border border-[#29263A] hover:border-[#8B5CF6]/60 transition-colors duration-300">
+              <h3 className="text-lg font-semibold text-white mb-6 text-center">
                 {category.category}
               </h3>
               
@@ -73,14 +73,14 @@ const TechnologyStack = () => {
                 {category.technologies.map((tech, techIndex) => (
                   <motion.div
                     key={tech}
-                    className="text-center p-3 bg-brand-white rounded-lg border border-brand-light-grey hover:border-brand-yellow transition-colors duration-200"
+                    className="text-center p-3 bg-[#17152A] rounded-lg border border-[#29263A] hover:border-[#8B5CF6] transition-colors duration-200"
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: (index * 0.1) + (techIndex * 0.05) }}
                     viewport={{ once: true }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <span className="text-sm font-medium text-brand-dark-grey">
+                    <span className="text-sm font-medium text-[#B8B6C4]">
                       {tech}
                     </span>
                   </motion.div>
@@ -99,12 +99,12 @@ const TechnologyStack = () => {
         transition={{ duration: 0.6, delay: 0.5 }}
         viewport={{ once: true }}
       >
-        <Card padding="lg">
+        <Card padding="lg" className="bg-[#15151D]/95 border border-[#29263A] shadow-[0_0_30px_rgba(124,58,237,0.12)]">
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-brand-dark-grey mb-4">
+            <h3 className="text-2xl font-bold text-white mb-4">
               AI-Enhanced Delivery Methodology
             </h3>
-            <p className="text-brand-medium-grey max-w-3xl mx-auto">
+            <p className="text-[#B8B6C4] max-w-3xl mx-auto">
               We follow AI-enhanced methodologies and best practices to accelerate delivery while ensuring quality and scalability
             </p>
           </div>
@@ -112,11 +112,11 @@ const TechnologyStack = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {['AI Strategy & Discovery', 'Intelligent Architecture', 'AI-Enhanced Development', 'Automated Deployment'].map((phase, index) => (
               <div key={phase} className="text-center">
-                <div className="w-12 h-12 bg-brand-yellow rounded-full flex items-center justify-center text-brand-dark-grey font-bold text-lg mx-auto mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#8B5CF6] to-[#7C3AED] rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto mb-4 shadow-[0_0_16px_rgba(124,58,237,0.35)]">
                   {index + 1}
                 </div>
-                <h4 className="font-semibold text-brand-dark-grey mb-2">{phase}</h4>
-                <p className="text-sm text-brand-medium-grey">
+                <h4 className="font-semibold text-white mb-2">{phase}</h4>
+                <p className="text-sm text-[#B8B6C4]">
                   {index === 0 && 'AI-powered requirements analysis and strategic planning'}
                   {index === 1 && 'Intelligent system design with AI integration points'}
                   {index === 2 && 'AI-assisted development with automated testing'}

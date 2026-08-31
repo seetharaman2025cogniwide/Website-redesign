@@ -11,7 +11,7 @@
   body {
     @apply font-poppins text-brand-dark-grey bg-brand-white;
   }
-  
+
   * {
     font-family: 'Poppins', sans-serif;
   }
@@ -186,3 +186,108 @@
 .duration-200 {
   animation-duration: 0.2s;
 }
+
+/* Services routes only: dark glass violet design system */
+.services-theme {
+  background: #0B0A14;
+  color: #FFFFFF;
+}
+
+.services-theme [class*="bg-white"],
+.services-theme [class*="bg-gray-50"] {
+  background-color: #0B0A14 !important;
+}
+
+.services-theme [class*="bg-gray-100"],
+.services-theme [class*="bg-gray-200"] {
+  background-color: #17152A !important;
+}
+
+.services-theme [class*="bg-[#2563eb]"],
+.services-theme [class*="bg-brand-blue"],
+.services-theme [class*="bg-[#FBBF24]"] {
+  background-color: #8B5CF6 !important;
+}
+
+.services-theme [class*="text-gray-900"],
+.services-theme [class*="text-gray-800"],
+.services-theme [class*="text-brand-dark-grey"] {
+  color: #FFFFFF !important;
+}
+
+.services-theme [class*="text-gray-600"],
+.services-theme [class*="text-gray-700"],
+.services-theme [class*="text-brand-medium-grey"] {
+  color: #B8B6C4 !important;
+}
+
+.services-theme [class*="text-[#2563eb]"],
+.services-theme [class*="text-brand-blue"] {
+  color: #A78BFA !important;
+}
+
+.services-theme [class*="border-gray"],
+.services-theme [class*="border-brand"],
+.services-theme [class*="border-[#2563eb]"] {
+  border-color: #29263A !important;
+}
+
+.services-theme [class*="bg-white"][class*="rounded"],
+.services-theme [class*="bg-gray-50"][class*="rounded"] {
+  background-color: #15151D !important;
+  border-color: #29263A !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+}
+
+.services-theme [class*="bg-[#2563eb]"],
+.services-theme [class*="bg-brand-blue"] {
+  color: #FFFFFF !important;
+}
+
+.services-theme [class*="hover:bg-blue"]:hover,
+.services-theme [class*="hover:bg-[#2563eb]"]:hover,
+.services-theme [class*="hover:bg-brand-blue"]:hover,
+.services-theme .group:hover [class*="group-hover:bg"] {
+  background-color: #7C3AED !important;
+}
+
+.services-theme [class*="hover:border"]:hover {
+  border-color: #8B5CF6 !important;
+}
+
+.services-theme [class*="group-hover:text"] {
+  transition: color 200ms ease, background-color 200ms ease;
+}
+
+.services-theme .group:hover [class*="group-hover:text"] {
+  color: #FFFFFF !important;
+}
+
+/* Footer inherits the Services palette when shown on a Services route. */
+.services-theme footer {
+  background: #08090B !important;
+  border-color: #29263A !important;
+}
+
+.services-theme footer [class*="bg-gray-700"] {
+  background-color: #15151D !important;
+}
+
+.services-theme footer [class*="text-blue"] {
+  color: #A78BFA !important;
+}
+
+.services-theme footer [class*="bg-blue"],
+.services-theme footer [class*="from-blue"],
+.services-theme footer [class*="via-blue"],
+.services-theme footer [class*="to-blue"] {
+  --tw-gradient-from: #8B5CF6 var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: #7C3AED var(--tw-gradient-to-position) !important;
+  background-color: #8B5CF6 !important;
+}
+
+.services-theme footer [class*="hover:bg-blue"]:hover {
+  background-color: #7C3AED !important;
+}
+
+ 

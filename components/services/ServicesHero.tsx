@@ -3,15 +3,16 @@
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import Section from '@/components/layout/Section'
+import { HERO_DOTS } from '@/components/services/ServiceHeroBackground'
 
 const ServicesHero = () => {
   return (
-    <Section background="white" padding="xl" className="bg-white relative overflow-hidden">
+    <Section background="white" padding="xl" className="bg-[#08090B] relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Circles */}
         <motion.div
-          className="absolute top-20 left-10 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-64 h-64 bg-[#8B5CF6]/15 rounded-full blur-3xl"
           animate={{
             y: [0, -30, 0],
             x: [0, 20, 0],
@@ -24,7 +25,7 @@ const ServicesHero = () => {
           }}
         />
         <motion.div
-          className="absolute top-40 right-20 w-96 h-96 bg-brand-yellow/5 rounded-full blur-3xl"
+          className="absolute top-40 right-20 w-96 h-96 bg-[#7C3AED]/15 rounded-full blur-3xl"
           animate={{
             y: [0, 40, 0],
             x: [0, -30, 0],
@@ -37,7 +38,7 @@ const ServicesHero = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-20 left-1/3 w-80 h-80 bg-brand-blue-light/5 rounded-full blur-3xl"
+          className="absolute bottom-20 left-1/3 w-80 h-80 bg-[#A78BFA]/10 rounded-full blur-3xl"
           animate={{
             y: [0, -40, 0],
             x: [0, 30, 0],
@@ -51,22 +52,19 @@ const ServicesHero = () => {
         />
 
         {/* Floating Dots */}
-        {[...Array(15)].map((_, i) => (
+        {HERO_DOTS.map((dot, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-brand-blue/20 rounded-full"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
+            className="absolute w-2 h-2 bg-[#A78BFA]/30 rounded-full"
+            style={{ top: dot.top, left: dot.left }}
             animate={{
               y: [0, -20, 0],
               opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
-              duration: 3 + Math.random() * 4,
+              duration: dot.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: dot.delay,
               ease: "easeInOut"
             }}
           />
@@ -74,7 +72,7 @@ const ServicesHero = () => {
 
         {/* Geometric Shapes */}
         <motion.div
-          className="absolute top-1/4 right-1/4 w-20 h-20 border-2 border-brand-blue/10 rounded-lg"
+          className="absolute top-1/4 right-1/4 w-20 h-20 border-2 border-[#8B5CF6]/20 rounded-lg"
           animate={{
             rotate: [0, 90, 0],
             scale: [1, 1.1, 1],
@@ -86,7 +84,7 @@ const ServicesHero = () => {
           }}
         />
         <motion.div
-          className="absolute bottom-1/3 left-1/4 w-16 h-16 border-2 border-brand-yellow/10"
+          className="absolute bottom-1/3 left-1/4 w-16 h-16 border-2 border-[#A78BFA]/20"
           animate={{
             rotate: [0, -90, 0],
             scale: [1, 1.2, 1],
@@ -100,15 +98,15 @@ const ServicesHero = () => {
 
         {/* Grid Pattern Overlay */}
         <div className="absolute inset-0 opacity-[0.02]" style={{
-          backgroundImage: `linear-gradient(to right, #1a4f8c 1px, transparent 1px),
-                           linear-gradient(to bottom, #1a4f8c 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, #8B5CF6 1px, transparent 1px),
+                           linear-gradient(to bottom, #8B5CF6 1px, transparent 1px)`,
           backgroundSize: '60px 60px'
         }} />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
         <motion.h1
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-dark-grey mb-6"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -117,7 +115,7 @@ const ServicesHero = () => {
         </motion.h1>
 
         <motion.p
-          className="text-xl md:text-2xl text-brand-medium-grey mb-8 leading-relaxed"
+          className="text-xl md:text-2xl text-[#B8B6C4] mb-8 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -132,8 +130,8 @@ const ServicesHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="inline-flex items-center px-6 py-3 bg-brand-yellow/10 rounded-full">
-            <span className="text-brand-dark-grey font-semibold">
+          <div className="inline-flex items-center px-6 py-3 bg-[#15151D]/90 border border-[#29263A] rounded-full shadow-[0_0_18px_rgba(124,58,237,0.2)]">
+            <span className="text-[#A78BFA] font-semibold">
               Trusted by Leading Enterprises across Global Industries
             </span>
           </div>

@@ -178,14 +178,14 @@ const Navigation = () => {
     'Services': {
       layout: 'two-column',
       leftItems: [
-        { name: 'AI Consulting', href: '/services/ai-consulting', description: 'Strategic AI implementation', icon: CursorArrowRaysIcon, color: 'from-purple-600 to-indigo-600' },
-        { name: 'AI Development', href: '/services/ai-development', description: 'Custom AI solutions', icon: ComputerDesktopIcon, color: 'from-sky-600 to-blue-600' },
-        { name: 'Data Engineering', href: '/services/data-engineering', description: 'Data pipeline solutions', icon: ChartBarIcon, color: 'from-teal-600 to-emerald-600' }
+        { name: 'AI Consulting', href: '/services/ai-consulting', description: 'Strategic AI implementation', icon: CursorArrowRaysIcon, color: 'from-[#8B5CF6] to-[#7C3AED]' },
+        { name: 'AI Development', href: '/services/ai-development', description: 'Custom AI solutions', icon: ComputerDesktopIcon, color: 'from-[#A78BFA] to-[#8B5CF6]' },
+        { name: 'Data Engineering', href: '/services/data-engineering', description: 'Data pipeline solutions', icon: ChartBarIcon, color: 'from-[#7C3AED] to-[#8B5CF6]' }
       ],
       rightItems: [
-        { name: 'Cloud & DevOps', href: '/services/cloud-devops', description: 'Cloud transformation', icon: CloudIcon, color: 'from-orange-600 to-red-600' },
-        { name: 'Intelligent Automation', href: '/services/intelligent-automation', description: 'Business process automation', icon: BoltIcon, color: 'from-blue-600 to-indigo-600' },
-        { name: 'Quality Engineering', href: '/services/quality-engineering', description: 'AI-driven quality assurance', icon: ShieldCheckIcon, color: 'from-emerald-500 to-teal-600' }
+        { name: 'Cloud & DevOps', href: '/services/cloud-devops', description: 'Cloud transformation', icon: CloudIcon, color: 'from-[#8B5CF6] to-[#7C3AED]' },
+        { name: 'Intelligent Automation', href: '/services/intelligent-automation', description: 'Business process automation', icon: BoltIcon, color: 'from-[#A78BFA] to-[#8B5CF6]' },
+        { name: 'Quality Engineering', href: '/services/quality-engineering', description: 'AI-driven quality assurance', icon: ShieldCheckIcon, color: 'from-[#7C3AED] to-[#8B5CF6]' }
       ]
     },
     'Industries': {
@@ -321,6 +321,8 @@ const Navigation = () => {
               {navigationItems.map((item) => {
                 const content = dropdownContent[item.name];
                 const isTwoColumn = content.layout === 'two-column';
+                const isServiceDropdown = item.name === 'Services';
+                const dropdownUsesDarkTheme = isDark || isServiceDropdown;
 
                 return (
                   <div
@@ -428,30 +430,30 @@ const Navigation = () => {
                     )}
                     {activeDropdown === item.name && content.layout !== 'mega-menu' && (
                       <div className={`absolute top-14 pt-2 z-50 ${isTwoColumn ? 'left-1/2 -translate-x-1/2 w-[560px]' : 'left-1/2 -translate-x-1/2 w-80'}`}>
-                        <div className={`backdrop-blur-xl rounded-2xl overflow-hidden ${isDark
+                        <div className={`backdrop-blur-xl rounded-2xl overflow-hidden ${dropdownUsesDarkTheme
                           ? 'bg-[#15151D]/95 border border-[#29263A] shadow-[0_20px_50px_rgba(0,0,0,0.8)]'
                           : 'bg-white/95 border border-gray-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)]'
                           }`}>
                           {isTwoColumn ? (
-                            <div className={`p-3 ${isDark ? 'bg-[#15151D]/90' : 'bg-white/90'}`}>
+                            <div className={`p-3 ${dropdownUsesDarkTheme ? 'bg-[#15151D]/90' : 'bg-white/90'}`}>
                               <div className="grid grid-cols-2 gap-3">
                                 <div className="space-y-1.5">
                                   {content.leftItems?.map((subItem: any) => (
                                     <Link
                                       key={subItem.name}
                                       href={subItem.href}
-                                      className={`dropdown-item flex items-center space-x-3 p-2.5 rounded-lg transition-all duration-200 group border border-transparent ${isDark
+                                      className={`dropdown-item flex items-center space-x-3 p-2.5 rounded-lg transition-all duration-200 group border border-transparent ${dropdownUsesDarkTheme
                                         ? 'hover:bg-[#1A1829] hover:border-[#29263A]'
                                         : 'hover:bg-gray-100/70 hover:border-gray-200'
                                         }`}
                                       onClick={closeDropdown}
                                     >
-                                      <div suppressHydrationWarning className={"w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 " + (subItem.color ? ("bg-gradient-to-br " + subItem.color) : (isDark ? "bg-[#1A1829]" : "bg-gray-200")) + " group-hover:brightness-110"}>
+                                      <div suppressHydrationWarning className={"w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 " + (subItem.color ? ("bg-gradient-to-br " + subItem.color) : (dropdownUsesDarkTheme ? "bg-[#1A1829]" : "bg-gray-200")) + " group-hover:brightness-110"}>
                                         {React.createElement(subItem.icon, { className: "w-4 h-4 text-white drop-shadow-sm" })}
                                       </div>
                                       <div className="flex-1 min-w-0">
                                         <div className="flex items-center space-x-2">
-                                          <div className={`font-medium text-sm transition-colors duration-200 truncate ${isDark ? 'text-white group-hover:text-[#A78BFA]' : 'text-gray-800 group-hover:text-gray-900'}`}>
+                                          <div className={`font-medium text-sm transition-colors duration-200 truncate ${dropdownUsesDarkTheme ? 'text-white group-hover:text-[#A78BFA]' : 'text-gray-800 group-hover:text-gray-900'}`}>
                                             {subItem.name}
                                           </div>
                                           {subItem.badge && (
@@ -460,30 +462,30 @@ const Navigation = () => {
                                             </span>
                                           )}
                                         </div>
-                                        <p className={`text-xs transition-colors duration-200 leading-relaxed ${isDark ? 'text-[#B8B6C4] group-hover:text-gray-300' : 'text-gray-600 group-hover:text-gray-700'}`}>
+                                        <p className={`text-xs transition-colors duration-200 leading-relaxed ${dropdownUsesDarkTheme ? 'text-[#B8B6C4] group-hover:text-gray-300' : 'text-gray-600 group-hover:text-gray-700'}`}>
                                           {subItem.description}
                                         </p>
                                       </div>
                                     </Link>
                                   ))}
                                 </div>
-                                <div className={`space-y-1.5 pl-3 ${isDark ? 'border-l border-[#29263A]' : 'border-l border-gray-200'}`}>
+                                <div className={`space-y-1.5 pl-3 ${dropdownUsesDarkTheme ? 'border-l border-[#29263A]' : 'border-l border-gray-200'}`}>
                                   {content.rightItems?.map((subItem: any) => (
                                     <Link
                                       key={subItem.name}
                                       href={subItem.href}
-                                      className={`dropdown-item flex items-center space-x-3 p-2.5 rounded-lg transition-all duration-200 group border border-transparent ${isDark
+                                      className={`dropdown-item flex items-center space-x-3 p-2.5 rounded-lg transition-all duration-200 group border border-transparent ${dropdownUsesDarkTheme
                                         ? 'hover:bg-[#1A1829] hover:border-[#29263A]'
                                         : 'hover:bg-gray-100/70 hover:border-gray-200'
                                         }`}
                                       onClick={closeDropdown}
                                     >
-                                      <div className={`w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 ${isDark ? 'bg-[#8B5CF6]' : 'bg-brand-blue'}`}>
+                                      <div className={"w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 bg-gradient-to-br " + (subItem.color || (dropdownUsesDarkTheme ? 'from-[#8B5CF6] to-[#7C3AED]' : 'from-blue-500 to-blue-700'))}>
                                         {React.createElement(subItem.icon, { className: "w-4 h-4 text-white" })}
                                       </div>
                                       <div className="flex-1 min-w-0">
                                         <div className="flex items-center space-x-2">
-                                          <div className={`font-medium text-sm transition-colors duration-200 truncate ${isDark ? 'text-white group-hover:text-[#A78BFA]' : 'text-gray-800 group-hover:text-gray-900'}`}>
+                                          <div className={`font-medium text-sm transition-colors duration-200 truncate ${dropdownUsesDarkTheme ? 'text-white group-hover:text-[#A78BFA]' : 'text-gray-800 group-hover:text-gray-900'}`}>
                                             {subItem.name}
                                           </div>
                                           {subItem.badge && (
@@ -492,7 +494,7 @@ const Navigation = () => {
                                             </span>
                                           )}
                                         </div>
-                                        <p className={`text-xs transition-colors duration-200 leading-relaxed ${isDark ? 'text-[#B8B6C4] group-hover:text-gray-300' : 'text-gray-600 group-hover:text-gray-700'}`}>
+                                        <p className={`text-xs transition-colors duration-200 leading-relaxed ${dropdownUsesDarkTheme ? 'text-[#B8B6C4] group-hover:text-gray-300' : 'text-gray-600 group-hover:text-gray-700'}`}>
                                           {subItem.description}
                                         </p>
                                       </div>

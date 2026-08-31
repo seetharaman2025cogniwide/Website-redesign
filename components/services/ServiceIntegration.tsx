@@ -40,11 +40,11 @@ const ServiceIntegration = () => {
   ]
 
   return (
-    <Section background="white" padding="lg">
+    <Section background="white" padding="lg" className="bg-[#17152A]">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold text-brand-dark-grey mb-6"
+            className="text-3xl md:text-4xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -53,7 +53,7 @@ const ServiceIntegration = () => {
             Integrated AI Ecosystem
           </motion.h2>
           <motion.p
-            className="text-xl text-brand-medium-grey max-w-3xl mx-auto"
+            className="text-xl text-[#B8B6C4] max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -72,33 +72,33 @@ const ServiceIntegration = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card padding="lg" className="border-l-4 border-brand-yellow">
+              <Card padding="lg" className="bg-[#15151D]/95 border border-[#29263A] border-l-4 !border-l-[#8B5CF6] hover:border-[#8B5CF6]/60 transition-colors duration-300">
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-center">
                   <div>
-                    <h3 className="text-lg font-semibold text-brand-dark-grey mb-2">
+                    <h3 className="text-lg font-semibold text-white mb-2">
                       {point.service}
                     </h3>
-                    <div className="text-sm text-brand-medium-grey">Service</div>
+                    <div className="text-sm text-[#777583]">Service</div>
                   </div>
                   
                   <div className="flex items-center justify-center">
-                    <div className="w-8 h-0.5 bg-brand-yellow hidden lg:block" />
-                    <div className="w-3 h-3 bg-brand-yellow rounded-full mx-2" />
-                    <div className="w-8 h-0.5 bg-brand-yellow hidden lg:block" />
+                    <div className="w-8 h-0.5 bg-[#8B5CF6] hidden lg:block" />
+                    <div className="w-3 h-3 bg-[#A78BFA] rounded-full mx-2 shadow-[0_0_12px_#8B5CF6]" />
+                    <div className="w-8 h-0.5 bg-[#8B5CF6] hidden lg:block" />
                   </div>
                   
                   <div>
-                    <h4 className="text-lg font-semibold text-brand-dark-grey mb-2">
+                    <h4 className="text-lg font-semibold text-white mb-2">
                       {point.aiProduct}
                     </h4>
-                    <div className="text-sm text-brand-medium-grey">Product/Solution</div>
+                    <div className="text-sm text-[#777583]">Product/Solution</div>
                   </div>
                   
                   <div>
-                    <p className="text-brand-dark-grey font-medium mb-2">
+                    <p className="text-white font-medium mb-2">
                       {point.integration}
                     </p>
-                    <p className="text-sm text-brand-medium-grey">
+                    <p className="text-sm text-[#B8B6C4]">
                       {point.benefit}
                     </p>
                   </div>
@@ -116,18 +116,18 @@ const ServiceIntegration = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <Card padding="lg" className="bg-gradient-to-r from-brand-light-grey to-brand-white">
-            <h3 className="text-2xl font-bold text-brand-dark-grey mb-4">
+          <Card padding="lg" className="bg-gradient-to-r from-[#15151D] to-[#17152A] border border-[#29263A] shadow-[0_0_30px_rgba(124,58,237,0.15)]">
+            <h3 className="text-2xl font-bold text-white mb-4">
               Ready to Transform Your Business?
             </h3>
-            <p className="text-brand-medium-grey mb-6 max-w-2xl mx-auto">
+            <p className="text-[#B8B6C4] mb-6 max-w-2xl mx-auto">
               Let our experts design a comprehensive solution that combines our services with AI products to accelerate your digital transformation journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary inline-flex justify-center items-center">
+              <Link href="/contact" className="inline-flex justify-center items-center rounded-lg bg-[#8B5CF6] px-5 py-3 font-semibold text-white hover:bg-[#7C3AED] transition-colors">
                 Schedule Strategy Session
               </Link>
-              <Link href="/casestudy" className="btn-secondary inline-flex justify-center items-center">
+              <Link href="/casestudy" className="inline-flex justify-center items-center rounded-lg border border-[#8B5CF6] px-5 py-3 font-semibold text-[#A78BFA] hover:bg-[#8B5CF6] hover:text-white transition-colors">
                 View Case Studies
               </Link>
             </div>

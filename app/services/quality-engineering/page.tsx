@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import PageLayout from '@/components/layout/PageLayout';
 import { CTASection } from '@/components/home/CTASection';
+import ServiceHeroBackground from '@/components/services/ServiceHeroBackground';
 import {
   ShieldCheckIcon,
   CogIcon,
@@ -140,23 +141,12 @@ const QualityEngineeringServicesPage = () => {
 
   return (
     <PageLayout>
-      {/* Animated Background Blobs */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 -left-40 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.45, 0.3] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-40 -right-32 w-80 h-80 bg-teal-600/5 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.25, 0.4, 0.25] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-        />
-      </div>
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-24 bg-gradient-to-b from-indigo-50 via-blue-50 to-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+      {/* Hero Section with Enhanced Animated Background */}
+      <section className="relative pt-32 pb-24 bg-white overflow-hidden">
+        <ServiceHeroBackground />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -185,7 +175,7 @@ const QualityEngineeringServicesPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.4, type: "spring", stiffness: 300 }}
-                className="px-5 py-2.5 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm"
+                className="px-5 py-2.5 bg-gray-100 border border-gray-200 rounded-full text-sm font-medium text-gray-700"
               >
                 {f}
               </motion.span>
@@ -212,7 +202,7 @@ const QualityEngineeringServicesPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.45, duration: 0.5 }}
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(37,99,235,0.1)" }}
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(37,99,235,0.08)" }}
               className="inline-flex items-center gap-2 border-2 border-[#2563eb] text-[#2563eb] px-8 py-4 rounded-xl font-semibold transition-all duration-200"
             >
               Quality Assessment
@@ -292,7 +282,7 @@ const QualityEngineeringServicesPage = () => {
       </section>
 
       {/* Tech Stack */}
-      <section className="py-24 bg-gray-50 border-t border-gray-200">
+      <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -348,7 +338,7 @@ const QualityEngineeringServicesPage = () => {
         </div>
       </section>
 
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 };

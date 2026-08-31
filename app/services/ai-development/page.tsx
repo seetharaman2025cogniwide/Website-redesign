@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import PageLayout from '@/components/layout/PageLayout';
 import { CTASection } from '@/components/home/CTASection';
+import ServiceHeroBackground from '@/components/services/ServiceHeroBackground';
 import {
   CodeBracketIcon,
   BeakerIcon,
@@ -100,104 +101,7 @@ const AIApplicationDevelopmentPage = () => {
 
       {/* Hero Section with Enhanced Animated Background */}
       <section className="relative pt-32 pb-24 bg-white overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating Circles */}
-          <motion.div
-            className="absolute top-20 left-10 w-64 h-64 bg-brand-blue/25 rounded-full blur-3xl"
-            animate={{
-              y: [0, -30, 0],
-              x: [0, 20, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute top-40 right-20 w-96 h-96 bg-blue-500/25 rounded-full blur-3xl"
-            animate={{
-              y: [0, 40, 0],
-              x: [0, -30, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-20 left-1/3 w-80 h-80 bg-brand-blue-light/25 rounded-full blur-3xl"
-            animate={{
-              y: [0, -40, 0],
-              x: [0, 30, 0],
-              scale: [1, 1.15, 1],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-
-          {/* Floating Dots */}
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-brand-blue/50 rounded-full"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0.2, 0.5, 0.2],
-              }}
-              transition={{
-                duration: 3 + Math.random() * 4,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-
-          {/* Geometric Shapes */}
-          <motion.div
-            className="absolute top-1/4 right-1/4 w-20 h-20 border-2 border-brand-blue/40 rounded-lg"
-            animate={{
-              rotate: [0, 90, 0],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/3 left-1/4 w-16 h-16 border-2 border-blue-500/40"
-            animate={{
-              rotate: [0, -90, 0],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-
-          {/* Grid Pattern Overlay */}
-          <div className="absolute inset-0 opacity-[0.10]" style={{
-            backgroundImage: `linear-gradient(to right, #1a4f8c 1px, transparent 1px),
-                             linear-gradient(to bottom, #1a4f8c 1px, transparent 1px)`,
-            backgroundSize: '60px 60px'
-          }} />
-        </div>
+        <ServiceHeroBackground />
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">
           <motion.h1
@@ -228,7 +132,7 @@ const AIApplicationDevelopmentPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.4, type: "spring", stiffness: 300 }}
-                className="px-5 py-2.5 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full text-sm font-medium text-gray-700 shadow-sm"
+                className="px-5 py-2.5 bg-gray-100 border border-gray-200 rounded-full text-sm font-medium text-gray-700"
               >
                 {f}
               </motion.span>
@@ -255,7 +159,7 @@ const AIApplicationDevelopmentPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.45, duration: 0.5 }}
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(37,99,235,0.1)" }}
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(37,99,235,0.08)" }}
               className="inline-flex items-center gap-2 border-2 border-[#2563eb] text-[#2563eb] px-8 py-4 rounded-xl font-semibold transition-all duration-200"
             >
               View Case Studies
@@ -371,7 +275,7 @@ const AIApplicationDevelopmentPage = () => {
         </div>
       </section>
 
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 };

@@ -293,8 +293,51 @@ export function ServiceWorkerRegistration() {
   return null
 }
 
-// Dev-only cleanup to prevent stale chunks from cached Service Workers
+// Dev-only cleanup to prevent stale chunks from cached Service Workers.
+//
+// sw.js is cache-first, so a worker registered by an earlier production run
+// keeps serving stale JS/CSS on localhost even after `next dev` rebuilds —
+// which shows up as "my code changes do nothing" plus hydration mismatches.
+//
+// This runs ONCE on mount rather than continuously (the previous continuous
+// version aborted in-flight requests, which is why it was disabled). It only
+// reloads when a worker was actually found, and a sessionStorage guard makes
+// a reload loop impossible if unregistration ever fails.
 export function DevServiceWorkerCleanup() {
-  // Disabled continuous unregistration as it aborts active network requests
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (process.env.NODE_ENV === 'production') return
+    if (!('serviceWorker' in navigator)) return
+
+    const GUARD = 'dev-sw-cleanup-done'
+    if (sessionStorage.getItem(GUARD)) return
+
+    let cancelled = false
+
+    navigator.serviceWorker.getRegistrations?.()
+      .then(async (regs) => {
+        if (cancelled || regs.length === 0) return
+
+        await Promise.all(regs.map((reg) => reg.unregister()))
+
+        if ('caches' in window) {
+          const keys = await caches.keys()
+          await Promise.all(keys.map((key) => caches.delete(key)))
+        }
+
+        if (cancelled) return
+        // Mark before reloading so this can never loop.
+        sessionStorage.setItem(GUARD, '1')
+        window.location.reload()
+      })
+      .catch(() => {
+        // Nothing actionable in dev — never block the page on cleanup.
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   return null
 }
