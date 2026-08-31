@@ -2,7 +2,34 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+/* --------------------------------------------------------------------------
+ * Perspective belt: the client logos are laid out around a vertical cylinder
+ * and the whole drum turns slowly. A tile facing the viewer is sharp and fully
+ * opaque; as it rounds the sides it dims, blurs and falls behind the ones in
+ * front. Hovering the belt eases it down to a crawl so a logo can be read.
+ *
+ * The rotation is driven by requestAnimationFrame writing straight to each
+ * tile's style — running it through React state would re-render fifteen
+ * subtrees sixty times a second for no benefit.
+ * -------------------------------------------------------------------------- */
+const BASE_SPEED = 0.0035 // radians per frame at rest
+const HOVER_SPEED = 0.0006 // radians per frame while hovered
+const SPEED_EASE = 0.06 // how quickly the drum reaches its target speed
+
+// Tile geometry per breakpoint. The radius is derived from the tile footprint
+// so the logos sit evenly around the drum however many of them there are.
+const tileMetrics = (width: number, count: number) => {
+  const tileW = width < 640 ? 108 : width < 1024 ? 132 : 156
+  const gap = width < 640 ? 22 : 32
+  return {
+    tileW,
+    tileH: Math.round(tileW * 0.5),
+    radius: (count * (tileW + gap)) / (2 * Math.PI),
+    height: width < 640 ? 240 : 330
+  }
+}
 
 const TrustIndicators = () => {
   const clientLogos = [
@@ -82,6 +109,104 @@ const TrustIndicators = () => {
     }
   }, [hasAnimated])
 
+  /* ---------------------------------------------------------------------- *
+   * Perspective belt
+   * -------------------------------------------------------------------- */
+  const logoCount = clientLogos.length
+  const beltRef = useRef<HTMLDivElement>(null)
+  const tileRefs = useRef<(HTMLDivElement | null)[]>([])
+  const angleRef = useRef(0)
+  const speedRef = useRef(BASE_SPEED)
+  const targetSpeedRef = useRef(BASE_SPEED)
+  const rafRef = useRef<number | null>(null)
+
+  // Rendered on the server at the desktop size, then corrected on mount.
+  const [metrics, setMetrics] = useState(() => tileMetrics(1280, logoCount))
+
+  useEffect(() => {
+    // Only swap state when the numbers actually change, so dragging a window
+    // edge does not tear down and restart the animation loop on every pixel.
+    const measure = () => setMetrics(prev => {
+      const next = tileMetrics(window.innerWidth, logoCount)
+      return next.tileW === prev.tileW && next.height === prev.height ? prev : next
+    })
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [logoCount])
+
+  useEffect(() => {
+    const belt = beltRef.current
+    if (!belt) return
+
+    const { radius } = metrics
+    const step = (Math.PI * 2) / logoCount
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    // Position every tile for the drum's current angle. Blur and opacity go on
+    // the inner element: a filter on the transformed element itself would
+    // flatten the 3D context in some browsers.
+    const paint = () => {
+      tileRefs.current.forEach((tile, i) => {
+        if (!tile) return
+        const a = angleRef.current + i * step
+        const x = Math.sin(a) * radius
+        const z = Math.cos(a) * radius
+        const facing = (Math.cos(a) + 1) / 2 // 1 = square-on to the viewer
+
+        tile.style.transform =
+          `translate3d(${x.toFixed(1)}px, 0, ${z.toFixed(1)}px) rotateY(${((a * 180) / Math.PI).toFixed(2)}deg)`
+        tile.style.zIndex = String(Math.round(facing * 100))
+
+        const face = tile.firstElementChild as HTMLElement | null
+        if (face) {
+          face.style.opacity = (0.12 + facing * 0.88).toFixed(3)
+          face.style.filter = `blur(${((1 - facing) * 2.6).toFixed(2)}px)`
+        }
+      })
+    }
+
+    if (reduced) {
+      paint()
+      return
+    }
+
+    const frame = () => {
+      speedRef.current += (targetSpeedRef.current - speedRef.current) * SPEED_EASE
+      angleRef.current += speedRef.current
+      paint()
+      rafRef.current = requestAnimationFrame(frame)
+    }
+
+    const stop = () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current)
+        rafRef.current = null
+      }
+    }
+
+    // Only spend frames while the section is actually on screen.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (rafRef.current === null) frame()
+        } else {
+          stop()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(belt)
+
+    return () => {
+      observer.disconnect()
+      stop()
+    }
+  }, [metrics, logoCount])
+
+  const slowBelt = () => { targetSpeedRef.current = HOVER_SPEED }
+  const resumeBelt = () => { targetSpeedRef.current = BASE_SPEED }
+
   return (
     <section className="py-20 lg:py-28 bg-[#0B0A14] relative overflow-hidden">
       {/* Background Elements */}
@@ -107,82 +232,77 @@ const TrustIndicators = () => {
             </span>
           </h3>
 
-          <div className="space-y-8">
-            {/* First Row - Right to Left */}
-            <div className="overflow-hidden">
-              <motion.div
-                className="flex gap-6"
-                animate={{ x: [0, -100 * 8] }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                style={{ width: `${8 * 140}px` }}
+          {/* Perspective belt — the drum of client logos */}
+          <div
+            ref={beltRef}
+            className="relative overflow-hidden rounded-3xl border border-[#29263A]"
+            style={{
+              height: `${metrics.height}px`,
+              WebkitMaskImage: 'linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent)',
+              maskImage: 'linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent)'
+            }}
+            onMouseEnter={slowBelt}
+            onMouseLeave={resumeBelt}
+            onFocus={slowBelt}
+            onBlur={resumeBelt}
+          >
+            {/* Violet haze the tiles rise out of */}
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_120%,rgba(124,58,237,0.22),transparent_62%)]" />
+
+            <div className="absolute inset-0" style={{ perspective: '1250px' }}>
+              <div
+                className="absolute left-1/2 top-1/2 h-0 w-0"
+                style={{ transformStyle: 'preserve-3d' }}
               >
-                {clientLogos.slice(0, 8).concat(clientLogos.slice(0, 8)).map((client, index) => (
-                  <motion.div
-                    key={`row1-${client.name}-${index}`}
-                    className="flex-shrink-0 w-32 h-20 flex items-center justify-center p-3 bg-white/95 backdrop-blur-sm rounded-xl border border-[#29263A] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:border-[#8B5CF6]/60 hover:shadow-[0_0_25px_rgba(124,58,237,0.3)] transition-all duration-300 ease-out group"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: (index % 8) * 0.05,
-                      ease: [0.25, 0.46, 0.45, 0.94]
-                    }}
-                    viewport={{ once: true, margin: "-50px" }}
-                  >
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={client.logo}
-                        alt={client.name}
-                        fill
-                        className="object-contain transition-all duration-300 hover:scale-110"
-                      />
+                {clientLogos.map((client, index) => {
+                  // First-paint position, so the tiles are already around the
+                  // drum before the animation frame takes over.
+                  const a = (index * Math.PI * 2) / logoCount
+                  const facing = (Math.cos(a) + 1) / 2
+
+                  return (
+                    <div
+                      key={client.name}
+                      ref={el => { tileRefs.current[index] = el }}
+                      className="absolute"
+                      style={{
+                        width: `${metrics.tileW}px`,
+                        height: `${metrics.tileH}px`,
+                        marginLeft: `${-metrics.tileW / 2}px`,
+                        marginTop: `${-metrics.tileH / 2}px`,
+                        transformStyle: 'preserve-3d',
+                        willChange: 'transform',
+                        zIndex: Math.round(facing * 100),
+                        transform:
+                          `translate3d(${(Math.sin(a) * metrics.radius).toFixed(1)}px, 0, ${(Math.cos(a) * metrics.radius).toFixed(1)}px) rotateY(${((a * 180) / Math.PI).toFixed(2)}deg)`
+                      }}
+                    >
+                      <div
+                        className="h-full w-full rounded-xl bg-white p-3 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.75)]"
+                        style={{ opacity: 0.12 + facing * 0.88 }}
+                      >
+                        <div className="relative h-full w-full">
+                          <Image
+                            src={client.logo}
+                            alt={client.name}
+                            fill
+                            sizes="160px"
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </motion.div>
-                ))}
-              </motion.div>
+                  )
+                })}
+              </div>
             </div>
 
-            {/* Second Row - Left to Right (Same 8 companies as first row) */}
-            <div className="overflow-hidden">
-              <motion.div
-                className="flex gap-6"
-                animate={{ x: [-100 * 8, 0] }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                style={{ width: `${8 * 140}px` }}
-              >
-                {clientLogos.slice(0, 8).concat(clientLogos.slice(0, 8)).map((client, index) => (
-                  <motion.div
-                    key={`row2-${client.name}-${index}`}
-                    className="flex-shrink-0 w-32 h-20 flex items-center justify-center p-3 bg-white/95 backdrop-blur-sm rounded-xl border border-[#29263A] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:border-[#8B5CF6]/60 hover:shadow-[0_0_25px_rgba(124,58,237,0.3)] transition-all duration-300 ease-out group"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: (index % 8) * 0.05,
-                      ease: [0.25, 0.46, 0.45, 0.94]
-                    }}
-                    viewport={{ once: true, margin: "-50px" }}
-                  >
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={client.logo}
-                        alt={client.name}
-                        fill
-                        className="object-contain transition-all duration-300 hover:scale-110"
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
+            {/* Floor fade, so the drum sinks into the section rather than ending */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0B0A14] to-transparent" />
+
+            <span className="pointer-events-none absolute bottom-4 left-1/2 z-10 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#777583]">
+              Hover to slow
+            </span>
           </div>
         </motion.div>
 

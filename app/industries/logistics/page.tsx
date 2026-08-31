@@ -137,7 +137,7 @@ const heroStats = [
 
 export default function ManufacturingPage() {
   return (
-    <PageLayout>
+    <PageLayout className="bg-[#0B0A14]">
       <IndustryHero
         industry="manufacturing"
         title="AI-Powered Manufacturing Solutions"
@@ -158,7 +158,7 @@ export default function ManufacturingPage() {
         internalAreas={industryAgentData.manufacturing?.internalAreas || []}
       />
       
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 }

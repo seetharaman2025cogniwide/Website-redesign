@@ -75,7 +75,7 @@ const heroStats = [
 
 export default function EducationPage() {
   return (
-    <PageLayout>
+    <PageLayout className="bg-[#0B0A14]">
       <IndustryHero
         industry="education"
         title="AI-Powered Education Solutions"
@@ -96,7 +96,7 @@ export default function EducationPage() {
         internalAreas={industryAgentData.education?.internalAreas || []}
       />
       
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 }

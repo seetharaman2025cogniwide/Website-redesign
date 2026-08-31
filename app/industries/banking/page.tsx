@@ -150,7 +150,7 @@ const heroStats = [
 
 export default function BankingPage() {
   return (
-    <PageLayout>
+    <PageLayout className="bg-[#0B0A14]">
       <IndustryHero
         industry="banking"
         title="Transform Banking with Intelligent AI"
@@ -168,7 +168,7 @@ export default function BankingPage() {
         customerStages={industryAgentData.banking.customerStages}
         internalAreas={industryAgentData.banking.internalAreas}
       />
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 }

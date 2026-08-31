@@ -30,8 +30,10 @@ import {
    MagnifyingGlassIcon,
    DocumentTextIcon
 } from '@heroicons/react/24/outline'
-import { useState, useEffect, ReactNode } from 'react'
-
+import { useState, useEffect, ReactNode, SVGProps } from 'react'
+import HandTilesVisual from '@/components/home/HandTilesVisual'
+import EcosystemAscent from '@/components/hero/EcosystemAscent'
+import LoomPipeline, { LOOM_RUN_MS } from '@/components/hero/LoomPipeline'
 /* --------------------------------------------------------------------------
  * Entrance choreography for the "cogniwide-vision" diamond-grid slide.
  * The hub lands first, then the four outer diamonds drop in one at a time.
@@ -70,6 +72,17 @@ const DIAMOND_DROP = { x: -64, y: -64 }
  * It also fires at the right moment when the carousel loops back, because the
  * wrapper only mounts once `mode="wait"` has finished exiting the old slide.
  */
+const useEntered = () => {
+  const [entered, setEntered] = useState(false)
+
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setEntered(true))
+    return () => cancelAnimationFrame(raf)
+  }, [])
+
+  return entered
+}
+
 const Entrance = ({
   from,
   delay,
@@ -81,12 +94,7 @@ const Entrance = ({
   duration: number
   children: ReactNode
 }) => {
-  const [entered, setEntered] = useState(false)
-
-  useEffect(() => {
-    const raf = requestAnimationFrame(() => setEntered(true))
-    return () => cancelAnimationFrame(raf)
-  }, [])
+  const entered = useEntered()
 
   return (
     <motion.div
@@ -97,6 +105,88 @@ const Entrance = ({
     </motion.div>
   )
 }
+
+/*
+ * Same mount-time-animation workaround as `Entrance`, but for the dotted SVG
+ * connector lines on the "cogniwide-vision" slide — a plain <motion.line>
+ * would hit the same `initial={false}` suppression. Kept to a plain opacity
+ * fade (no `pathLength` "self-draw" animation): pathLength needs the browser
+ * to measure the line via getTotalLength(), which isn't available during
+ * server rendering, and animating it here caused a hydration mismatch.
+ */
+const LineEntrance = ({
+  delay,
+  duration,
+  opacity = 1,
+  ...lineProps
+}: {
+  delay: number
+  duration: number
+} & Omit<SVGProps<SVGLineElement>, 'ref'>) => {
+  const entered = useEntered()
+
+  return (
+    <motion.line
+      {...lineProps}
+      animate={entered ? { opacity } : { opacity: 0 }}
+      transition={{ duration, delay, ease: DIAMOND_EASE }}
+    />
+  )
+}
+
+/*
+ * The four capability cards on the "cogniwide-vision" slide, positioned
+ * (in px, inside a 400x460 box) as a fanned stack rising out of the hand at
+ * bottom-right. `from` is the offset each card animates in from — pointed
+ * back toward the palm so it reads as rising out of the hand, not dropping
+ * from the sky like the old diamonds did.
+ */
+const VISION_CARDS = [
+  {
+    id: 'ai',
+    label: 'AI Transformation',
+    icon: SparklesIcon,
+    left: 165,
+    top: 300,
+    rotate: -6,
+    gradient: 'from-neon-500/90 to-neon-800/95',
+    line: '#22D3EE',
+    from: { x: 55, y: 90, scale: 0.6 },
+  },
+  {
+    id: 'digital',
+    label: 'Digital Transformation',
+    icon: GlobeAltIcon,
+    left: 55,
+    top: 215,
+    rotate: 5,
+    gradient: 'from-mint-500/90 to-mint-800/95',
+    line: '#5EEAD4',
+    from: { x: 130, y: 160, scale: 0.55 },
+  },
+  {
+    id: 'product',
+    label: 'Product Dev & Testing',
+    icon: CodeBracketIcon,
+    left: 150,
+    top: 130,
+    rotate: -5,
+    gradient: 'from-neon-400/90 to-neon-700/95',
+    line: '#22D3EE',
+    from: { x: 90, y: 240, scale: 0.5 },
+  },
+  {
+    id: 'data',
+    label: 'Data Engineering',
+    icon: ChartBarIcon,
+    left: 45,
+    top: 42,
+    rotate: 6,
+    gradient: 'from-mint-400/90 to-mint-700/95',
+    line: '#5EEAD4',
+    from: { x: 150, y: 300, scale: 0.45 },
+  },
+] as const
 
 const CleanHero = () => {
    const [activeSlide, setActiveSlide] = useState(0)
@@ -245,12 +335,17 @@ const CleanHero = () => {
   // whatever was left of a shared tick. Every slide keeps the original 6s
   // dwell; the diamond-grid slide additionally gets the length of its staggered
   // entrance, so the sequence always finishes before we rotate away from it.
+  // CogniLoom instead waits for its pipeline to reach Operate — reaching the
+  // last stage is what ends that slide, so its dwell is the run's own length.
   useEffect(() => {
     const BASE_DWELL = 6000
+    const slideId = slides[activeSlide]?.id
     const dwell =
-      slides[activeSlide]?.id === 'cogniwide-vision'
+      slideId === 'cogniwide-vision'
         ? VISION_ENTRANCE_MS + BASE_DWELL
-        : BASE_DWELL
+        : slideId === 'cogniloom'
+          ? LOOM_RUN_MS
+          : BASE_DWELL
 
     const timer = setTimeout(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length)
@@ -359,7 +454,29 @@ const CleanHero = () => {
           {/* RIGHT COLUMN: Glassmorphic Composition */}
           <div className="cw-enter cw-enter-4 cw-perspective relative h-[600px] hidden lg:flex items-center justify-center">
              <AnimatePresence mode="wait" initial={false}>
-               {current.isSolid ? (
+               {current.id === 'platform' ? (
+                 <motion.div
+                   key={activeSlide}
+                   initial={{ opacity: 0, scale: 0.95 }}
+                   animate={{ opacity: 1, scale: 1 }}
+                   exit={{ opacity: 0, scale: 0.95 }}
+                   transition={{ duration: 0.6 }}
+                   className="relative w-full h-full flex items-center justify-center z-10"
+                 >
+                   <EcosystemAscent />
+                 </motion.div>
+               ) : current.id === 'cogniloom' ? (
+                 <motion.div
+                   key={activeSlide}
+                   initial={{ opacity: 0, scale: 0.95 }}
+                   animate={{ opacity: 1, scale: 1 }}
+                   exit={{ opacity: 0, scale: 0.95 }}
+                   transition={{ duration: 0.6 }}
+                   className="relative w-full h-full flex items-center justify-center z-10"
+                 >
+                   <LoomPipeline />
+                 </motion.div>
+               ) : current.isSolid ? (
                  <motion.div
                    key={activeSlide}
                    initial={{ opacity: 0, scale: 0.95 }}
@@ -372,96 +489,17 @@ const CleanHero = () => {
                    <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-neon-500/30 rounded-full blur-[100px] pointer-events-none" />
                    <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-neon-500/30 rounded-full blur-[100px] pointer-events-none" />
 
-                   {/* Diamond Grid Container */}
-                   <div className="relative w-[340px] h-[340px] grid grid-cols-2 gap-6 rotate-45 z-10 mb-8 mt-4">
-                     
-                     {/*
-                       Each diamond is wrapped in a motion.div that owns the entrance
-                       only. The diamond itself is left untouched so its Tailwind
-                       `hover:` transform keeps working — Framer Motion writes an
-                       inline `transform`, which would otherwise out-rank the hover
-                       utility and silently kill it. The wrapper is the grid item, so
-                       the diamond takes `w-full h-full` to fill the same cell as before.
-                     */}
-
-                     {/* Top Diamond (AI) */}
-                     <Entrance
-                       from={{ ...DIAMOND_DROP, scale: 0.75 }}
-                       duration={DIAMOND_DURATION}
-                       delay={DIAMOND_START + 0 * DIAMOND_STAGGER}
-                     >
-                     <div className="cw-diamond w-full h-full bg-gradient-to-br from-neon-500/85 to-neon-800/90 rounded-3xl flex items-center justify-center group hover:-translate-y-3 hover:-translate-x-3 transition-transform duration-300">
-                       <div className="-rotate-45 flex flex-col items-center justify-center p-4">
-                         <SparklesIcon className="cw-icon-float w-10 h-10 text-white mb-2 drop-shadow-md" />
-                         <h3 className="text-white font-bold text-sm text-center leading-tight drop-shadow-md">AI<br/>Transformation</h3>
-                       </div>
-                     </div>
-                     </Entrance>
-
-                     {/* Right Diamond (Digital) */}
-                     <Entrance
-                       from={{ ...DIAMOND_DROP, scale: 0.75 }}
-                       duration={DIAMOND_DURATION}
-                       delay={DIAMOND_START + 1 * DIAMOND_STAGGER}
-                     >
-                     <div className="cw-diamond w-full h-full bg-gradient-to-bl from-mint-500/85 to-mint-800/90 rounded-3xl flex items-center justify-center group hover:-translate-y-3 hover:translate-x-3 transition-transform duration-300">
-                       <div className="-rotate-45 flex flex-col items-center justify-center p-4">
-                         <GlobeAltIcon className="cw-icon-float w-10 h-10 text-white mb-2 drop-shadow-md" />
-                         <h3 className="text-white font-bold text-sm text-center leading-tight drop-shadow-md">Digital<br/>Transformation</h3>
-                       </div>
-                     </div>
-                     </Entrance>
-
-                              {/* Left Diamond (Product) */}
-                              <Entrance
-                       from={{ ...DIAMOND_DROP, scale: 0.75 }}
-                       duration={DIAMOND_DURATION}
-                       delay={DIAMOND_START + 2 * DIAMOND_STAGGER}
-                     >
-                     <div className="cw-diamond w-full h-full bg-gradient-to-tr from-neon-400/85 to-neon-700/90 rounded-3xl flex items-center justify-center group hover:translate-y-3 hover:-translate-x-3 transition-transform duration-300">
-                                 <div className="-rotate-45 flex flex-col items-center justify-center p-4">
-                                    <CodeBracketIcon className="cw-icon-float w-10 h-10 text-white mb-2 drop-shadow-md" />
-                                    <h3 className="text-white font-bold text-sm text-center leading-tight drop-shadow-md">Product Dev<br />& Testing</h3>
-                                 </div>
-                              </div>
-                     </Entrance>
-
-                     {/* Bottom Diamond (Data) */}
-                     <Entrance
-                       from={{ ...DIAMOND_DROP, scale: 0.75 }}
-                       duration={DIAMOND_DURATION}
-                       delay={DIAMOND_START + 3 * DIAMOND_STAGGER}
-                     >
-                     <div className="cw-diamond w-full h-full bg-gradient-to-tl from-neon-500/85 to-neon-800/90 rounded-3xl flex items-center justify-center group hover:translate-y-3 hover:translate-x-3 transition-transform duration-300">
-                       <div className="-rotate-45 flex flex-col items-center justify-center p-4">
-                         <ChartBarIcon className="cw-icon-float w-10 h-10 text-white mb-2 drop-shadow-md" />
-                         <h3 className="text-white font-bold text-sm text-center leading-tight drop-shadow-md">Data<br/>Engineering</h3>
-                       </div>
-                     </div>
-                     </Entrance>
-
-                     {/* Central Hub Node — lands first, before the diamonds drop in.
-                         Centring stays on the outer div and the hover scale stays on the
-                         inner one, so neither collides with the motion transform. */}
-                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                       <Entrance from={{ scale: 0.4 }} duration={HUB_DURATION} delay={HUB_DELAY}>
-                         <div className="cw-hub w-24 h-24 rounded-3xl flex items-center justify-center group hover:scale-110 transition-transform duration-300">
-                           <div className="-rotate-45 flex flex-col items-center">
-                             <span className="font-black text-night-950 text-2xl leading-none">AI</span>
-                             <span className="font-bold text-neon-900 text-[9px] tracking-widest mt-1">CORE</span>
-                           </div>
-                         </div>
-                       </Entrance>
-                     </div>
-                   </div>
+                   {/* Robotic Hand + Floating Capability Cards */}
+                   <HandTilesVisual />
 
                    {/* Floating End-to-End badge */}
-                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30">
+                   <div className="absolute bottom-4 left-4 z-30">
                      <div className="cw-glass cw-float-pill rounded-full px-6 py-2.5 text-xs font-bold text-white flex items-center gap-2 whitespace-nowrap">
                        <CheckCircleIcon className="w-5 h-5 text-neon-400" />
                        End-to-End Enterprise Solutions
                      </div>
                    </div>
+
 
                         </motion.div>
                      ) : (
@@ -478,75 +516,6 @@ const CleanHero = () => {
 
                    {/* Main Glass Card */}
                   <div className="cw-glass cw-gradient-border cw-topline cw-tilt relative w-[450px] h-[550px] rounded-[2.5rem] p-8 flex flex-col justify-between z-10">
-
-                   {/* Mascot — peeks over the top edge of the CogniAssist panel only.
-                       The wrapper sits directly above the card (bottom-full) and hides its
-                       own overflow, so the wrapper's bottom edge — which coincides exactly
-                       with the card's top border — cleanly cuts the robot's lower half.
-                       The static offset and the bob live on separate elements because
-                       Framer Motion writes an inline transform that would otherwise
-                       override a Tailwind translate utility. */}
-                   {current.id === 'cogniassist' && (
-                     <div className="pointer-events-none absolute inset-x-0 bottom-full h-[60px] overflow-hidden z-20" aria-hidden="true">
-                       <div className="absolute bottom-0 right-16 translate-y-[34%]">
-                         <motion.div
-                           animate={{ y: [0, -7, 0] }}
-                           transition={{ duration: 3.6, ease: 'easeInOut', repeat: Infinity }}
-                         >
-                           {/* soft blue halo, matching the panel's glow aesthetic */}
-                           <div className="absolute inset-0 -m-3 rounded-full bg-[#8B5CF6]/25 blur-xl" />
-                           <svg
-                             viewBox="0 0 96 96"
-                             className="relative w-20 h-20 drop-shadow-[0_6px_18px_rgba(139,92,246,0.55)]"
-                           >
-                             <defs>
-                               <linearGradient id="cwBotShell" x1="0" y1="0" x2="0" y2="1">
-                                 <stop offset="0%" stopColor="#ffffff" />
-                                 <stop offset="100%" stopColor="#C9BFF0" />
-                               </linearGradient>
-                               <linearGradient id="cwBotVisor" x1="0" y1="0" x2="0" y2="1">
-                                 <stop offset="0%" stopColor="#150E2E" />
-                                 <stop offset="100%" stopColor="#0B0A14" />
-                               </linearGradient>
-                             </defs>
-
-                             {/* antenna */}
-                             <path d="M48 17V8" stroke="#C4B5FD" strokeWidth="2.5" strokeLinecap="round" />
-                             <circle cx="48" cy="5.5" r="3.8" fill="#8B5CF6" />
-
-                             {/* ear pieces */}
-                             <rect x="9" y="36" width="11" height="21" rx="5.5" fill="url(#cwBotShell)" />
-                             <rect x="76" y="36" width="11" height="21" rx="5.5" fill="url(#cwBotShell)" />
-
-                             {/* body hint — mostly hidden behind the card */}
-                             <rect x="28" y="69" width="40" height="27" rx="13" fill="url(#cwBotShell)" />
-
-                             {/* head */}
-                             <rect x="18" y="16" width="60" height="55" rx="24" fill="url(#cwBotShell)" />
-
-                             {/* visor */}
-                             <rect x="26" y="27" width="44" height="30" rx="15" fill="url(#cwBotVisor)" />
-
-                             {/* eyes */}
-                             <circle cx="39" cy="42" r="6" fill="#8B5CF6" />
-                             <circle cx="57" cy="42" r="6" fill="#8B5CF6" />
-                             <circle cx="41" cy="40" r="2" fill="#ffffff" />
-                             <circle cx="59" cy="40" r="2" fill="#ffffff" />
-
-                             {/* smile */}
-                             <path
-                               d="M42 51q6 4 12 0"
-                               stroke="#C4B5FD"
-                               strokeWidth="2"
-                               strokeLinecap="round"
-                               fill="none"
-                               opacity="0.85"
-                             />
-                           </svg>
-                         </motion.div>
-                       </div>
-                     </div>
-                   )}
 
                    {/* Header */}
                    <div className="flex items-center justify-between mb-8">
@@ -568,148 +537,6 @@ const CleanHero = () => {
                     {/* DYNAMIC CONTENT BASED ON SLIDE */}
                     <div className="flex-1 relative">
                       
-                      {/* 1. PLATFORM (Enterprise AI Command Center - Refined) */}
-                      {current.id === 'platform' && (
-                        <div className="flex flex-col h-full gap-3 text-night-200">
-                           
-                           {/* Top Status Bar */}
-                           <div className="flex justify-between items-center px-1">
-                              <div className="flex items-center gap-2">
-                                 <div className="w-2 h-2 rounded-full bg-mint-400 animate-pulse" />
-                                 <span className="text-[10px] font-bold text-mint-100 uppercase tracking-wider">Enterprise AI Platform</span>
-                              </div>
-                              <div className="flex gap-2">
-                                 <span className="text-[9px] font-mono text-night-400 bg-night-800/50 px-1.5 py-0.5 rounded border border-night-700/50">v4.2.0 Stable</span>
-                                 <span className="text-[9px] font-mono text-neon-400 bg-neon-950/50 px-1.5 py-0.5 rounded border border-neon-800/50">System Healthy</span>
-                              </div>
-                           </div>
-
-                           {/* Metric Cards Row */}
-                           <div className="grid grid-cols-3 gap-2">
-                              {[
-                                 { label: 'Active Agents', val: '24', icon: CpuChipIcon, color: 'text-mint-400', bg: 'bg-mint-950/50', border: 'border-mint-800/50' },
-                                 { label: 'Secure Pipelines', val: '100%', icon: ShieldCheckIcon, color: 'text-neon-400', bg: 'bg-neon-950/50', border: 'border-neon-800/50' },
-                                 { label: 'Data Quality', val: '99.9%', icon: ChartBarIcon, color: 'text-neon-400', bg: 'bg-neon-950/50', border: 'border-neon-800/50' }
-                              ].map((stat, i) => (
-                                 <div key={i} className={`bg-night-800/40 p-2.5 rounded-xl border border-night-700/50 shadow-sm flex flex-col gap-1 hover:bg-night-800/60 transition-colors`}>
-                                    <div className="flex justify-between items-start">
-                                       <div className={`p-1.5 rounded-lg ${stat.bg} border ${stat.border}`}>
-                                          <stat.icon className={`w-3.5 h-3.5 ${stat.color}`} />
-                                       </div>
-                                       <ArrowTrendingUpIcon className="w-3 h-3 text-neon-400" />
-                                    </div>
-                                    <div>
-                                       <div className="text-lg font-bold text-white leading-none mb-0.5">{stat.val}</div>
-                                       <div className="text-[9px] text-night-400 font-medium">{stat.label}</div>
-                                    </div>
-                                 </div>
-                              ))}
-                           </div>
-
-                           {/* Main Topology Monitor */}
-                           <div className="flex-1 bg-night-900/50 rounded-xl border border-night-700/50 p-1 relative overflow-hidden flex flex-col shadow-inner group">
-                              <div className="absolute inset-0 cw-inner-grid [mask-image:linear-gradient(0deg,black,transparent)]" />
-                              
-                              {/* Header */}
-                              <div className="flex justify-between items-center px-3 py-2 relative z-10 border-b border-night-800/50">
-                                 <span className="text-[10px] font-semibold text-night-300 flex items-center gap-1.5">
-                                    <GlobeAltIcon className="w-3 h-3 text-night-500" />
-                                    Live Ecosystem Map
-                                 </span>
-                                 <div className="flex gap-1">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-night-600" />
-                                    <div className="w-1.5 h-1.5 rounded-full bg-night-600" />
-                                 </div>
-                              </div>
-
-                              {/* Visualization */}
-                              <div className="flex-1 relative z-10">
-                                 {/* Central Hub */}
-                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                                    <div className="relative">
-                                       <div className="absolute inset-0 bg-mint-500/30 blur-xl rounded-full animate-pulse-slow" />
-                                       <div className="w-16 h-16 bg-night-800 rounded-full shadow-lg border-4 border-night-700 flex items-center justify-center relative z-10">
-                                          <SparklesIcon className="w-8 h-8 text-mint-400" />
-                                       </div>
-                                       {/* Orbiting Ring */}
-                                       <svg className="absolute inset-0 w-full h-full -m-4 overflow-visible animate-spin-slow-reverse">
-                                          <circle cx="48" cy="48" r="32" fill="none" stroke="#8B5CF6" strokeWidth="1" strokeDasharray="4 4" className="opacity-50" />
-                                       </svg>
-                                    </div>
-                                    <div className="mt-2 text-[10px] font-bold text-white bg-night-800/80 px-2 py-0.5 rounded-full border border-night-700 shadow-sm backdrop-blur-sm">Unified Core</div>
-                                 </div>
-
-                                 {/* Connected Nodes */}
-                                 {[
-                                    { label: 'ERP', icon: ServerIcon, x: '20%', y: '20%', color: 'text-neon-400', bg: 'bg-neon-950/80', border: 'border-neon-800/50' },
-                                    { label: 'CRM', icon: UserGroupIcon, x: '80%', y: '20%', color: 'text-mint-400', bg: 'bg-mint-950/80', border: 'border-mint-800/50' },
-                                    { label: 'Cloud', icon: CloudIcon, x: '20%', y: '80%', color: 'text-mint-400', bg: 'bg-mint-950/80', border: 'border-mint-800/50' },
-                                    { label: 'DevOps', icon: CommandLineIcon, x: '80%', y: '80%', color: 'text-neon-400', bg: 'bg-neon-950/80', border: 'border-neon-800/50' },
-                                 ].map((node, i) => (
-                                    <motion.div
-                                       key={i}
-                                       className="absolute flex flex-col items-center gap-1"
-                                       style={{ left: node.x, top: node.y }}
-                                       initial={{ scale: 0 }}
-                                       animate={{ scale: 1 }}
-                                       transition={{ delay: i * 0.1 }}
-                                    >
-                                       {/* Connection Line */}
-                                       <svg className="absolute top-1/2 left-1/2 w-[200px] h-[200px] -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none">
-                                          <line 
-                                             x1="100" y1="100" 
-                                             x2={node.x === '20%' ? (node.y === '20%' ? '160' : '160') : (node.y === '20%' ? '40' : '40')} 
-                                             y2={node.y === '20%' ? (node.x === '20%' ? '160' : '160') : (node.x === '20%' ? '40' : '40')} 
-                                             stroke="#29263A" 
-                                             strokeWidth="1" 
-                                             strokeDasharray="4 4"
-                                          />
-                                          {/* Animated Packet */}
-                                          <motion.circle 
-                                             r="3" 
-                                             fill="#8B5CF6"
-                                             animate={{ 
-                                                cx: ["100", node.x === '20%' ? (node.y === '20%' ? '160' : '160') : (node.y === '20%' ? '40' : '40')],
-                                                cy: ["100", node.y === '20%' ? (node.x === '20%' ? '160' : '160') : (node.x === '20%' ? '40' : '40')],
-                                                opacity: [0, 1, 0]
-                                             }}
-                                             transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
-                                          />
-                                       </svg>
-
-                                       <div className={`w-10 h-10 ${node.bg} rounded-xl border ${node.border} shadow-sm flex items-center justify-center relative group-hover:scale-110 transition-transform`}>
-                                          <node.icon className={`w-5 h-5 ${node.color}`} />
-                                          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-neon-400 rounded-full border-2 border-night-800" />
-                                       </div>
-                                       <span className="text-[9px] font-semibold text-night-300 bg-night-800/80 px-1.5 py-0.5 rounded border border-night-700/50 backdrop-blur-sm">{node.label}</span>
-                                    </motion.div>
-                                 ))}
-                              </div>
-                           </div>
-
-                           {/* Enterprise Readiness Footer */}
-                           <div className="bg-night-800/40 rounded-xl p-3 border border-night-700/50 shadow-sm flex items-center justify-between">
-                              <div className="flex items-center gap-4">
-                                 <div className="flex items-center gap-1.5">
-                                    <ShieldCheckIcon className="w-3.5 h-3.5 text-night-400" />
-                                    <span className="text-[10px] font-semibold text-night-300">Enterprise Ready</span>
-                                 </div>
-                                 <div className="h-3 w-[1px] bg-night-700" />
-                                 <div className="flex gap-2">
-                                    <span className="text-[9px] font-mono text-night-400 bg-night-900/50 px-1.5 py-0.5 rounded border border-night-700/50">SOC2 Type II</span>
-                                    <span className="text-[9px] font-mono text-night-400 bg-night-900/50 px-1.5 py-0.5 rounded border border-night-700/50">ISO 27001</span>
-                                    <span className="text-[9px] font-mono text-night-400 bg-night-900/50 px-1.5 py-0.5 rounded border border-night-700/50">GDPR</span>
-                                 </div>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                 <span className="text-[9px] text-night-500 font-medium">Uptime</span>
-                                 <span className="text-[10px] font-bold text-neon-400">99.99%</span>
-                              </div>
-                           </div>
-
-                                    </div>
-                                 )}
-
                       {/* 2. COGNIASSIST (Agentic Control Plane) */}
                       {current.id === 'cogniassist' && (
                         <div className="flex flex-col h-full gap-3 text-night-200">
@@ -807,116 +634,6 @@ const CleanHero = () => {
                                     <div className="flex justify-between items-center text-[9px] text-night-300 bg-neon-950/30 px-1.5 py-1 rounded border border-neon-800/30">
                                        <span>Policy Check</span>
                                        <CheckCircleIcon className="w-3 h-3 text-neon-400" />
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                      )}
-
-                      {/* 3. COGNILOOM (Detailed Pipeline) */}
-                      {current.id === 'cogniloom' && (
-                        <div className="flex flex-col h-full gap-4 text-night-200">
-                           {/* 1. Unified Pipeline Timeline */}
-                           <div className="bg-night-800/40 rounded-xl p-3 border border-night-700/50 shadow-sm">
-                              <div className="flex justify-between items-center mb-2">
-                                 <div className="text-[10px] font-semibold text-neon-400 uppercase tracking-wider flex items-center gap-1">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-neon-500 animate-pulse" />
-                                    Pipeline Active
-                                 </div>
-                                 <div className="text-[10px] text-night-400 font-mono">ID: #8392-AC</div>
-                              </div>
-                              <div className="flex justify-between items-center relative px-1">
-                                 {['Build', 'Test', 'Secure', 'Deploy', 'Operate'].map((step, i) => (
-                                    <div key={step} className="flex flex-col items-center z-10 gap-1">
-                                       <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] border transition-all duration-300 ${
-                                          i <= 2 ? 'bg-neon-950/80 border-neon-500/50 text-neon-300 shadow-md' : 
-                                          i === 3 ? 'bg-night-800/80 border-neon-500/50 text-neon-400 animate-pulse shadow-sm' : 
-                                          'bg-night-800/50 border-night-700/50 text-night-500'
-                                       }`}>
-                                          {i <= 2 ? <CheckCircleIcon className="w-3.5 h-3.5" /> : i === 3 ? <ArrowPathIcon className="w-3.5 h-3.5 animate-spin" /> : i + 1}
-                                       </div>
-                                       <span className={`text-[8px] font-medium tracking-wide ${i <= 3 ? 'text-night-300' : 'text-night-500'}`}>{step}</span>
-                                    </div>
-                                 ))}
-                                 {/* Connecting Line */}
-                                 <div className="absolute top-3 left-0 w-full h-0.5 bg-night-700/50 -z-0">
-                                    <motion.div 
-                                       initial={{ width: "0%" }}
-                                       animate={{ width: "75%" }}
-                                       transition={{ duration: 1.5, ease: "easeInOut" }}
-                                       className="h-full bg-gradient-to-r from-neon-500 to-mint-500" 
-                                    />
-                                 </div>
-                              </div>
-                           </div>
-                       
-                           {/* 2. AI Insights & Security (Grid) */}
-                           <div className="grid grid-cols-2 gap-3 flex-1">
-                              {/* AI Insights */}
-                              <div className="bg-gradient-to-br from-mint-950/40 to-neon-950/40 rounded-xl p-3 border border-mint-800/50 flex flex-col gap-2 relative overflow-hidden group shadow-sm">
-                                 <div className="absolute inset-0 bg-mint-950/30 group-hover:bg-mint-900/30 transition-colors" />
-                                 <div className="flex items-center gap-2 mb-1 relative z-10">
-                                    <SparklesIcon className="w-4 h-4 text-mint-400" />
-                                    <span className="text-xs font-semibold text-mint-300">AI Insights</span>
-                                 </div>
-                                 <div className="bg-night-800/60 rounded p-2 border border-night-700/50 relative z-10 hover:border-mint-500/50 transition-colors shadow-sm">
-                                    <div className="flex justify-between items-start mb-1">
-                                       <span className="text-[10px] text-night-300 font-medium">Optimization</span>
-                                       <span className="text-[9px] bg-mint-950/50 text-mint-400 px-1.5 py-0.5 rounded border border-mint-800/50">98% Conf.</span>
-                                    </div>
-                                    <div className="text-[9px] text-night-400 leading-tight">Docker image size reduction possible (-40%)</div>
-                                 </div>
-                                 <div className="bg-night-800/60 rounded p-2 border border-night-700/50 relative z-10 hover:border-neon-500/50 transition-colors shadow-sm">
-                                    <div className="flex justify-between items-start">
-                                       <span className="text-[10px] text-neon-300 font-medium">Policy Drift</span>
-                                       <span className="text-[9px] bg-neon-950/50 text-neon-400 px-1.5 py-0.5 rounded border border-neon-800/50">High</span>
-                                    </div>
-                                 </div>
-                              </div>
-                       
-                              {/* Security Intelligence */}
-                              <div className="bg-night-800/40 rounded-xl p-3 border border-night-700/50 flex flex-col gap-2 relative group shadow-sm">
-                                 <div className="flex items-center gap-2 mb-1">
-                                    <ShieldCheckIcon className="w-4 h-4 text-mint-400" />
-                                    <span className="text-xs font-semibold text-mint-300">Security</span>
-                                 </div>
-                                 <div className="flex justify-between items-center bg-night-800/40 p-2 rounded border border-night-700/50 group-hover:border-mint-500/50 transition-colors">
-                                    <div className="flex flex-col items-center">
-                                       <span className="text-xl font-bold text-night-200">0</span>
-                                       <span className="text-[8px] text-night-400 uppercase tracking-wider">Critical</span>
-                                    </div>
-                                    <div className="h-8 w-[1px] bg-night-700/50" />
-                                    <div className="flex flex-col items-center">
-                                       <span className="text-xl font-bold text-mint-400">100%</span>
-                                       <span className="text-[8px] text-night-400 uppercase tracking-wider">Secure</span>
-                                    </div>
-                                 </div>
-                                 <div className="flex gap-1.5 mt-auto">
-                                    <span className="text-[8px] px-2 py-1 bg-night-800/50 border border-night-700/50 rounded text-night-400 flex-1 text-center shadow-sm">SOC2</span>
-                                    <span className="text-[8px] px-2 py-1 bg-night-800/50 border border-night-700/50 rounded text-night-400 flex-1 text-center shadow-sm">ISO</span>
-                                 </div>
-                              </div>
-                       
-                              {/* Infrastructure */}
-                              <div className="bg-night-800/40 rounded-xl p-3 border border-night-700/50 col-span-2 flex items-center justify-between group hover:bg-night-800/60 transition-colors shadow-sm">
-                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-neon-950/50 rounded-lg border border-neon-800/50">
-                                       <GlobeAltIcon className="w-4 h-4 text-neon-400" />
-                                    </div>
-                                    <div>
-                                       <div className="text-xs font-semibold text-night-200">Infrastructure</div>
-                                       <div className="text-[10px] text-night-400 flex items-center gap-1">
-                                          Provisioning: 
-                                          <span className="text-neon-400 font-medium">Auto-Remediated</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div className="text-right">
-                                    <div className="text-xs font-mono text-neon-400 bg-neon-950/50 px-2 py-0.5 rounded border border-neon-800/50">us-east-1</div>
-                                    <div className="text-[10px] text-neon-400 flex items-center gap-1.5 justify-end mt-1">
-                                       <div className="w-1.5 h-1.5 rounded-full bg-neon-500 animate-pulse shadow-sm" />
-                                       Healthy
                                     </div>
                                  </div>
                               </div>

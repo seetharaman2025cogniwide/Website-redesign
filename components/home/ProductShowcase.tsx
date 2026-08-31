@@ -1,11 +1,24 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle, BarChart2, Cpu, Globe, Bot, Shield, Zap, Database, Server, Workflow } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import {
+  ArrowRight, CheckCircle, BarChart2, Cpu, Globe, Bot, Shield, Zap, Database, Server,
+  ShoppingCart as ShoppingCartIcon,
+  Users as UsersIcon,
+  TrendingUp as TrendingUpIcon,
+  Scale as ScaleIcon,
+  DollarSign as DollarSignIcon,
+  Rocket as RocketIcon,
+  ArrowLeftRight as ArrowLeftRightIcon,
+  AlertCircle as AlertCircleIcon,
+  LineChart as LineChartIcon
+} from 'lucide-react';
 
-// --- Types & Data ---
-
+// --- Data ---
+// `accent` feeds the panel's corner wash (--cw-panel-acc); everything else
+// stays on the shared neon/mint scales so the three panels read as a set.
 const products = [
   {
     id: 'agent',
@@ -15,7 +28,7 @@ const products = [
     features: ['Autonomous Orchestration', 'Multi-Agent Collaboration', 'Real-time Decisions', 'Process Automation'],
     href: '/products/cogniassist',
     icon: <Cpu className="w-5 h-5" />,
-    color: 'blue',
+    accent: 'rgba(167, 139, 250, 0.28)',
     agents: [
       { name: 'IT Incident Agent', desc: 'Auto-resolves tickets & system alerts', icon: Server },
       { name: 'Procurement Agent', desc: 'Validates vendors & processes POs', icon: ShoppingCartIcon },
@@ -31,7 +44,7 @@ const products = [
     features: ['AI-Powered Auto-Scaling', 'Multi-Cloud Deploy', 'Intelligent Monitoring', 'Automated Ops'],
     href: '/products/cogniloom',
     icon: <Globe className="w-5 h-5" />,
-    color: 'purple',
+    accent: 'rgba(139, 92, 246, 0.32)',
     agents: [
       { name: 'Cluster Auto-Scaler', desc: 'Optimizes node usage in real-time', icon: ScaleIcon },
       { name: 'Security Sentinel', desc: 'Runtime container protection', icon: Shield },
@@ -47,7 +60,7 @@ const products = [
     features: ['One-Click BI Migration', 'PortBI Integration', 'CogniCraft MDM', 'Predictive Analytics'],
     href: '/products/cogniaura',
     icon: <BarChart2 className="w-5 h-5" />,
-    color: 'orange',
+    accent: 'rgba(192, 132, 252, 0.28)',
     agents: [
       { name: 'Migration Assistant', desc: 'Legacy to Modern BI conversion', icon: ArrowLeftRightIcon },
       { name: 'Data Steward', desc: 'Ensures data quality & governance', icon: Database },
@@ -57,45 +70,10 @@ const products = [
   }
 ];
 
-// Mock Icons for Agents (since lucide-react exports might vary, defining simple fallbacks or using available ones)
-import { ShoppingCart as ShoppingCartIcon, Users as UsersIcon, TrendingUp as TrendingUpIcon, Scale as ScaleIcon, DollarSign as DollarSignIcon, Rocket as RocketIcon, ArrowLeftRight as ArrowLeftRightIcon, AlertCircle as AlertCircleIcon, LineChart as LineChartIcon } from 'lucide-react';
-
-
 // --- Main Component ---
 
 export const ProductShowcase = () => {
-  const [activeTab, setActiveTab] = useState(products[0].id);
-
-  const activeProduct = products.find(p => p.id === activeTab) || products[0];
-
-  const colorMap: Record<string, { bg: string; text: string; lightBg: string; gradient: string; ring: string; hoverBg: string }> = {
-    agent: {
-      bg: 'bg-neon-400',
-      text: 'text-neon-400',
-      lightBg: 'bg-neon-400/15',
-      gradient: 'from-neon-400 to-neon-400',
-      ring: 'focus:ring-neon-400',
-      hoverBg: 'group-hover:bg-neon-400'
-    },
-    loom: {
-      bg: 'bg-neon-400',
-      text: 'text-neon-300',
-      lightBg: 'bg-neon-400/15',
-      gradient: 'from-neon-400 to-neon-400',
-      ring: 'focus:ring-neon-400',
-      hoverBg: 'group-hover:bg-neon-400'
-    },
-    aura: {
-      bg: 'bg-mint-400',
-      text: 'text-mint-300',
-      lightBg: 'bg-mint-400/15',
-      gradient: 'from-mint-300 to-neon-400',
-      ring: 'focus:ring-mint-400',
-      hoverBg: 'group-hover:bg-mint-400'
-    }
-  };
-
-  const activeColors = colorMap[activeTab] || colorMap.agent;
+  const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section className="bg-transparent relative py-24 lg:py-32 overflow-hidden font-poppins selection:bg-neon-400 selection:text-white">
@@ -104,13 +82,12 @@ export const ProductShowcase = () => {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-neon-400/5 rounded-full blur-[100px]" />
         <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] bg-neon-400/5 rounded-full blur-[120px]" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-mint-300/20 to-transparent"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 2. Section Header */}
-        <div className="text-center mb-16 max-w-4xl mx-auto">
+        <div className="text-center mb-14 lg:mb-16 max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -147,137 +124,134 @@ export const ProductShowcase = () => {
           </motion.p>
         </div>
 
-        {/* 3. Tabs Navigation */}
-        <div className="flex justify-center mb-12">
-          <div className="cw-glass inline-flex p-1.5 rounded-2xl gap-2">
-            {products.map((product) => {
-               const pColors = colorMap[product.id] || colorMap.agent;
-               return (
+        {/* 3. Expanding Panels */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
+          className="cw-panels"
+        >
+          {products.map((product, index) => {
+            const isOpen = openIndex === index;
+            const open = () => setOpenIndex(index);
+
+            return (
+              <div
+                key={product.id}
+                data-open={isOpen}
+                onMouseEnter={open}
+                className="cw-panel"
+                style={{ '--cw-panel-acc': product.accent } as React.CSSProperties}
+              >
+                <span className="cw-panel__wash" aria-hidden="true" />
+
+                {/* Collapsed state — also the control that opens the panel */}
                 <button
-                  key={product.id}
-                  onClick={() => setActiveTab(product.id)}
-                  className={`relative px-6 py-3 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
-                    activeTab === product.id 
-                      ? 'text-night-950 font-bold' 
-                      : 'text-night-400 hover:text-white hover:bg-mint-300/10'
-                  }`}
+                  type="button"
+                  onClick={open}
+                  onFocus={open}
+                  tabIndex={isOpen ? -1 : 0}
+                  aria-expanded={isOpen}
+                  aria-label={`Show ${product.name}`}
+                  className="cw-panel__closed group focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-400 rounded-[22px]"
                 >
-                  {activeTab === product.id && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className={`absolute inset-0 rounded-xl ${pColors.bg}`}
-                    />
-                  )}
-                  <span className="relative z-10 flex items-center gap-2">
+                  <span className="flex-none w-11 h-11 rounded-xl grid place-items-center bg-night-950/50 border border-mint-300/15 text-neon-400 transition-colors group-hover:border-neon-400/60">
                     {product.icon}
+                  </span>
+                  <span className="cw-panel__vert text-lg font-bold text-night-200 group-hover:text-white transition-colors">
                     {product.name}
                   </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* 4. Tab Content Area */}
-        <div className="min-h-[500px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12"
-            >
-              {/* Left Column: Product Details */}
-              <div className="lg:col-span-5 flex flex-col justify-center">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className={`h-px w-8 ${activeColors.bg}`}></span>
-                  <span className={`font-semibold uppercase tracking-wider text-sm ${activeColors.text}`}>
-                    {activeProduct.subtitle}
+                  <span className="text-[11px] font-mono text-night-500 lg:block hidden">
+                    0{index + 1}
                   </span>
-                </div>
+                  <span className="text-sm text-night-500 lg:hidden ml-auto text-right">
+                    {product.subtitle}
+                  </span>
+                </button>
 
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                  {activeProduct.name}
-                </h3>
+                {/* Expanded state */}
+                <div className="cw-panel__open">
+                  <div className="cw-panel__inner h-full grid grid-cols-1 lg:grid-cols-[1.12fr_1fr] gap-8 lg:gap-10 lg:items-center">
 
-                <p className="text-lg text-night-300 mb-8 leading-relaxed">
-                  {activeProduct.description}
-                </p>
-
-                <ul className="grid grid-cols-1 gap-3 mb-10">
-                  {activeProduct.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3 group">
-                      <div className={`mt-1 p-0.5 rounded-full ${activeColors.lightBg} ${activeColors.text}`}>
-                        <CheckCircle className="w-3.5 h-3.5" />
+                    {/* Copy */}
+                    <div className="flex flex-col">
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="h-px w-8 bg-neon-400"></span>
+                        <span className="font-semibold uppercase tracking-wider text-xs text-neon-400">
+                          {product.subtitle}
+                        </span>
                       </div>
-                      <span className="text-night-200 font-medium">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
 
-                <a href={activeProduct.href} className="relative inline-flex group self-start">
-                  <div className={`absolute transition-all duration-300 opacity-70 -inset-px bg-gradient-to-r rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt ${activeColors.gradient}`}></div>
-                  <button className="cw-btn cw-btn-primary cw-btn-pulse relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold font-sans rounded-xl focus:outline-none">
-                    <span>Explore {activeProduct.name}</span>
-                    <ArrowRight className="w-5 h-5 ml-2 -mr-1 transition-transform duration-200 group-hover:translate-x-1" />
-                  </button>
-                </a>
-              </div>
+                      <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                        {product.name}
+                      </h3>
 
-              {/* Right Column: Agent Ecosystem (The "List of Agents") */}
-              <div className="lg:col-span-7">
-                <div className="cw-glass cw-gradient-border cw-topline rounded-3xl p-8 relative overflow-hidden h-full">
-                  {/* Decorative Background */}
-                  <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] opacity-20 -mr-16 -mt-16 ${activeColors.bg}`}></div>
+                      <p className="text-night-300 leading-relaxed mb-6 max-w-md">
+                        {product.description}
+                      </p>
 
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-8">
-                      <h4 className="text-xl font-bold text-night-100 flex items-center gap-2">
-                        <Bot className="w-5 h-5 text-night-500" />
-                        Specialized Agents
-                      </h4>
-                      <span className={`text-xs font-bold px-3 py-1 rounded-full bg-mint-300/10 border border-mint-300/20 text-mint-300`}>
-                        {activeProduct.agents.length} Active
-                      </span>
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5 mb-8">
+                        {product.features.map((feature) => (
+                          <li key={feature} className="flex items-start gap-2.5">
+                            <span className="mt-0.5 text-neon-400">
+                              <CheckCircle className="w-4 h-4" />
+                            </span>
+                            <span className="text-night-200 text-sm font-medium">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <Link
+                        href={product.href}
+                        className="cw-btn cw-btn-primary group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold text-base w-fit focus:outline-none"
+                      >
+                        <span>Explore {product.name}</span>
+                        <ArrowRight className="w-5 h-5 transition-transform duration-200 group-hover:translate-x-1" />
+                      </Link>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {activeProduct.agents.map((agent, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.1 }}
-                          className="cw-glass cw-tilt group relative p-4 rounded-xl transition-all duration-300 cursor-default"
-                        >
-                          <div className="flex items-start gap-4">
-                            <div className={`cw-icon-float p-3 rounded-lg bg-mint-300/10 border border-mint-300/20 transition-colors duration-300 ${activeColors.text} ${activeColors.hoverBg} group-hover:text-night-950`}>
-                              <agent.icon className="w-6 h-6" />
-                            </div>
-                            <div>
-                              <h5 className="font-bold text-night-100 text-sm mb-1 group-hover:text-white">{agent.name}</h5>
-                              <p className="text-xs text-night-400 leading-relaxed">{agent.desc}</p>
-                            </div>
+                    {/* Agent ecosystem */}
+                    <div className="cw-glass rounded-2xl p-5 lg:p-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h4 className="text-sm font-bold text-night-100 flex items-center gap-2">
+                          <Bot className="w-4 h-4 text-night-500" />
+                          Specialized Agents
+                        </h4>
+                        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-mint-300/10 border border-mint-300/20 text-mint-300">
+                          {product.agents.length} Active
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
+                        {product.agents.map((agent) => (
+                          <div
+                            key={agent.name}
+                            className="group flex items-start gap-3 p-3 rounded-xl bg-mint-300/[0.04] border border-mint-300/12 transition-colors duration-300 hover:border-neon-400/50 hover:bg-neon-400/10"
+                          >
+                            <span className="flex-none w-9 h-9 rounded-lg grid place-items-center bg-night-950/60 border border-mint-300/15 text-neon-400 transition-colors duration-300 group-hover:bg-neon-400 group-hover:text-night-950">
+                              <agent.icon className="w-4 h-4" />
+                            </span>
+                            <span className="min-w-0">
+                              <span className="block text-[13px] font-bold text-night-100 leading-snug">{agent.name}</span>
+                              <span className="block text-[11px] text-night-400 leading-snug">{agent.desc}</span>
+                            </span>
                           </div>
-                        </motion.div>
-                      ))}
+                        ))}
+                      </div>
+
+                      <div className="mt-4 pt-4 border-t border-night-800 flex items-center justify-center gap-2 text-xs text-night-500">
+                        <Zap className="w-3.5 h-3.5" />
+                        30+ more pre-built agents available
+                      </div>
                     </div>
 
-                    {/* Bottom "More" indicator */}
-                    <div className="mt-8 pt-6 border-t border-night-800 flex items-center justify-center text-sm text-night-500">
-                      <span className="flex items-center gap-2">
-                        <Zap className="w-4 h-4" />
-                        30+ more pre-built agents available
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            );
+          })}
+        </motion.div>
 
       </div>
     </section>

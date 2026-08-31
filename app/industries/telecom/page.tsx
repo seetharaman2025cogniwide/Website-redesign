@@ -142,7 +142,7 @@ const caseStudyHighlight = {
 
 export default function TelecomPage() {
   return (
-    <PageLayout>
+    <PageLayout className="bg-[#0B0A14]">
       <IndustryHero
         industry="telecom"
         title="AI-Powered Telecom Solutions"
@@ -163,7 +163,7 @@ export default function TelecomPage() {
         internalAreas={industryAgentData.telecom.internalAreas}
       />
       
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 }

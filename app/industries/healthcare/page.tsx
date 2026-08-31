@@ -150,7 +150,7 @@ const heroStats = [
 
 export default function HealthcarePage() {
   return (
-    <PageLayout>
+    <PageLayout className="bg-[#0B0A14]">
       <IndustryHero
         industry="healthcare"
         title="AI-Powered Healthcare Solutions"
@@ -171,7 +171,7 @@ export default function HealthcarePage() {
         internalAreas={industryAgentData.healthcare.internalAreas}
       />
       
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 }

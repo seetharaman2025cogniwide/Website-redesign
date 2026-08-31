@@ -30,10 +30,13 @@ const Icons = {
 };
 
 // --- Data ---
+// `stage` is what turns three products into one story: the rail reads
+// Build -> Verify -> Ship, in the order a team actually moves through them.
 const solutions = [
   {
     id: 'cognivibe',
     name: 'CogniVibe',
+    stage: 'Build',
     tagline: 'Intelligent Development',
     subtitle: 'Agents that think & code',
     description: 'A unified SDLC framework where AI agents handle the heavy lifting. From planning to coding, automate workflows and ship products with unprecedented velocity.',
@@ -44,6 +47,7 @@ const solutions = [
   {
     id: 'cognitest',
     name: 'CogniTest',
+    stage: 'Verify',
     tagline: 'Enterprise Quality',
     subtitle: 'Pixel-perfect validation',
     description: 'Ensure functional and visual perfection. Our AI generates test data, detects visual regressions via CogniPixel, and secures your quality gates automatically.',
@@ -54,6 +58,7 @@ const solutions = [
   {
     id: 'cogniops',
     name: 'CogniOps',
+    stage: 'Ship',
     tagline: 'Seamless Delivery',
     subtitle: 'Zero-downtime deployment',
     description: 'Master multi-cloud complexity. Deploy Helm charts seamlessly, optimize infrastructure costs intelligently, and migrate between clouds with zero friction.',
@@ -74,7 +79,7 @@ const CodeWindow = () => (
       </div>
     </div>
     <div className="pt-4 flex-1 space-y-2 relative overflow-hidden">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -82,7 +87,7 @@ const CodeWindow = () => (
       >
         import <span className="text-night-100">React</span> from <span className="text-neon-300">'react'</span>;
       </motion.div>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.4 }}
@@ -90,7 +95,7 @@ const CodeWindow = () => (
       >
         <span className="text-neon-300">const</span> <span className="text-mint-300">LoginForm</span> = () ={'>'} {'{'}
       </motion.div>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
@@ -98,12 +103,12 @@ const CodeWindow = () => (
       >
         // AI Generating logic...
       </motion.div>
-      <motion.div 
+      <motion.div
          animate={{ width: ["0%", "80%"] }}
          transition={{ duration: 1.5, ease: "easeInOut" }}
          className="h-2 bg-neon-400/25 rounded mt-2 ml-8"
       />
-       <motion.div 
+       <motion.div
          animate={{ width: ["0%", "60%"] }}
          transition={{ duration: 1.5, delay: 0.2, ease: "easeInOut" }}
          className="h-2 bg-neon-400/25 rounded mt-2 ml-8"
@@ -148,16 +153,16 @@ const TestDashboard = () => (
       </motion.div>
     ))}
     <div className="mt-auto p-3 bg-neon-400/10 rounded-lg border border-neon-400/25">
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center gap-2 mb-2 text-neon-400">
             <Icons.Shield />
-            <span className="text-xs font-bold text-neon-400">Security Gate</span>
+            <span className="text-xs font-bold">Security Gate</span>
         </div>
         <div className="w-full bg-mint-300/15 h-1.5 rounded-full overflow-hidden">
-            <motion.div 
+            <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 1.2 }}
-                className="bg-gradient-to-r from-neon-400 to-mint-300 h-full" 
+                className="bg-gradient-to-r from-neon-400 to-mint-300 h-full"
             />
         </div>
     </div>
@@ -165,12 +170,12 @@ const TestDashboard = () => (
 );
 
 const OpsPipeline = () => (
-  <div className="flex flex-col h-full relative">
+  <div className="flex flex-col h-full relative justify-center">
      {/* Connecting Lines */}
      <div className="absolute top-8 left-[19px] bottom-8 w-0.5 bg-mint-300/15 -z-10"></div>
 
     {['Build', 'Deploy', 'Monitor'].map((step, idx) => (
-        <motion.div 
+        <motion.div
             key={step}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -198,27 +203,36 @@ const OpsPipeline = () => (
   </div>
 );
 
+const AUTOPLAY_MS = 7000;
+
 // --- Main Component ---
 
 const SolutionShowcase = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [isAutoPlay, setIsAutoPlay] = useState(false); // Can be enabled for auto-rotation
+  // The rail walks itself through the lifecycle until the visitor takes over.
+  const [engaged, setEngaged] = useState(false);
 
-  // Optional: Auto-rotate tabs if user is idle (disabled by default)
   useEffect(() => {
-    if (!isAutoPlay) return;
+    if (engaged) return;
     const interval = setInterval(() => {
       setActiveTab((prev) => (prev + 1) % solutions.length);
-    }, 5000);
+    }, AUTOPLAY_MS);
     return () => clearInterval(interval);
-  }, [isAutoPlay]);
+  }, [engaged]);
+
+  const active = solutions[activeTab];
+
+  const selectStage = (index: number) => {
+    setEngaged(true);
+    setActiveTab(index);
+  };
 
   return (
     <section className="py-24 bg-transparent overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16 lg:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -227,169 +241,159 @@ const SolutionShowcase = () => {
           >
             INTELLIGENT ECOSYSTEM
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             viewport={{ once: true }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-night-50 tracking-tight mb-6"
           >
-            AI Powered <span className="cw-glow-text">Development Solutions</span> 
+            AI Powered <span className="cw-glow-text">Development Solutions</span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             viewport={{ once: true }}
             className="text-lg md:text-xl text-night-400 max-w-2xl mx-auto leading-relaxed"
           >
-            Comprehensive frameworks that streamline development, testing, and deployment with intelligent automation.
+            One lifecycle, three frameworks. Build with CogniVibe, verify with CogniTest, ship with CogniOps.
           </motion.p>
         </div>
 
-        {/* Main Interface */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          
-          {/* Left Column: Navigation Tabs */}
-          <div className="lg:col-span-4 flex flex-col gap-4">
+        {/* ---------------- Lifecycle Rail ---------------- */}
+        <div className="flex flex-col gap-7">
+
+          {/* Rail: the three stages, wired together */}
+          <div className="relative grid grid-cols-3" role="tablist" aria-label="Product lifecycle stages">
+            {/* Track + travelling packet */}
+            <div className="absolute left-[18%] right-[18%] top-6 md:top-7 h-0.5 bg-mint-300/15 overflow-hidden rounded-full">
+              <motion.div
+                animate={{ x: ['-120%', '340%'] }}
+                transition={{ duration: 3.4, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-neon-400 to-transparent"
+              />
+            </div>
+
             {solutions.map((solution, index) => {
               const isActive = activeTab === index;
               return (
                 <button
                   key={solution.id}
-                  onClick={() => setActiveTab(index)}
-                  className={`group relative text-left p-6 rounded-2xl transition-all duration-300 border-2 overflow-hidden ${
-                    isActive 
-                      ? 'cw-glass cw-tab-active border-neon-400/60' 
-                      : 'cw-glass border-transparent hover:border-mint-300/30'
-                  }`}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls="lifecycle-panel"
+                  onClick={() => selectStage(index)}
+                  className="group flex flex-col items-center gap-2.5 px-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-400 focus-visible:ring-offset-4 focus-visible:ring-offset-night-950 rounded-2xl"
                 >
-                  {/* Background Progress Bar for Active State */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeGlow"
-                      className="absolute inset-0 bg-neon-400/8 -z-10"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    />
-                  )}
-                  
-                  <div className="flex items-start gap-4 z-10 relative">
-                    <div className={`p-3 rounded-xl transition-colors duration-300 ${
-                      isActive ? 'bg-neon-400 text-night-950' : 'bg-mint-300/10 border border-mint-300/20 text-night-400 group-hover:bg-neon-400/15 group-hover:text-neon-400'
-                    }`}>
-                      {solution.icon}
-                    </div>
-                    <div>
-                      <h3 className={`text-lg font-bold mb-1 transition-colors ${isActive ? 'text-night-50' : 'text-night-300'}`}>
-                        {solution.name}
-                      </h3>
-                      <p className={`text-sm font-medium transition-colors ${isActive ? 'text-neon-400' : 'text-night-500'}`}>
-                        {solution.tagline}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className={`mt-4 text-sm leading-relaxed transition-all duration-300 ${isActive ? 'opacity-100 h-auto text-night-300' : 'opacity-0 h-0 text-transparent'}`}>
-                     {solution.subtitle}
-                  </div>
+                  <span
+                    className={`relative z-10 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-[0_0_0_8px_#0B0A14] transition-all duration-300 ease-out ${
+                      isActive
+                        ? 'bg-gradient-to-br from-neon-400 to-neon-600 text-night-950 border-2 border-transparent scale-110 shadow-[0_0_0_8px_#0B0A14,0_0_34px_rgba(139,92,246,0.55)]'
+                        : 'bg-night-900 border-2 border-mint-300/20 text-night-500 group-hover:border-neon-400/60 group-hover:text-neon-400'
+                    }`}
+                  >
+                    {solution.icon}
+                  </span>
+                  <span className={`text-[10px] md:text-xs font-mono uppercase tracking-[0.18em] transition-colors ${isActive ? 'text-neon-400' : 'text-night-500'}`}>
+                    {solution.stage}
+                  </span>
+                  <span className={`text-sm md:text-base font-bold transition-colors ${isActive ? 'text-night-50' : 'text-night-300 group-hover:text-night-100'}`}>
+                    {solution.name}
+                  </span>
                 </button>
               );
             })}
           </div>
 
-          {/* Right Column: Dynamic Content Window */}
-          <div className="lg:col-span-8 relative">
-             <div className="absolute inset-0 bg-[#8B5CF6] rounded-3xl transform rotate-1 opacity-20 blur-3xl"></div>
-             
-             <div className="cw-glass cw-topline relative rounded-3xl overflow-hidden min-h-[500px] flex flex-col">
-                
-                {/* Window Header */}
-                <div className="h-14 border-b border-mint-300/12 bg-night-950/40 flex items-center px-6 justify-between backdrop-blur-sm">
-                    <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-mint-400/80"></div>
-                        <div className="w-3 h-3 rounded-full bg-neon-400/80"></div>
-                        <div className="w-3 h-3 rounded-full bg-neon-400/80"></div>
-                    </div>
-                    <div className="text-xs font-mono text-night-500">
-                        {solutions[activeTab].id}.ai-platform.internal
-                    </div>
-                </div>
-
-                {/* Content Area */}
-                <div className="flex-1 p-8 grid md:grid-cols-2 gap-8">
-                    
-                    {/* Text Content */}
-                    <AnimatePresence mode='wait'>
-                        <motion.div
-                            key={activeTab}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 10 }}
-                            transition={{ duration: 0.3 }}
-                            className="flex flex-col justify-center"
-                        >
-                            <div className="cw-eyebrow inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold w-fit mb-4">
-                                <span className="relative flex h-2 w-2">
-                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-500 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-500"></span>
-                                </span>
-                                {solutions[activeTab].tagline}
-                            </div>
-                            <h3 className="text-3xl font-bold text-night-50 mb-4">
-                                {solutions[activeTab].name}
-                            </h3>
-                            <p className="text-night-300 leading-relaxed mb-8">
-                                {solutions[activeTab].description}
-                            </p>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                {solutions[activeTab].features.map((feature, i) => (
-                                    <div key={i} className="flex items-center gap-2 text-sm font-medium text-night-200">
-                                        <div className="text-[#8B5CF6]">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                        </div>
-                                        {feature}
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="mt-8">
-                              <Link href={`/solutions/${solutions[activeTab].id}`} className="cw-link-underline group inline-flex items-center gap-2 text-neon-400 font-semibold hover:text-mint-200 transition-colors">
-                                    Explore  
-                                    <span className="group-hover:translate-x-1 transition-transform">
-                                        <Icons.ArrowRight />
-                                    </span>
-                              </Link>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-
-                    {/* Dynamic Visual Mockup */}
-                    <div className="cw-glass cw-inner-grid rounded-2xl p-6 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-neon-400/15 to-transparent rounded-bl-full pointer-events-none"></div>
-                        
-                        <AnimatePresence mode='wait'>
-                            <motion.div
-                                key={activeTab}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 1.05 }}
-                                transition={{ duration: 0.4 }}
-                                className="h-full"
-                            >
-                                {activeTab === 0 && <CodeWindow />}
-                                {activeTab === 1 && <TestDashboard />}
-                                {activeTab === 2 && <OpsPipeline />}
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-
-                </div>
-             </div>
+          {/* Autoplay progress — disappears once the visitor takes control */}
+          <div className="h-0.5 rounded-full bg-mint-300/10 overflow-hidden">
+            {!engaged && (
+              <motion.div
+                key={activeTab}
+                initial={{ width: '0%' }}
+                animate={{ width: '100%' }}
+                transition={{ duration: AUTOPLAY_MS / 1000, ease: 'linear' }}
+                className="h-full bg-neon-400/70"
+              />
+            )}
           </div>
 
+          {/* Stage detail */}
+          <div
+            id="lifecycle-panel"
+            className="cw-glass cw-topline rounded-3xl p-6 md:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 min-h-[420px] lg:min-h-[440px]"
+          >
+            {/* Text side */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35 }}
+                className="flex flex-col justify-center"
+              >
+                <div className="cw-eyebrow inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold w-fit mb-5">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-500 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-500"></span>
+                  </span>
+                  {active.tagline}
+                </div>
+
+                <h3 className="text-3xl lg:text-4xl font-bold text-night-50 mb-2">
+                  {active.name}
+                </h3>
+                <p className="text-neon-400 font-medium mb-5">{active.subtitle}</p>
+
+                <p className="text-night-300 leading-relaxed mb-8">
+                  {active.description}
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                  {active.features.map((feature) => (
+                    <div key={feature} className="flex items-start gap-2 text-sm font-medium text-night-200">
+                      <span className="mt-0.5 text-neon-500">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                      </span>
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+
+                <Link
+                  href={`/solutions/${active.id}`}
+                  className="cw-link-underline group inline-flex items-center gap-2 text-neon-400 font-semibold hover:text-mint-200 transition-colors w-fit"
+                >
+                  Explore {active.name}
+                  <span className="group-hover:translate-x-1 transition-transform">
+                    <Icons.ArrowRight />
+                  </span>
+                </Link>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Live mockup side */}
+            <div className="cw-glass cw-inner-grid rounded-2xl p-6 relative overflow-hidden min-h-[300px]">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-neon-400/15 to-transparent rounded-bl-full pointer-events-none"></div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active.id}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.03 }}
+                  transition={{ duration: 0.35 }}
+                  className="h-full relative"
+                >
+                  {activeTab === 0 && <CodeWindow />}
+                  {activeTab === 1 && <TestDashboard />}
+                  {activeTab === 2 && <OpsPipeline />}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
 
         {/* Bottom CTA */}
@@ -397,12 +401,11 @@ const SolutionShowcase = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-20 text-center"
+            className="mt-16 lg:mt-20 text-center"
         >
             <Link href="/contact" className="cw-btn cw-btn-primary cw-btn-pulse inline-block px-10 py-4 rounded-full font-semibold text-lg">
                 Schedule a Demo
             </Link>
-            {/* <p className="mt-4 text-sm text-night-500">No credit card required • Enterprise Ready</p> */}
         </motion.div>
 
       </div>

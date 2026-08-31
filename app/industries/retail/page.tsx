@@ -148,7 +148,7 @@ const heroStats = [
 
 export default function RetailPage() {
   return (
-    <PageLayout>
+    <PageLayout className="bg-[#0B0A14]">
       <IndustryHero
         industry="retail"
         title="AI-Powered Retail Solutions"
@@ -169,7 +169,7 @@ export default function RetailPage() {
         internalAreas={industryAgentData.retail.internalAreas}
       />
       
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 }
