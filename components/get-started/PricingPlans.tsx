@@ -47,11 +47,11 @@ const plans = [
 
 export const PricingPlans = () => {
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-brand-purple/5 rounded-full blur-3xl"></div>
+    <section id="pricing" className="py-20 lg:py-32 bg-[#0D0C1A] relative overflow-hidden">
+      {/* Background Lighting Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#7C3AED]/12 rounded-full blur-[140px]" />
+        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-[#8B5CF6]/10 rounded-full blur-[140px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,9 +61,9 @@ export const PricingPlans = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-sm font-semibold tracking-wide uppercase mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#15151D]/90 border border-[#29263A] text-[#A78BFA] rounded-full text-xs font-semibold uppercase tracking-wider mb-6 shadow-[0_0_18px_rgba(124,58,237,0.2)] backdrop-blur-md"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse"></span>
             Pricing Plans
           </motion.div>
 
@@ -72,9 +72,12 @@ export const PricingPlans = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-dark-grey mb-6 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight"
           >
-            Choose Your <span className="text-brand-blue">AI Journey</span>
+            Choose Your{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#C084FC] drop-shadow-[0_0_25px_rgba(139,92,246,0.4)]">
+              AI Journey
+            </span>
           </motion.h2>
 
           <motion.p
@@ -82,7 +85,7 @@ export const PricingPlans = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-[#B8B6C4] max-w-3xl mx-auto leading-relaxed font-normal"
           >
             Flexible pricing options designed to grow with your business and AI maturity level.
           </motion.p>
@@ -101,69 +104,72 @@ export const PricingPlans = () => {
                 ease: [0.21, 0.47, 0.32, 0.98]
               }}
               viewport={{ once: true, margin: "-50px" }}
-              className={`group relative bg-white rounded-3xl p-8 lg:p-10 border transition-all duration-500 ease-out hover:-translate-y-2 flex flex-col h-full ${
+              className={`group relative rounded-3xl p-8 lg:p-10 border transition-all duration-500 ease-out hover:-translate-y-2 flex flex-col h-full backdrop-blur-xl ${
                 plan.popular 
-                  ? 'border-brand-blue shadow-2xl shadow-brand-blue/10 ring-2 ring-brand-blue/20' 
-                  : 'border-gray-200 shadow-lg hover:shadow-2xl hover:border-brand-blue/30'
+                  ? 'bg-[#15151D]/95 border-2 border-[#8B5CF6] shadow-[0_0_35px_rgba(139,92,246,0.25)] ring-1 ring-[#8B5CF6]/50' 
+                  : 'bg-[#15151D]/90 border-[#29263A] shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-[#8B5CF6]/40 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)]'
               }`}
             >
               {/* Popular Badge */}
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-brand-blue text-white text-sm font-bold px-6 py-2 rounded-full shadow-lg">
+                  <div className="bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] text-white text-xs sm:text-sm font-bold px-6 py-1.5 rounded-full shadow-[0_0_20px_rgba(139,92,246,0.5)] border border-[#A78BFA]/30 tracking-wide uppercase">
                     Most Popular
                   </div>
                 </div>
               )}
 
-              {/* Plan Header - Fixed Height */}
+              {/* Plan Header */}
               <div className="text-center mb-8 flex-shrink-0">
                 <div className="h-12 flex items-center justify-center mb-2">
-                  <h3 className="text-2xl lg:text-3xl font-bold text-brand-dark-grey text-center">
+                  <h3 className="text-2xl lg:text-3xl font-bold text-white text-center">
                     {plan.name}
                   </h3>
                 </div>
                 <div className="h-14 flex items-center justify-center mb-4">
-                  <div className="text-4xl lg:text-5xl font-bold text-brand-blue">
+                  <div className="text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] to-[#C084FC]">
                     {plan.price}
                   </div>
                 </div>
                 <div className="h-16 flex items-center justify-center">
-                  <p className="text-gray-600 leading-relaxed text-center text-sm lg:text-base">
+                  <p className="text-[#B8B6C4] leading-relaxed text-center text-sm lg:text-base font-normal">
                     {plan.description}
                   </p>
                 </div>
               </div>
 
-              {/* Features List - Flexible Height */}
-              <div className="flex-grow mb-8 min-h-[200px]">
+              {/* Features List */}
+              <div className="flex-grow mb-8 min-h-[200px] border-t border-[#29263A]/80 pt-6">
                 <ul className="space-y-4">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start space-x-3">
-                      <div className="flex-shrink-0 w-5 h-5 bg-brand-blue/10 rounded-full flex items-center justify-center mt-0.5">
-                        <svg className="w-3 h-3 text-brand-blue" fill="currentColor" viewBox="0 0 20 20">
+                      <div className="flex-shrink-0 w-5 h-5 bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 rounded-full flex items-center justify-center mt-0.5">
+                        <svg className="w-3 h-3 text-[#A78BFA]" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      <span className="text-gray-700 leading-relaxed text-sm lg:text-base">{feature}</span>
+                      <span className="text-gray-300 leading-relaxed text-sm lg:text-base">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* CTA Button - Fixed at Bottom */}
+              {/* CTA Button */}
               <div className="flex-shrink-0 mt-auto">
-                <button className={`w-full py-4 rounded-xl font-bold text-lg transition-all duration-300 ${
-                  plan.popular 
-                    ? 'bg-brand-blue text-white hover:bg-brand-blue-dark shadow-lg hover:shadow-xl' 
-                    : 'border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white'
-                }`}>
+                <a
+                  href="/contact"
+                  className={`block w-full text-center py-4 rounded-xl font-bold text-base sm:text-lg transition-all duration-300 ${
+                    plan.popular 
+                      ? 'bg-gradient-to-r from-[#8B5CF6] to-[#7C3AED] hover:from-[#7C3AED] hover:to-[#6D28D9] text-white shadow-[0_0_25px_rgba(139,92,246,0.4)] hover:shadow-[0_0_35px_rgba(139,92,246,0.6)] hover:-translate-y-0.5' 
+                      : 'border border-[#29263A] bg-[#1E1C2E]/80 hover:bg-[#252238] hover:border-[#8B5CF6]/50 text-white hover:text-white'
+                  }`}
+                >
                   Get Started
-                </button>
+                </a>
               </div>
 
               {/* Decorative Element */}
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-blue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-3xl"></div>
             </motion.div>
           ))}
         </div>
@@ -176,16 +182,22 @@ export const PricingPlans = () => {
           transition={{ delay: 0.5 }}
           className="text-center mt-16 lg:mt-20"
         >
-          <p className="text-gray-600 mb-6">
+          <p className="text-[#B8B6C4] mb-6 font-normal">
             All plans include 24/7 support, regular updates, and our satisfaction guarantee.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-6 py-3 border border-brand-blue text-brand-blue rounded-lg font-semibold hover:bg-brand-blue hover:text-white transition-all">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="/contact"
+              className="px-6 py-3 border border-[#29263A] bg-[#15151D] hover:bg-[#1E1C2E] hover:border-[#8B5CF6]/40 text-gray-200 hover:text-white rounded-xl font-semibold backdrop-blur-sm transition-all text-sm sm:text-base"
+            >
               Compare All Features
-            </button>
-            <button className="px-6 py-3 text-brand-blue font-semibold hover:text-brand-blue-dark transition-colors">
-              Talk to Sales →
-            </button>
+            </a>
+            <a
+              href="/contact"
+              className="px-6 py-3 text-[#A78BFA] hover:text-[#C084FC] font-semibold transition-colors flex items-center gap-1.5 text-sm sm:text-base"
+            >
+              Talk to Sales <span>→</span>
+            </a>
           </div>
         </motion.div>
       </div>

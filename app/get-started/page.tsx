@@ -20,7 +20,7 @@ export default function GetStartedPage() {
       <EnterpriseGenAI />
       <OnboardingProcess />
       <PricingPlans />
-      <CTASection />
+      <CTASection theme="dark" />
     </PageLayout>
   );
 }

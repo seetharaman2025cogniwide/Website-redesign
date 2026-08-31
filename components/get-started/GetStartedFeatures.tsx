@@ -52,14 +52,11 @@ const features = [
 
 export const GetStartedFeatures = () => {
   return (
-    <section className="py-20 lg:py-32 bg-white relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-purple/5 rounded-full blur-3xl"></div>
-        <div className="absolute inset-0 opacity-[0.02]" 
-             style={{ backgroundImage: 'radial-gradient(#2563EB 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
-        </div>
+    <section className="py-20 lg:py-32 bg-[#0B0A14] relative overflow-hidden">
+      {/* Background Lighting Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#7C3AED]/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#8B5CF6]/10 rounded-full blur-[140px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -69,9 +66,9 @@ export const GetStartedFeatures = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-sm font-semibold tracking-wide uppercase mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#15151D]/90 border border-[#29263A] text-[#A78BFA] rounded-full text-xs font-semibold uppercase tracking-wider mb-6 shadow-[0_0_18px_rgba(124,58,237,0.2)] backdrop-blur-md"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse"></span>
             Why Choose Us
           </motion.div>
 
@@ -80,9 +77,12 @@ export const GetStartedFeatures = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-dark-grey mb-6 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight"
           >
-            Built for <span className="text-brand-blue">Enterprise Success</span>
+            Built for{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] via-[#8B5CF6] to-[#C084FC] drop-shadow-[0_0_25px_rgba(139,92,246,0.4)]">
+              Enterprise Success
+            </span>
           </motion.h2>
 
           <motion.p
@@ -90,7 +90,7 @@ export const GetStartedFeatures = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-[#B8B6C4] max-w-3xl mx-auto leading-relaxed font-normal"
           >
             Everything you need to successfully implement and scale AI across your organization.
           </motion.p>
@@ -111,35 +111,37 @@ export const GetStartedFeatures = () => {
                   ease: [0.21, 0.47, 0.32, 0.98]
                 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="group relative bg-white rounded-2xl p-8 border border-gray-100 shadow-soft hover:shadow-strong transition-all duration-500 ease-out hover:-translate-y-2"
+                className="group relative bg-[#15151D]/90 rounded-2xl p-8 border border-[#29263A] shadow-[0_4px_25px_rgba(0,0,0,0.5)] hover:border-[#8B5CF6]/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.2)] transition-all duration-500 ease-out hover:-translate-y-2 backdrop-blur-md flex flex-col justify-between"
               >
-                {/* Icon */}
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-brand-blue/10 flex items-center justify-center group-hover:bg-brand-blue/20 group-hover:scale-110 transition-all duration-300">
-                    <IconComponent className="w-7 h-7 text-brand-blue" />
+                <div>
+                  {/* Icon */}
+                  <div className="mb-6">
+                    <div className="w-14 h-14 rounded-xl bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 flex items-center justify-center group-hover:scale-110 transition-all duration-300 shadow-[0_0_15px_rgba(139,92,246,0.2)]">
+                      <IconComponent className="w-7 h-7 text-[#A78BFA]" />
+                    </div>
                   </div>
+
+                  {/* Content */}
+                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#A78BFA] transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-[#B8B6C4] leading-relaxed mb-6 text-sm sm:text-base font-normal">
+                    {feature.description}
+                  </p>
                 </div>
 
-                {/* Content */}
-                <h3 className="text-xl font-bold text-brand-dark-grey mb-3 group-hover:text-brand-blue transition-colors duration-300">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  {feature.description}
-                </p>
-
                 {/* Benefits */}
-                <ul className="space-y-2">
+                <ul className="space-y-2.5 pt-4 border-t border-[#29263A]/80">
                   {feature.benefits.map((benefit, benefitIndex) => (
-                    <li key={benefitIndex} className="flex items-center text-sm text-gray-700">
-                      <div className="w-1.5 h-1.5 bg-brand-blue rounded-full mr-3 flex-shrink-0" />
+                    <li key={benefitIndex} className="flex items-center text-sm text-gray-300">
+                      <div className="w-1.5 h-1.5 bg-[#8B5CF6] rounded-full mr-3 flex-shrink-0 shadow-[0_0_8px_rgba(139,92,246,0.8)]" />
                       {benefit}
                     </li>
                   ))}
                 </ul>
 
                 {/* Decorative Element */}
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gray-200 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-2xl"></div>
               </motion.div>
             );
           })}

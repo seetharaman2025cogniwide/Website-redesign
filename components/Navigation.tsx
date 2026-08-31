@@ -63,7 +63,7 @@ interface NavigationSection {
 const Navigation = () => {
   const pathname = usePathname()
   // Pages that sit on the near-black violet canvas get the dark navbar.
-  const darkRoutes = ['/about', '/careers', '/blog', '/solutions', '/products', '/contact']
+  const darkRoutes = ['/about', '/careers', '/blog', '/solutions', '/products', '/contact', '/get-started', '/services', '/industries']
   const isDark = pathname === '/' || darkRoutes.some((route) => pathname?.startsWith(route))
   const [isOpen, setIsOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
